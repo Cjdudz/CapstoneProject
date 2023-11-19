@@ -1,198 +1,225 @@
-  <template>
-    <v-app>
-      <v-app-bar app dark color="primary">
-         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-  <v-toolbar-title>
-    <img src= "/img/PCGA.png"  alt="Coast Guard Logo" class="coast-guard-logo"> 
-    505th PCGA Application System
-  </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn text @click="redirectTo('/LoginComponent')">Login</v-btn>
-        <v-btn text @click="redirectTo('/RegisterComponent')">Register</v-btn>
-      </v-app-bar>
+<template>
+  <v-app>
+    <v-app-bar app dark color="primary">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+        505th PCGA Application System
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text @click="redirectTo('/LoginComponent')">Login</v-btn>
+      <v-btn text @click="redirectTo('/RegisterComponent')">Register</v-btn>
+    </v-app-bar>
 
-      <v-navigation-drawer app v-model="drawer" dark color="primary">
-        <v-list>
-          <v-list-item link @click="redirectTo('/home')">
-            <v-list-item-content>
-              <v-list-item-title>Home</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+    <v-navigation-drawer app v-model="drawer" dark color="primary">
+      <v-list>
+        <v-list-item link @click="redirectTo('/home')">
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
-          <v-divider></v-divider>
+        <v-divider></v-divider>
 
-          <v-list-item link @click="redirectTo('/application')">
-            <v-list-item-content>
-              <v-list-item-title>Apply Online</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+        <v-list-item link @click="redirectTo('/OnlineApplicationForm')">
+          <v-list-item-content>
+            <v-list-item-title>Apply Online</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title @click="startInterviewProcess">Appointment Interview</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title @click="startInterviewProcess">Appointment Interview</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
-          <v-list-item v-if="isLoggedIn" @click="logout">
-            <v-list-item-content>
-              <v-list-item-title>Logout</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-      <!-- Application form on the side -->
-      
+        <v-list-item v-if="isLoggedIn" @click="logout">
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-      <v-main>
-        <v-container>
-          <v-row>
-            <v-col>
-              <v-container class="my-5">
-                <h1 class="display-4">Welcome to the 505th PCGA Application System</h1>
-                <p class="subtitle-1">Apply online and schedule your appointment interview with ease.</p>
-              </v-container>
-            </v-col>
-          </v-row>
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-container>
+              <v-alert
+                v-for="notification in notifications"
+                :key="notification.timestamp"
+                dismissible
+                border="top"
+                color="info"
+                icon="mdi-bell"
+              >
+                {{ notification.message }}
+              </v-alert>
+            </v-container>
+          </v-col>
+        </v-row>
 
-          <v-row>
-            <v-col>
-              <v-container class="my-5">
-                <!-- Add a button to trigger the application process form -->
-                <v-btn @click="startApplicationProcess">Start Application Process</v-btn>
-              </v-container>
-            </v-col>
-          </v-row>
+        <v-row>
+          <v-col>
+            <v-container class="my-5">
+              <h1 class="display-4">Welcome to the 505th PCGA Application System</h1>
+              <p class="subtitle-1">Apply online and schedule your appointment interview with ease.</p>
+            </v-container>
+          </v-col>
+        </v-row>
 
-          <!-- Add a conditional rendering for the application process form -->
-          <v-row v-if="showApplicationForm">
-            <v-col>
-              <v-container class="my-5">
-                <!-- Add your application process form here -->
-                <v-dialog v-model="showApplicationForm" max-width="600">
-                  <v-card>
-                    <v-card-title class="headline">Application Process Form</v-card-title>
-                    <v-card-text>
-                      <v-form>
-                            <!-- Add form fields for the application process -->
-                  <v-text-field label="Full Name" v-model="applicationForm.fullName"></v-text-field>
-                  <v-text-field label="Email" v-model="applicationForm.email"></v-text-field>
-                  <v-text-field label="Phone Number" v-model="applicationForm.phoneNumber"></v-text-field>
-                  <!-- Add more form fields as needed -->
+        <v-row>
+          <v-col class="chat-col" cols="2">
+            <Chatcomponent />
+          </v-col>
+        </v-row>
 
-                  <v-btn @click="submitApplicationForm">Submit Application</v-btn>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn @click="showApplicationForm = false">Close</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-container>
-      </v-col>
-    </v-row>
+        <v-row>
+  <v-col>
+    <v-container class="my-5">
+      <v-btn @click="startApplicationProcess">Start Application Process</v-btn>
+      <p>Number of Applicants: {{ numberOfApplicants }}</p> <!-- Add this line -->
+    </v-container>
+  </v-col>
+</v-row>
 
-          <v-row>
-            <v-col>
-              <v-container class="my-5">
-                <!-- Add a button to trigger the interview process form -->
-                <v-btn @click="startInterviewProcess">Start Interview Process</v-btn>
-              </v-container>
-            </v-col>
-          </v-row>
+        <v-row v-if="showApplicationForm">
+          <v-col>
+            <v-container class="my-5">
+              <v-dialog v-model="showApplicationForm" max-width="600">
+                <v-card>
+                  <v-card-title class="headline">Application Process Form</v-card-title>
+                  <v-card-text>
+                    <v-form>
+                      <v-text-field label="Full Name" v-model="applicationForm.fullName"></v-text-field>
+                      <v-text-field label="Email" v-model="applicationForm.email"></v-text-field>
+                      <v-text-field label="Phone Number" v-model="applicationForm.phoneNumber"></v-text-field>
 
-          <v-row v-if="showInterviewForm">
+                      <v-btn @click="submitApplicationForm">Submit Application</v-btn>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn @click="showApplicationForm = false">Close</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-container>
+          </v-col>
+        </v-row>
+        <v-row>
       <v-col>
-        <v-container class="my-5">
-          <!-- Add your interview process form here -->
-          <v-dialog v-model="showInterviewForm" max-width="600">
-            <v-card>
-              <v-card-title class="headline">Interview Process Form</v-card-title>
-              <v-card-text>
-                <v-form>
-                  <!-- Add form fields for the interview process -->
-                  <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
-                  <v-text-field label="Interview Date" v-model="interviewForm.interviewDate" type="date"></v-text-field>
-                  <v-textarea label="Comments" v-model="interviewForm.comments"></v-textarea>
-                  <!-- Add more form fields as needed -->
-
-                  <v-btn @click="submitInterviewForm">Submit Interview</v-btn>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn @click="showInterviewForm = false">Close</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-container>
+        <!-- ... Your existing code ... -->
+        <ApplicantList :applicants="applicants" />
       </v-col>
-    </v-row>
-        </v-container>
-      </v-main>
+    </v-row>    
+        <v-row v-if="showInterviewForm">
+          <v-col>
+            <v-container class="my-5">
+              <v-dialog v-model="showInterviewForm" max-width="600">
+                <v-card>
+                  <v-card-title class="headline">Interview Process Form</v-card-title>
+                  <v-card-text>
+                    <v-form>
+                      <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
+                      <v-text-field label="Interview Date" v-model="interviewForm.interviewDate" type="date"></v-text-field>
+                      <v-textarea label="Comments" v-model="interviewForm.comments"></v-textarea>
 
-      <v-footer app dark color="primary">
-        <v-container>
-          <v-row>
-            <v-col>
-              <p class="white--text">&copy; 2023 505th PCGA Application System. All rights reserved.</p>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-footer>
-    </v-app>
-  </template>
+                      <v-btn @click="submitInterviewForm">Submit Interview</v-btn>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn @click="showInterviewForm = false">Close</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-container>
+          </v-col>
+        </v-row>
 
-  <script>
-  export default {
-    data() {
-      return {
-        drawer: false,
-        isLoggedIn: false,
-        showApplicationForm: false,
-        applicationForm: {
-          fullName: '',
-          // Add more application form fields as needed
-        },
-        showInterviewForm: false,
-        interviewForm: {
-          intervieweeName: '',
-          // Add more interview form fields as needed
-        },
-      };
+      </v-container>
+    </v-main>
+
+    <v-footer app dark color="primary">
+      <v-container>
+        <v-row>
+          <v-col>
+            <p class="white--text">&copy; 2023 505th PCGA Application System. All rights reserved.</p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
+  </v-app>
+  
+</template>
+
+<script>
+import Chatcomponent from './Chatcomponent.vue';
+import ApplicantList from './ApplicantList.vue';
+export default {
+  data() {
+    return {
+      drawer: false,
+      isLoggedIn: false,
+      showApplicationForm: false,
+      applicationForm: {
+        fullName: "",
+      },
+      showInterviewForm: false,
+      interviewForm: {
+        intervieweeName: "",
+      },
+      notifications: [],
+    };
+  },
+  methods: {
+    redirectTo(path) {
+      this.$router.push(path);
+      this.drawer = false;
     },
-    methods: {
-      redirectTo(path) {
-        this.$router.push(path);
-        this.drawer = false;
-      },
-      logout() {
-        // Implement your logout logic here
-        console.log('Logout clicked');
-      },
-      startApplicationProcess() {
-        // Show the application form when the button is clicked
-        this.showApplicationForm = true;
-        // Hide the interview form
-        this.showInterviewForm = false;
-      },
-      startInterviewProcess() {
-        // Show the interview form when the button is clicked
-        this.showInterviewForm = true;
-        // Hide the application form
-        this.showApplicationForm = false;
-      },
-      submitApplicationForm() {
-        // Implement your logic to submit the application form
-        console.log('Application Form submitted:', this.applicationForm);
-        // You can add additional logic to handle form submission, e.g., sending data to a server
-      },
-      submitInterviewForm() {
-        // Implement your logic to submit the interview form
-        console.log('Interview Form submitted:', this.interviewForm);
-        // You can add additional logic to handle form submission, e.g., sending data to a server
-      },
+    logout() {
+      console.log("Logout clicked");
     },
-  };
-  </script>
+    startApplicationProcess() {
+      this.showApplicationForm = true;
+      this.showInterviewForm = false;
+    },
+    startInterviewProcess() {
+      this.showInterviewForm = true;
+      this.showApplicationForm = false;
+    },
+    submitApplicationForm() {
+      console.log("Application Form submitted:", this.applicationForm);
+      this.applicants.push({
+        id: this.applicants.length + 1,
+        fullName: this.applicationForm.fullName,
+        email: this.applicationForm.email,
+        phoneNumber: this.applicationForm.phoneNumber,
+      });
+
+      // Reset form fields after submission
+      this.applicationForm.fullName = "";
+      this.applicationForm.email = "";
+      this.applicationForm.phoneNumber = "";
+
+      // Close the application form dialog
+      this.showApplicationForm = false;
+    },
+    },
+    submitInterviewForm() {
+      console.log("Interview Form submitted:", this.interviewForm);
+    },
+    notifyJobOpening(jobTitle) {
+      this.notifications.push({
+        message: `New job opening: ${jobTitle}`,
+        timestamp: new Date(),
+      });
+    },
+
+  components: { Chatcomponent, ApplicantList},
+              
+};
+</script>
 <style scoped>
 /* Global styles */
 body {
@@ -200,11 +227,12 @@ body {
   margin: 30;
   overflow-x: hidden;
   
+  
 }
 
 /* Header styles */
 .v-app-bar {
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px rgba(149, 6, 6, 0.2);
   margin-top: 0;
   
 }
@@ -275,6 +303,10 @@ body {
 .v-main {
   padding: 20px;
   margin-top: 0;
+  background-image: image('@/assets/A_letter_tech_logo.png'); /* Adjust the path based on your project structure */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .display-4 {
@@ -293,7 +325,30 @@ body {
   color: #333;
   font-weight: bold; /* Make the headline text bold */
 }
+.applicant-list {
+  margin-top: 20px;
+}
 
+.applicant-list h2 {
+  color: #333;
+}
+
+.applicant-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.applicant-list th, .applicant-list td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.applicant-list th {
+  background-color: #4caf50;
+  color: white;
+}
 /* Footer styles */
 .v-footer {
   background-color: #333;
