@@ -21,7 +21,7 @@
     name: 'HomeView',
   
     components: {
-      HelloWorld,
+     
       Login,
     },
   });

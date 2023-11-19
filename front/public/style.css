@@ -1,0 +1,49 @@
+/* Global styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 30;
+    overflow-x: hidden;
+    background-image: url('https://i.pinimg.com/originals/53/ce/b4/53ceb430c155ca3b30b668083180bf57.gif'); /* Add the path to your background image */
+    background-size: cover; /* Ensure the background covers the entire screen */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed; /* Fixed background scrolling */
+  
+    /* Add any other styles you want for the body element */
+  }
+  
+  /* Header styles */
+  .v-app-bar {
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 0;
+  }
+  
+  /* ... (Rest of your existing styles) ... */
+  
+  /* Footer styles */
+  .v-footer {
+    background-color: #333;
+    color: white;
+    padding: 5px 0; /* Reduce padding to make it smaller */
+    position: fixed; /* Fix the footer at the bottom */
+    bottom: 0; /* Position at the bottom of the viewport */
+    width: 100%; /* Make the footer span the entire width of the viewport */
+  }
+  
+  /* Responsive styles */
+  @media only screen and (max-width: 600px) {
+    .v-app-bar {
+      /* Adjust styles for small screens */
+    }
+  
+    .v-navigation-drawer {
+      /* Adjust styles for small screens */
+    }
+  
+    .v-main {
+      /* Adjust styles for small screens */
+    }
+  
+    .v-footer {
+      /* Adjust styles for small screens */
+    }
+  }
