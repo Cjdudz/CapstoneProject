@@ -1,13 +1,12 @@
 <template>
+
   <div class="home">
     <h1>{{ websiteName }}</h1>
+    <h4>Our Mission</h4>
     <p>
-      Central Luzon (CGADNCR-CL) is one of the 12 Auxiliary Districts
-      <br> of the Philippine Coast Guard Auxiliary (PCGA). CGADNCR-CL assists the Philippine Coast Guard and subordinate units of the<br>
-      Coast Guard District - National Capital Region-Central Luzon in promoting safety of life and property at sea, safeguarding the marine environment, 
-      <br>maritime search and rescue and such other humanitarian activities.
+      The Philippine Coast Guard Auxiliary (PCGA) shall assist the Philippine Coast Guard (PCG) in the promotion of safety of life and property at sea, in the preservation of the marine environment and its resources, the conduct of maritime search and rescue, the maintenance of aids to navigation, and such other activities that enhance maritime community relations which include civic action, participation under the National Service Training Program (NSTP), youth development, recreational safety and other related activities.
     </p>
-    <img src="@/assets/home-image.jpg" alt="Home Image" />
+    
 
     <!-- Embedded Google Map -->
     <div class="map-container">
@@ -37,8 +36,17 @@ export default {
 
 <style scoped>
 .home {
+  top: 30px;
   text-align: center;
   padding: 20px;
+  max-width: 700px;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+.background{
+  background-color: black;
 }
 
 h1 {
