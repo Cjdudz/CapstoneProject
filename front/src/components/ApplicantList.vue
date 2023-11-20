@@ -1,5 +1,6 @@
 <template>
-  <div class="applicants-container">
+  <div class="applicants-container" :class="{ 'is-fixed': isFixed }">
+    
     <h2>Applicants List</h2>
     <ul>
       <li v-for="applicant in applicants" :key="applicant.id">{{ applicant.fullName }}</li>
@@ -20,23 +21,34 @@ export default {
       ],
     },
   },
+  data() {
+    return {
+      isFixed: true,
+    };
+  },
+  methods: {
+    toggleFixedPosition() {
+      this.isFixed = !this.isFixed;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .applicants-container {
-  position: fixed; /* Fixed position to keep it in place */
-  top: 50%; /* Position at the vertical center */
-  right: 0; /* Position from the right */
-  transform: translate(0, -50%); /* Center the container vertically */
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
   padding: 20px;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
-  width: 200px; /* Adjust the width as needed */
-  text-align: center; /* Center text within the container */
+  width: 200px;
+  text-align: center;
+  transition: all 0.3s; /* Add transition for a smooth effect */
 }
 
-/* Add your styling for the applicant list if needed */
+
 .applicants-container ul {
   list-style: none;
   padding: 0;

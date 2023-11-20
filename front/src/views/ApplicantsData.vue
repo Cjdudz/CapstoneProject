@@ -9,7 +9,7 @@
   
   <script>
   // Import the ApplicantsData component
-  import ApplicantsData from '@/views/ApplicantsData.vue'; // Update the import path
+  import ApplicantsData from '../components/ApplicantsData.vue'; // Update the import path
   
   export default {
     components: {

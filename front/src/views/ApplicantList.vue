@@ -7,7 +7,7 @@
   </template>
   
   <script>
-  import ApplicantList from '../views/ApplicantList.vue';
+  import ApplicantList from '../components/ApplicantList.vue';
   
   export default {
     data() {

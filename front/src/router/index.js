@@ -9,20 +9,17 @@ import ApplicantList from '../views/ApplicantList.vue';
 import Admin from '../views/Admin.vue'; // Corrected import statement
 import users from '../views/users.vue';
 import ApplicantsData from '../views/ApplicantsData.vue';
-import index from '@/views/index.vue';
+import Overview from '@/views/Overview.vue'
 
 const routes = [
-  {
-    path: '/index',
-    name: 'home',
-    component: index,
-  },
+ 
   {
     
     path: '/',
     name: 'home',
     component: HomeView,
   },
+  { path: '/Overview', component: Overview },
   {
     path: '/ApplicantsData',
     name: 'ApplicantsData', // Corrected the name
