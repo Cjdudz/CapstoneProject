@@ -13,6 +13,14 @@
           <input type="password" v-model="password" class="form-control" required />
         </div>
 
+        <div class="form-group">
+          <label for="role">Role:</label>
+          <select v-model="role" class="form-control" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
         <button type="submit" class="btn btn-coast-guard">Login</button>
 
         <!-- Error message display -->
@@ -31,6 +39,7 @@ export default {
     return {
       username: '',
       password: '',
+      role: 'user', // Default to user role
       loginError: '', // New data property for login errors
     };
   },
@@ -40,16 +49,26 @@ export default {
       // For simplicity, let's just log the credentials for now
       console.log('Username:', this.username);
       console.log('Password:', this.password);
+      console.log('Role:', this.role);
+
+      // Simulate a login error for demonstration purposes
+      if (this.role === 'user') {
+        // User login logic
+        // For example, redirect to a user dashboard
+        this.$router.push('/');
+      } else if (this.role === 'admin') {
+        // Admin login logic
+        // For example, redirect to an admin dashboard
+        this.$router.push('/Admin');
+      }
 
       // Simulate a login error for demonstration purposes
       this.loginError = 'Invalid username or password';
-
-      // For example, redirect to a dashboard
-      this.$router.push('/');
     },
   },
 };
 </script>
+
 <style scoped>
 .coast-guard-container {
   display: flex;

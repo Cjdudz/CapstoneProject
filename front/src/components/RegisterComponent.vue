@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="register-container">
+ <div class="container">
+    <div :class="['register-container', { 'admin-style': role === 'admin' }]">
       <h2>Register</h2>
       <form @submit.prevent="register" class="register-form">
         <div class="form-group">
@@ -11,6 +11,13 @@
         <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" v-model="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="role" :class="{ 'admin-label': role === 'admin' }">Role:</label>
+          <select v-model="role" class="form-control" :class="{ 'admin-select': role === 'admin' }" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
         </div>
 
         <button type="submit" class="btn btn-coastguard">Register</button>
@@ -29,6 +36,7 @@ export default {
     return {
       username: '',
       password: '',
+      role: 'user', // Default to user role
     };
   },
   methods: {
@@ -37,8 +45,9 @@ export default {
       // For simplicity, let's just log the registration details for now
       console.log('Registered Username:', this.username);
       console.log('Registered Password:', this.password);
+      console.log('Role:', this.role);
 
-      // After successful registration, you can redirect to the login page
+      // After successful registration, redirect to the login page
       this.$router.push('/LoginComponent');
     },
   },
@@ -82,7 +91,12 @@ export default {
   font-weight: bold;
   color: #344e5e; /* Slate Blue */
 }
-
+.register-container.admin-style {
+  /* Add additional styles for the admin role here */
+  background-color: #f8d7da; /* Light Red */
+  border-color: #dc3545; /* Red */
+  color: #721c24; /* Dark Red */
+}
 .register-form input {
   width: 100%;
   padding: 15px;

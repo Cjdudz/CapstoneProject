@@ -1,17 +1,40 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import LoginComponent from '../views/LoginComponent.vue'; // Corrected import statement
+import LoginComponent from '../views/LoginComponent.vue';
 import RegisterComponent from '../views/RegisterComponent.vue';
 import Home from '../views/Home.vue';
 import OnlineApplicationForm from '../views/OnlineApplicationForm.vue';
-import Chatcomponent from '../views/Chatcomponent.vue'; // Corrected import statement
+import Chatcomponent from '../views/Chatcomponent.vue';
 import ApplicantList from '../views/ApplicantList.vue';
+import Admin from '../views/Admin.vue'; // Corrected import statement
+import users from '../views/users.vue';
+import ApplicantsData from '../views/ApplicantsData.vue';
+import index from '@/views/index.vue';
 
 const routes = [
   {
+    path: '/index',
+    name: 'home',
+    component: index,
+  },
+  {
+    
     path: '/',
     name: 'home',
     component: HomeView,
+  },
+  {
+    path: '/ApplicantsData',
+    name: 'ApplicantsData', // Corrected the name
+    component: ApplicantsData,
+  },
+  {
+    path: '/users',
+    component: users,
+  },
+  {
+    path: '/admin',
+    component: Admin,
   },
   {
     path: '/ChatComp',
@@ -35,7 +58,7 @@ const routes = [
   {
     path: '/LoginComponent',
     name: 'login',
-    component: LoginComponent, // Corrected component name
+    component: LoginComponent,
   },
   {
     path: '/RegisterComponent',
@@ -45,9 +68,6 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
 ];
