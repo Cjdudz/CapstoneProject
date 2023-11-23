@@ -21,7 +21,7 @@
 
         <v-divider></v-divider>
 
-        <v-list-item link @click="redirectTo('/OnlineApplicationForm')">
+        <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
           <v-list-item-content>
             <v-list-item-title>Apply Online</v-list-item-title>
           </v-list-item-content>

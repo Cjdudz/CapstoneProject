@@ -10,7 +10,17 @@ import Admin from '../views/Admin.vue'; // Corrected import statement
 import users from '../views/users.vue';
 import ApplicantsData from '../views/ApplicantsData.vue';
 import Overview from '@/views/Overview.vue'
-
+import MembershipapplicationPAge1 from '@/views/MembershipapplicationPAge1.vue'
+import MembershipapplicationPAge2 from '@/views/MembershipapplicationPAge2.vue'
+import MembershipapplicationPAge5 from '@/views/MembershipapplicationPAge5.vue'
+import MembershipapplicationPAge4 from '@/views/MembershipapplicationPAge4.vue'
+import Personalhistory from '@/views/Personalhistory.vue'
+import Maritalhistory from '@/views/Maritalhistory.vue'
+import MilitaryHistory from '@/views/MilitaryHistory.vue'
+import CountryVisited from '@/views/CountryVisited.vue'
+import Neighbors from '@/views/Neighbors.vue'
+import LastpageApplication from '@/views/LastpageApplication.vue'
+import PcgaapplicationForm from '@/views/PcgaapplicationForm.vue'
 const routes = [
  
   {
@@ -19,7 +29,18 @@ const routes = [
     name: 'home',
     component: HomeView,
   },
+  {path:'/CountryVisited', component:CountryVisited},
   { path: '/Overview', component: Overview },
+  { path: '/MembershipapplicationPAge5', component: MembershipapplicationPAge5},
+  { path: '/MembershipapplicationPAge2', component: MembershipapplicationPAge2 },
+  { path: '/MembershipapplicationPAge1', component: MembershipapplicationPAge1 },
+  { path: '/MembershipapplicationPAge4', component: MembershipapplicationPAge4 },
+  { path: '/MilitaryHistory', component: MilitaryHistory },
+  { path: '/Personalhistory', component: Personalhistory },
+  { path: '/Maritalhistory', component: Maritalhistory },
+  { path: '/Neighbors', component: Neighbors },
+  { path: '/PcgaapplicationForm', component: PcgaapplicationForm },
+  { path: '/LastpageApplication', component: LastpageApplication },
   {
     path: '/ApplicantsData',
     name: 'ApplicantsData', // Corrected the name

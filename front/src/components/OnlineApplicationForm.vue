@@ -1,151 +1,169 @@
 <template>
-  <div class="card">
-    <h2>Online Application Form</h2>
-
-    <form @submit.prevent="submitForm" class="form">
-      <!-- Name field -->
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" v-model="formData.name" required />
-      </div>
-
-      <!-- Email field -->
-      <div class="form-group">
-        <label for="email">Email:</label>
         <input type="email" id="email" v-model="formData.email" required />
-      </div>
+  <div class="pagination-container">
+    <p>PAGES</p>
 
-      <!-- Address field -->
-      <div class="form-group">
-        Address
-      </div>
+    <div v-for="(page, index) in paginatedLinks" :key="index">
+      <router-link v-for="link in page" :key="link.to" v-bind:to="link.to" class="pagination-link">{{ link.label }}</router-link>
+    </div>
 
-      <!-- City field -->
-      <div class="form-group">
-        <label for="city">City:</label>
-        <input type="text" id="city" v-model="formData.city" required />
-      </div>
-
-      <!-- Province field -->
-      <div class="form-group">
-        <label for="province">Province:</label>
-        <input type="text" id="province" v-model="formData.province" required />
-      </div>
-
-      <!-- Phone field -->
-      <div class="form-group">
-        <label for="phone">Phone:</label>
-        <input
-          type="tel"
-          id="phone"
-          v-model="formData.phone"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-        />
-      </div>
-
-      <!-- Date of Birth field -->
-      <div class="form-group">
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" v-model="formData.dob" />
-      </div>
-<!-- Course field -->
-<div class="form-group">
-  <label for="course">Course:</label>
-  <input type="text" id="course" v-model="formData.course" required />
-</div>
-
-      <!-- Submit button -->
-      <button type="submit" class="submit-btn">Submit</button>
-    </form>
-
-    <!-- Display form submission message -->
-    <div v-if="formSubmissionMessage" class="submission-message">
-      {{ formSubmissionMessage }}
+    <div class="pagination-buttons">
+      <button @click="prevPage" :disabled="currentPage === 1" class="pagination-button">Previous Page</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages" class="pagination-button">Next Page</button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      formData: {
-        name: '',
-        email: '',
-        city: '',
-        province: '',
-        phone: '',
-        course: '',
-        dob: '',
-        // Add more form fields here
+
+    <script>
+    export default {
+      name: 'LandingPage',
+      data() {
+        return {
+          links: [
+            { to: '/pcga-application-form', label: 'PCGA Application Form' },
+            { to: '/MembershipapplicationPAge1', label: 'Membership Application Page 1' },
+            { to: '/MembershipapplicationPAge2', label: 'Membership Application Page 2' },
+            { to: '/MembershipapplicationPAge5', label: 'Membership Application Page 3' },
+            { to: '/MembershipapplicationPAge4', label: 'Membership Application Page 4' },
+            { to: '/Personalhistory', label: 'Personal History' },
+            { to: '/Maritalhistory', label: 'Marital History' },
+            { to: '/MilitaryHistory', label: 'Military History' },
+            { to: '/CountryVisited', label: 'Country Visited' },
+            { to: '/Neighbors', label: 'Neighbors' },
+            { to: '/LastpageApplication', label: 'Last Page Application' },
+          ],
+          itemsPerPage: 3,
+          currentPage: 1,
+        };
       },
-      formSubmissionMessage: '',
+      computed: {
+        totalPages() {
+          return Math.ceil(this.links.length / this.itemsPerPage);
+        },
+        paginatedLinks() {
+          const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+          const endIndex = startIndex + this.itemsPerPage;
+          return this.links.slice(startIndex, endIndex).map(link => [link]);
+        },
+      },
+      methods: {
+        nextPage() {
+          if (this.currentPage < this.totalPages) {
+            this.currentPage += 1;
+          }
+        },
+        prevPage() {
+          if (this.currentPage > 1) {
+            this.currentPage -= 1;
+          }
+        },
+      },
     };
-  },
-  methods: {
-    submitForm() {
-      // Perform form submission logic
-      // Simulate success for demonstration purposes
-      this.formSubmissionMessage = 'Form submitted successfully!';
-      console.log('Form submitted!', this.formData);
-      // You can send the form data to your server or perform other actions.
-    },
-  },
-};
-</script>
+    </script>
 
-<style scoped>
-/* Component-specific styles */
-.card {
-  max-width: 400px;
-  margin: auto;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 20px;
+    <style scoped>
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      p {
+        color: #555;
+        text-align: center;
+      }
+
+      div {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      router-link {
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        transition: background-color 0.3s;
+      }
+
+      router-link:hover {
+        background-color: #2980b9;
+      }
+      .pagination-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-h2 {
-  color: #333;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  color: #555;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 100%;
+.pagination-link {
+  display: block;
+  margin-bottom: 10px;
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s;
 }
 
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.pagination-link:hover {
+  background-color: #2980b9;
 }
 
-button:hover {
-  background-color: #45a049;
-}
-
-.submission-message {
+.pagination-buttons {
   margin-top: 10px;
-  color: #4caf50;
+  display: flex;
+  justify-content: center;
 }
-</style>
+
+.pagination-button {
+  padding: 8px;
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.pagination-button:hover:disabled {
+  background-color: #bdc3c7;
+}
+
+.pagination-button:hover {
+  background-color: #27ae60;
+}
+      button {
+        padding: 8px;
+        margin-top: 10px;
+        background-color: #2ecc71;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+      }
+
+      button:hover:disabled {
+        background-color: #bdc3c7;
+      }
+
+      button:hover {
+        background-color: #27ae60;
+      }
+    </style>

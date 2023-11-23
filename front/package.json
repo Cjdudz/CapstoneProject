@@ -18,7 +18,7 @@
     "vue-chartjs": "^5.2.0",
     "vue-router": "^4.0.3",
     "vuesax": "^3.12.2",
-    "vuetify": "^3.0.0-beta.0",
+    "vuetify": "^3.4.3",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
