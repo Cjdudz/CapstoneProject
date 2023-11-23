@@ -2,6 +2,7 @@
     <v-app>
       <v-container>
         <v-card>
+            <h1>PCGA APPLICATION FORM</h1>
           <v-form @submit.prevent="submitForm" class="form">
             <v-row>
               <v-col>
