@@ -1,26 +1,26 @@
 <template>
   <v-app>
-    <v-container>
+    <v-container class="form-container">
       <v-form>
         <v-row>
           <v-col>
-            <v-h1>MA - 2009 Page 3 of 4 MEMBERSHIP APPLICATION</v-h1>
+            <v-h1 class="form-title">MA - 2009 Page 3 of 4 MEMBERSHIP APPLICATION</v-h1>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-h2>SECTION K - MISCELLANEOUS</v-h2>
+            <v-h2 class="section-title">SECTION K - MISCELLANEOUS</v-h2>
             <v-textarea v-model="pangaka" label="I certify the following 'PANGAKA' in my own handwriting"></v-textarea>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-h2>SECTION L - ACCEPTANCE OF SPONSORSHIP</v-h2>
+            <v-h2 class="section-title">SECTION L - ACCEPTANCE OF SPONSORSHIP</v-h2>
             <v-text-field v-model="applicantSignature" label="Applicant's Signature"></v-text-field>
             <v-text-field v-model="sponsorSignature" label="Sponsor's Signature"></v-text-field>
             <v-text-field v-model="applicantDate" label="Applicant's Date" type="date"></v-text-field>
             <v-text-field v-model="sponsorDate" label="Sponsor's Date" type="date"></v-text-field>
-            <v-btn @click.prevent="submitForm">Submit</v-btn>
+            <v-btn @click.prevent="submitForm" class="submit-btn">Submit</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -47,21 +47,21 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-.v-container{
+.form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 170dvh; /* Set the height to 100% of the viewport height for vertical centering */
+  height: 100vh;
 }
-.v-h1 {
+
+.form-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.v-h2 {
+.section-title {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 15px;
@@ -73,18 +73,17 @@ export default {
   margin-bottom: 15px;
 }
 
-.v-btn {
-  background-color: #4caf50; /* Green */
+.submit-btn {
+  background-color: #2196F3; /* Blue */
   border: none;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+  font-size: 18px;
   border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 </style>

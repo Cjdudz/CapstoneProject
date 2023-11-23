@@ -1,52 +1,51 @@
 <template>
-    <div id="app">
-      <div class="card">
-        <form @submit.prevent="submitForm" class="form">
-          <h1>PCGA APPLICATION FORM</h1>
-          <div class="form-group">
-            <label>Name of Applicant:</label>
-            <input v-model="form.name" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Nationality:</label>
-            <input v-model="form.nationality" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Date of Birth:</label>
-            <input v-model="form.dob" type="date" />
-          </div>
-          <div class="form-group">
-            <label>Passport No.:</label>
-            <input v-model="form.passport" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Address:</label>
-            <input v-model="form.address" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Telephone:</label>
-            <input v-model="form.telephone" type="tel" />
-          </div>
-          <div class="form-group">
-            <label>Email:</label>
-            <input v-model="form.email" type="email" />
-          </div>
-          <div class="form-group">
-            <label>Occupation:</label>
-            <input v-model="form.occupation" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Name of Club:</label>
-            <input v-model="form.club" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Date of Application:</label>
-            <input v-model="form.applicationDate" type="date" />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
+    <v-app>
+      <v-container>
+        <v-card>
+          <v-form @submit.prevent="submitForm" class="form">
+            <v-row>
+              <v-col>
+                <v-text-field v-model="form.name" label="Name of Applicant"></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field v-model="form.nationality" label="Nationality"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field v-model="form.dob" label="Date of Birth" type="date"></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field v-model="form.passport" label="Passport No."></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field v-model="form.address" label="Address"></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field v-model="form.telephone" label="Telephone" type="tel"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field v-model="form.occupation" label="Occupation"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-text-field v-model="form.club" label="Name of Club"></v-text-field>
+            <v-row>
+              <v-col>
+                <v-text-field v-model="form.applicationDate" label="Date of Application" type="date"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-btn type="submit">Submit</v-btn>
+          </v-form>
+        </v-card>
+      </v-container>
+    </v-app>
   </template>
   
   <script>
@@ -63,71 +62,31 @@
           email: '',
           occupation: '',
           club: '',
-          applicationDate: ''
+          applicationDate: '',
         }
       };
     },
     methods: {
       submitForm() {
-        console.log(this.form);
+        // Handle form submission logic
       }
     }
   };
   </script>
-  
   <style scoped>
-  .card {
-    max-width: 600px;
-    margin: auto;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-    min-height:900px
-  }
-  
-  h1 {
-    color: #333;
-    text-align: center;
-  }
+  /* Add your styles here */
   
   .form {
-    display: flex;
-    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
   }
   
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    color: #555;
-    font-weight: bold;
-  }
-  
-  input {
+  .v-text-field {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    margin-bottom: 16px;
   }
   
-  button {
-    background-color: #4caf50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
+  .v-btn {
+    margin-top: 16px;
   }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
   </style>
-  

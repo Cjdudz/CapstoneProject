@@ -1,49 +1,114 @@
-Neigbors 
 <template>
-  <div id="app">
-    <form>
-      <h1>List down three (3) neighbors at your present residence</h1>
-      <label>Business Address/Residence: <input type="text" v-model="neighbors.address"></label>
-      <!-- Add other fields here -->
-
-      <h1>Organization or social groups</h1>
-      <label>Member Membership & Position: <input type="text" v-model="organization.membership"></label>
-      <!-- Add other fields here -->
-
-      <h1>Miscellaneous</h1>
-      <label>Address: <input type="text" v-model="miscellaneous.address"></label>
-      <!-- Add other fields here -->
-
-      <h1>Languages and dialects</h1>
-      <label>Write: <input type="text" v-model="languages.write"></label>
-      <!-- Add other fields here -->
-    </form>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'App',
-  data() {
-    return {
-      neighbors: {
-        address: '',
-        // Add other fields here
-      },
-      organization: {
-        membership: '',
-        // Add other fields here
-      },
-      miscellaneous: {
-        address: '',
-        // Add other fields here
-      },
-      languages: {
-        write: '',
+    <div id="app">
+      <form class="neighbor-form">
+        <h1>Neighbors</h1>
+        <div class="form-section">
+          <h2>Present Residence</h2>
+          <label for="neighbor-address">Business Address/Residence:</label>
+          <input type="text" id="neighbor-address" v-model="neighbors.address" placeholder="Enter address">
+          <!-- Add other fields here -->
+        </div>
+  
+        <h1>Organization or Social Groups</h1>
+        <div class="form-section">
+          <label for="organization-membership">Member Membership & Position:</label>
+          <input type="text" id="organization-membership" v-model="organization.membership" placeholder="Enter membership details">
+          <!-- Add other fields here -->
+        </div>
+  
+        <h1>Miscellaneous</h1>
+        <div class="form-section">
+          <label for="miscellaneous-address">Address:</label>
+          <input type="text" id="miscellaneous-address" v-model="miscellaneous.address" placeholder="Enter address">
+          <!-- Add other fields here -->
+        </div>
+  
+        <h1>Languages and Dialects</h1>
+        <div class="form-section">
+          <label for="languages-write">Write:</label>
+          <input type="text" id="languages-write" v-model="languages.write" placeholder="Enter language proficiency">
+          <!-- Add other fields here -->
+        </div>
+        <!-- Add other sections here -->
+  
+        <!-- Submit button -->
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    name: 'App',
+    data() {
+      return {
+        neighbors: {
+          address: '',
+          // Add other fields here
+        },
+        organization: {
+          membership: '',
+          // Add other fields here
+        },
+        miscellaneous: {
+          address: '',
+          // Add other fields here
+        },
+        languages: {
+          write: '',
+          // Add other fields here
+        }
         // Add other fields here
       }
-      // Add other fields here
     }
   }
-}
-</script>
+  </script>
+  
+  <style scoped>
+  #app {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+  
+  .neighbor-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  </style>
+  

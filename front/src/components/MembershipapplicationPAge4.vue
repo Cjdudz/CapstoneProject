@@ -1,25 +1,25 @@
 <template>
-  <div id="app">
-    <form>
-      <h1>MA - 2009 Page 4 of 4 INSTRUCTIONS MEMBERSHIP APPLICATION</h1>
-      <h2>GENERAL</h2>
-      <div class="form-group">
-        <label>Everyone requesting membership in the Philippine Coast Guard Auxiliary shall complete this form:</label>
-        <textarea v-model="general" class="form-textarea"></textarea>
-      </div>
-      <h2>SECTION I - BASIC DATA OF APPLICANT</h2>
-      <div class="form-group">
-        <label>To be completed by applicant:</label>
-        <textarea v-model="sectionI" class="form-textarea"></textarea>
-      </div>
-      <h2>SECTION II - APPLICANT'S QUALIFICATIONS</h2>
-      <div class="form-group">
-        <label>To be completed by:</label>
-        <input v-model="sectionII" class="form-input">
-      </div>
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
-  </div>
+  <v-app>
+    <v-container>
+      <v-form @submit.prevent="submitForm" class="styled-form">
+        <v-row justify="center">
+          <v-col cols="12" md="8">
+            <h1 class="form-title">MA - 2009 Page 4 of 4 INSTRUCTIONS MEMBERSHIP APPLICATION</h1>
+            <h2 class="form-subtitle">GENERAL</h2>
+            <v-textarea v-model="general" label="Everyone requesting membership in the Philippine Coast Guard Auxiliary shall complete this form:" outlined></v-textarea>
+
+            <h2 class="form-subtitle">SECTION I - BASIC DATA OF APPLICANT</h2>
+            <v-textarea v-model="sectionI" label="To be completed by applicant:" outlined></v-textarea>
+
+            <h2 class="form-subtitle">SECTION II - APPLICANT'S QUALIFICATIONS</h2>
+            <v-text-field v-model="sectionII" label="To be completed by:" outlined></v-text-field>
+
+            <v-btn type="submit" class="submit-button">Submit</v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -30,65 +30,29 @@ export default {
       sectionI: '',
       sectionII: ''
     };
+  },
+  methods: {
+    submitForm() {
+      // Add your form submission logic here
+      console.log('Form submitted!', this.general, this.sectionI, this.sectionII);
+    }
   }
 };
 </script>
 
 <style scoped>
-  #app {
-    font-family: 'Arial', sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
+.styled-form {
+  margin-top: 20px;
+}
 
-  form {
-    margin-top: 20px;
-    width: auto;
-  }
+.form-title, .form-subtitle {
+  color: #333;
+  margin-bottom: 20px;
+}
 
-  h1, h2 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-  }
-
-  .form-textarea,
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: #333;
-  }
-
-  .form-textarea {
-    resize: vertical;
-  }
-
-  .submit-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-
-  .submit-button:hover {
-    background-color: #45a049;
-  }
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  margin-top: 20px;
+}
 </style>

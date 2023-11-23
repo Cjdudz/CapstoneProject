@@ -20,7 +20,7 @@
       data() {
         return {
           links: [
-            { to: '/pcga-application-form', label: 'PCGA Application Form' },
+            { to: '/PcgaapplicationForm', label: 'PCGA Application Form' },
             { to: '/MembershipapplicationPAge1', label: 'Membership Application Page 1' },
             { to: '/MembershipapplicationPAge2', label: 'Membership Application Page 2' },
             { to: '/MembershipapplicationPAge5', label: 'Membership Application Page 3' },

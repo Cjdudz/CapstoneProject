@@ -13,7 +13,7 @@ import OnlineApplicationForm from '@/components/OnlineApplicationForm.vue';
   
     components: {
     CountryVisited,
-    OnlineApplicationForm
+    OnlineApplicationForm,
 },
   });
   </script>

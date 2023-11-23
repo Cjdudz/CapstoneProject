@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <v-container>
+      <v-container class="custom-form">
         <v-form @submit.prevent="submitForm">
           <v-row>
             <v-col>
@@ -32,7 +32,7 @@
           <v-text-field label="Post Graduate Courses and Other Qualifications" v-model="form.fatherInLaw.courses"></v-text-field>
           <v-text-field label="Further Eligibility, if any, and other qualifications" v-model="form.fatherInLaw.eligibility"></v-text-field>
   
-          <v-btn type="submit" color="primary">Submit</v-btn>
+          <v-btn type="submit" color="primary" class="submit-button">Submit</v-btn>
         </v-form>
       </v-container>
     </v-app>
@@ -76,27 +76,25 @@
   </script>
   
   <style scoped>
-  .v-container{
-    display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 250dvh
-  }
   .custom-form {
-    max-width: 800px;
-    margin: auto;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 240vh;
   }
   
   h3 {
     color: #2a4e6c;
+    margin-top: 16px;
   }
   
   .v-text-field {
     width: 100%;
+    margin-bottom: 16px;
   }
   
-  .submit-btn {
+  .submit-button {
     margin-top: 16px;
   }
   </style>
+  
