@@ -1,5 +1,4 @@
 <template>
-        <input type="email" id="email" v-model="formData.email" required />
   <div class="pagination-container">
     <p>PAGES</p>
 
