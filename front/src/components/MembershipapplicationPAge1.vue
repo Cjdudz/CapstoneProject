@@ -71,10 +71,10 @@ export default {
 </script>
 
 <style scoped>
-.form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+.v-container {
+  max-width: 700px;
+
+  
 }
 
 .form-title {

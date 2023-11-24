@@ -80,7 +80,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 240vh;
+    height: 200vh;
   }
   
   h3 {

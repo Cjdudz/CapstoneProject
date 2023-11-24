@@ -24,7 +24,6 @@ import PcgaapplicationForm from '@/views/PcgaapplicationForm.vue'
 const routes = [
  
   {
-    
     path: '/',
     name: 'home',
     component: HomeView,

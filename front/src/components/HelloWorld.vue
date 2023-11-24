@@ -108,10 +108,7 @@
           </v-col>
         </v-row>
         <v-row>
-      <v-col>
-        <!-- ... Your existing code ... -->
-        <ApplicantList :applicants="applicants" />
-      </v-col>
+      
     </v-row>    
         <v-row v-if="showInterviewForm">
           <v-col>
@@ -155,7 +152,7 @@
 
 <script>
 import Chatcomponent from './Chatcomponent.vue';
-import ApplicantList from './ApplicantList.vue';
+
 export default {
   data() {
     return {
@@ -216,7 +213,7 @@ export default {
       });
     },
 
-  components: { Chatcomponent, ApplicantList},
+  components: { Chatcomponent},
               
 };
 </script>
