@@ -75,15 +75,7 @@
           </v-col>
         </v-row>
 
-        <v-row>
-  <v-col>
-    <v-container class="my-5">
-      <v-btn @click="startApplicationProcess">Start Application Process</v-btn>
-      <p>Number of Applicants: {{ numberOfApplicants }}</p> <!-- Add this line -->
-    </v-container>
-  </v-col>
-</v-row>
-
+   
         <v-row v-if="showApplicationForm">
           <v-col>
             <v-container class="my-5">
@@ -155,7 +147,6 @@
 
 <script>
 import Chatcomponent from './Chatcomponent.vue';
-import ApplicantList from './ApplicantList.vue';
 export default {
   data() {
     return {
@@ -216,7 +207,7 @@ export default {
       });
     },
 
-  components: { Chatcomponent, ApplicantList},
+  components: { Chatcomponent},
               
 };
 </script>

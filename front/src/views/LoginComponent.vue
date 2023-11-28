@@ -1,13 +1,7 @@
 <template>
-    <div>
-  
-  
-      <!-- Include the LoginView component -->
-      <Login />
-  
-      <!-- Other content of the HomeView component -->
-     
-    </div>
+    
+          <Login />
+    
   </template>
   
   <script>
