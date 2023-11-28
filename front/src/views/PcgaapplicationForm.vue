@@ -2,7 +2,7 @@
     <div id="app">
       <PcgaapplicationForm />
       <OnlineApplicationForm />
-      <router-view />
+  
     </div>
   </template>
   

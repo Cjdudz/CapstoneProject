@@ -1,145 +1,56 @@
 <template>
-  <div class="coast-guard-container">
-    <div class="coast-guard-login-container">
-      <h2>Login</h2>
-      <form @submit.prevent="login" class="coast-guard-login-form">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" v-model="username" class="form-control" required />
-        </div>
+  <div class="container">
+<v-sheet width="300" class="mx-auto login-container">
+  <v-form fast-fail @submit.prevent="login">
+    <v-text-field v-model="username" label="Username" required></v-text-field>
 
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" v-model="password" class="form-control" required />
-        </div>
+    <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
 
-        <div class="form-group">
-          <label for="role">Role:</label>
-          <select v-model="role" class="form-control" required>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
+    <v-btn type="submit" block class="mt-2">Login</v-btn>
+  </v-form>
+  
+  <p v-if="message" class="error-message">{{ message }}</p>
 
-        <button type="submit" class="btn btn-coast-guard">Login</button>
-
-        <!-- Error message display -->
-        <p v-if="loginError" class="coast-guard-error-message">{{ loginError }}</p>
-      </form>
-
-      <!-- Link to the registration page -->
-      <router-link to="/RegisterComponent" class="router-link">Don't have an account? Register here.</router-link>
-    </div>
+  <div class="forgot-register-links">
+    <router-link to="/forgot-password">Forgot Password?</router-link>
+    <v-card-text>If you don't have an account, register <router-link to="/RegisterComponent">here</router-link> first.</v-card-text>
   </div>
+</v-sheet>
+</div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  data() {
-    return {
-      username: '',
-      password: '',
-      role: 'user', // Default to user role
-      loginError: '', // New data property for login errors
-    };
-  },
-  methods: {
-    login() {
-      // Here you can add your authentication logic
-      // For simplicity, let's just log the credentials for now
-      console.log('Username:', this.username);
-      console.log('Password:', this.password);
-      console.log('Role:', this.role);
+data: () => ({
+  username: '',
+  password: '',
+  message: '',
+}),
+methods: {
+  async login() {
+    try {
+      const response = await axios.post('api/login', {
+        username: this.username,
+        password: this.password,
+      });
 
-      // Simulate a login error for demonstration purposes
-      if (this.role === 'user') {
-        // User login logic
-        // For example, redirect to a user dashboard
-        this.$router.push('/');
-      } else if (this.role === 'admin') {
-        // Admin login logic
-        // For example, redirect to an admin dashboard
-        this.$router.push('/Admin');
+      if ('msg' in response.data) {
+        if (response.data.msg === 'okay') {
+          this.$router.push('/');
+        } else {
+          this.message = 'Login failed. Please try again.';
+        }
+      } else {
+        this.message = 'Unexpected response structure. Please try again.';
+        console.error('Unexpected response structure:', response);
       }
-
-      // Simulate a login error for demonstration purposes
-      this.loginError = 'Invalid username or password';
-    },
+    } catch (error) {
+      this.message = 'Error during login. Please try again later.';
+      console.error('Error during login:', error);
+    }
   },
+},
 };
 </script>
-
-<style scoped>
-.coast-guard-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 20px;
-  background-color: #dae2df; /* Coastal Blue-Green */
-}
-
-.coast-guard-login-container {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #007bff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5; /* Set background color to light gray */
-}
-
-.coast-guard-login-form .form-group {
-  margin-bottom: 15px;
-}
-
-.coast-guard-login-form label {
-  display: block;
-  margin-bottom: 5px;
-  color: #007bff; /* Set label color to Coast Guard blue */
-}
-
-.coast-guard-login-form input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.coast-guard-login-form input:focus {
-  border-color: #0056b3; /* Darker blue on focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.btn-coast-guard {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-coast-guard:hover {
-  background-color: #0056b3;
-}
-
-.coast-guard-error-message {
-  color: #dc3545;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.router-link {
-  display: block;
-  margin-top: 20px;
-  text-align: center;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.router-link:hover {
-  text-decoration: underline;
-}
-</style>
