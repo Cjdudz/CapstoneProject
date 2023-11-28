@@ -9,7 +9,7 @@
 import OnlineApplicationForm from '@/components/OnlineApplicationForm.vue';
   
   export default defineComponent({
-    name: 'ParentComponent',
+    name: 'ParentComponent',    
   
     components: {
     CountryVisited,

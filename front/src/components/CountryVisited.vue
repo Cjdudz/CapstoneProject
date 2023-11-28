@@ -80,7 +80,7 @@
   }
   .mr-4 {
     margin-right: 4px;
-  }
+  } 
   .visit-table {
     width: 100%;
     border-collapse: collapse;

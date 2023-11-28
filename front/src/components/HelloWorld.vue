@@ -107,10 +107,14 @@
             </v-container>
           </v-col>
         </v-row>
+<<<<<<< Updated upstream
         <v-row>
       
     </v-row>    
         <v-row v-if="showInterviewForm">
+=======
+              <v-row v-if="showInterviewForm">
+>>>>>>> Stashed changes
           <v-col>
             <v-container class="my-5">
               <v-dialog v-model="showInterviewForm" max-width="600">
@@ -152,7 +156,10 @@
 
 <script>
 import Chatcomponent from './Chatcomponent.vue';
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 export default {
   data() {
     return {

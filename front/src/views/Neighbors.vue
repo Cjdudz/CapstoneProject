@@ -1,6 +1,5 @@
 <template>
     <div>
-
       <Neighbors />
       <OnlineApplicationForm />
     </div>
