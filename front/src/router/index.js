@@ -1,86 +1,99 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import LoginComponent from '../views/LoginComponent.vue';
-import RegisterComponent from '../views/RegisterComponent.vue';
-import Home from '../views/Home.vue';
-import OnlineApplicationForm from '../views/OnlineApplicationForm.vue';
-import Chatcomponent from '../views/Chatcomponent.vue';
-import ApplicantList from '../views/ApplicantList.vue';
-import Admin from '../views/Admin.vue'; // Corrected import statement
-import users from '../views/users.vue';
-import ApplicantsData from '../views/ApplicantsData.vue';
-import Overview from '@/views/Overview.vue'
-import MembershipapplicationPAge1 from '@/views/MembershipapplicationPAge1.vue'
-import MembershipapplicationPAge2 from '@/views/MembershipapplicationPAge2.vue'
-import MembershipapplicationPAge5 from '@/views/MembershipapplicationPAge5.vue'
-import MembershipapplicationPAge4 from '@/views/MembershipapplicationPAge4.vue'
-import Personalhistory from '@/views/Personalhistory.vue'
-import Maritalhistory from '@/views/Maritalhistory.vue'
-import MilitaryHistory from '@/views/MilitaryHistory.vue'
-import CountryVisited from '@/views/CountryVisited.vue'
-import Neighbors from '@/views/Neighbors.vue'
-import LastpageApplication from '@/views/LastpageApplication.vue'
-import PcgaapplicationForm from '@/views/PcgaapplicationForm.vue'
 const routes = [
- 
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: () => import('@/views/HomeView.vue'),
   },
-  {path:'/CountryVisited', component:CountryVisited},
-  { path: '/Overview', component: Overview },
-  { path: '/MembershipapplicationPAge5', component: MembershipapplicationPAge5},
-  { path: '/MembershipapplicationPAge2', component: MembershipapplicationPAge2 },
-  { path: '/MembershipapplicationPAge1', component: MembershipapplicationPAge1 },
-  { path: '/MembershipapplicationPAge4', component: MembershipapplicationPAge4 },
-  { path: '/MilitaryHistory', component: MilitaryHistory },
-  { path: '/Personalhistory', component: Personalhistory },
-  { path: '/Maritalhistory', component: Maritalhistory },
-  { path: '/Neighbors', component: Neighbors },
-  { path: '/PcgaapplicationForm', component: PcgaapplicationForm },
-  { path: '/LastpageApplication', component: LastpageApplication },
+  {
+    path: '/CountryVisited',
+    component: () => import('@/views/CountryVisited.vue'),
+  },
+  {
+    path: '/Overview',
+    component: () => import('@/views/Overview.vue'),
+  },
+  {
+    path: '/MembershipapplicationPAge5',
+    component: () => import('@/views/MembershipapplicationPAge5.vue'),
+  },
+  {
+    path: '/MembershipapplicationPAge2',
+    component: () => import('@/views/MembershipapplicationPAge2.vue'),
+  },
+  {
+    path: '/MembershipapplicationPAge1',
+    component: () => import('@/views/MembershipapplicationPAge1.vue'),
+  },
+  {
+    path: '/MembershipapplicationPAge4',
+    component: () => import('@/views/MembershipapplicationPAge4.vue'),
+  },
+  {
+    path: '/MilitaryHistory',
+    component: () => import('@/views/MilitaryHistory.vue'),
+  },
+  {
+    path: '/Personalhistory',
+    component: () => import('@/views/Personalhistory.vue'),
+  },
+  {
+    path: '/Maritalhistory',
+    component: () => import('@/views/Maritalhistory.vue'),
+  },
+  {
+    path: '/Neighbors',
+    component: () => import('@/views/Neighbors.vue'),
+  },
+  {
+    path: '/PcgaapplicationForm',
+    component: () => import('@/views/PcgaapplicationForm.vue'),
+  },
+  {
+    path: '/LastpageApplication',
+    component: () => import('@/views/LastpageApplication.vue'),
+  },
   {
     path: '/ApplicantsData',
-    name: 'ApplicantsData', // Corrected the name
-    component: ApplicantsData,
+    name: 'ApplicantsData',
+    component: () => import('@/views/ApplicantsData.vue'),
   },
   {
     path: '/users',
-    component: users,
+    component: () => import('@/views/users.vue'),
   },
   {
     path: '/admin',
-    component: Admin,
+    component: () => import('@/views/Admin.vue'),
   },
   {
     path: '/ChatComp',
     name: 'ChatComp',
-    component: Chatcomponent,
+    component: () => import('@/views/Chatcomponent.vue'),
   },
   {
     path: '/ApplicantList',
     name: 'ApplicantList',
-    component: ApplicantList,
+    component: () => import('@/views/ApplicantList.vue'),
   },
   {
     path: '/Home',
     name: 'homeKo',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
   },
   {
     path: '/OnlineApplicationForm',
-    component: OnlineApplicationForm,
+    component: () => import('@/views/OnlineApplicationForm.vue'),
   },
   {
     path: '/LoginComponent',
     name: 'login',
-    component: LoginComponent,
+    component: () => import('@/views/LoginComponent.vue'),
   },
   {
     path: '/RegisterComponent',
     name: 'register',
-    component: RegisterComponent,
+    component: () => import('@/views/RegisterComponent.vue'),
   },
   {
     path: '/about',
@@ -88,6 +101,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
 ];
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

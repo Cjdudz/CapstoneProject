@@ -1,62 +1,204 @@
-<!-- UserTable.vue -->
-
 <template>
-    <div>
-      <h2>User Table</h2>
+  <div class="admin-panel">
+    <h1>User Management</h1>
+
+    <div class="user-list">
       <table class="user-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
             <th>Role</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in users" :key="index">
+          <tr v-for="user in users" :key="user.id">
             <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
+            <td>{{ user.username }}</td>
             <td>{{ user.role }}</td>
+            <td>
+              <button @click="editUser(user)"><i class="fas fa-edit"></i> Edit</button>
+              <button @click="deleteUser(user)"><i class="fas fa-trash-alt"></i> Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        users: [
-          { id: 1, name: 'Admin User', email: 'admin@example.com', role: 'admin' },
-          { id: 2, name: 'Staff User', email: 'staff@example.com', role: 'staff' },
-          { id: 3, name: 'Regular User', email: 'user@example.com', role: 'user' },
-          // Add more users as needed
-        ],
-      };
+
+    <div v-if="editMode" class="user-form-modal">
+      <div class="user-form">
+        <h2>Edit User</h2>
+        <form @submit.prevent="updateUser">
+          <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="number" id="id" v-model="editedUserId" readonly>
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" v-model="editedUserName">
+          </div>
+          <div class="form-group">
+            <label for="role">Role:</label>
+            <input type="text" id="role" v-model="editedUserRole">
+          </div>
+          <button type="submit"><i class="fas fa-check"></i> Update User</button>
+          <button type="button" @click="cancelEdit">
+    <i class="fas fa-times"></i> Cancel
+  </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      users: [],
+      editMode: false,
+      editedUserId: null,
+      editedUserName: '',
+      editedUserRole: '',
+    };
+  },
+  mounted() {
+    this.getUsers();
+  },
+  methods: {
+    cancelEdit() {
+    console.log('Editing canceled!');
+    this.editMode = false; // Make sure this line is present
+  },
+    editUser(user) {
+      this.editMode = true;
+      this.editedUserId = user.id;
+      this.editedUserName = user.username;
+      this.editedUserRole = user.role;
     },
-  };
-  </script>
-  
-  <style scoped>
-  /* Add your styling here if needed */
-  
+    updateUser() {
+      const data = {
+        username: this.editedUserName,
+        role: this.editedUserRole,
+      };
+
+      axios.put(`/api/update_user/${this.editedUserId}`, data)
+        .then((response) => {
+          this.getUsers();
+          this.editMode = false;
+          this.editedUserId = null;
+          this.editedUserName = '';
+          this.editedUserRole = '';
+        })
+        .catch((error) => {
+          console.error('Error updating user:', error);
+        });
+    },
+    getUsers() {
+      axios.get('/api/users')
+        .then((response) => {
+          this.users = response.data;
+        });
+    },
+    deleteUser(user) {
+      axios.delete(`/api/delete/${user.id}`)
+        .then((response) => {
+          this.getUsers();
+        })
+        .catch((error) => {
+          console.error('Error deleting user:', error);
+        });
+    },
+  },
+};
+</script>
+
+
+<style scoped>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .admin-panel {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1, h2 {
+    font-weight: bold;
+  }
+
   .user-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
-  
-  .user-table th, .user-table td {
+
+  .user-table th,
+  .user-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     text-align: left;
   }
-  
+
   .user-table th {
-    background-color: #f2f2f2;
+    background-color: #f5f5f5;
   }
-  
-  </style>
-  
+
+  .user-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .user-form-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .user-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .user-form button {
+    margin-right: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+</style>

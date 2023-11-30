@@ -20,8 +20,9 @@ class UserController extends ResourceController
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'token' => $token,
             'status' => 'active',
-            'role' => 'user','admin'
+            'role' => 'user', // Assuming you want to set the role as 'user'
         ];
+
         $u = $user->save($data);
         if ($u) {
             return $this->respond(['msg' => 'okay', 'token' => $token]);
@@ -52,5 +53,47 @@ class UserController extends ResourceController
                 return $this->respond(['msg' => 'error'], 200);
             }
         }
+    }
+
+    public function users($id = null)
+    {
+        $model = new UserModel();
+        $users = $model->findAll();
+
+        return $this->respond($users);
+    }
+
+    public function create_user()
+    {
+        $userModel = new UserModel();
+        $data = [
+            'username' => $this->request->getVar('username'), // Assuming 'name' is a field in your 'users' table
+            // Add other fields as needed
+        ];
+
+        $userModel->insert($data);
+
+        return $this->respond(['msg' => 'User created successfully']);
+    }
+
+    public function update_user($id)
+    {
+        $userModel = new UserModel();
+        $data = [
+            'username' => $this->request->getVar('username'),
+            'role' => $this->request->getVar('role'), // Add other fields as needed
+        ];
+    
+        $userModel->update($id, $data);
+    
+        return $this->respond(['msg' => 'User updated successfully']);
+    }
+
+    public function delete_user($id)
+    {
+        $userModel = new UserModel();
+        $userModel->delete($id);
+
+        return $this->respond(['msg' => 'User deleted successfully']);
     }
 }

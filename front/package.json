@@ -14,11 +14,12 @@
     "js-cookie": "^3.0.5",
     "register-service-worker": "^1.7.2",
     "roboto-fontface": "*",
+    "socket.io-client": "^4.7.2",
     "vue": "^3.2.13",
     "vue-chartjs": "^5.2.0",
     "vue-router": "^4.0.3",
     "vuesax": "^3.12.2",
-    "vuetify": "^3.4.3",
+    "vuetify": "^3.4.4",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {

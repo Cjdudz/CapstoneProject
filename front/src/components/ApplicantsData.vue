@@ -1,64 +1,77 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-card>
-            <v-card-title>Applicants</v-card-title>
-            <v-card-text>
-              <v-list>
-                <v-list-item v-for="(applicant, index) in applicants" :key="index">
-                  <v-list-item-content>
-                    <v-list-item-title>{{ applicant.name }}</v-list-item-title>
-                    <v-list-item-subtitle>{{ applicant.email }}</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-  
-      <v-row>
-        <v-col>
-          <v-card>
-            <v-card-title>Add New Applicant</v-card-title>
-            <v-card-text>
-              <v-form @submit.prevent="addApplicant">
-                <v-text-field v-model="newApplicant.name" label="Name"></v-text-field>
-                <v-text-field v-model="newApplicant.email" label="Email"></v-text-field>
-                <v-btn type="submit" color="primary">Add Applicant</v-btn>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        applicants: [
-          { name: "John Doe", email: "john@example.com" },
-          { name: "Jane Doe", email: "jane@example.com" },
-        ],
-        newApplicant: {
-          name: "",
-          email: "",
-        },
-      };
+  <div>
+    <h2>User Table</h2>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th class="table-header">ID</th>
+          <th class="table-header">Name</th>
+          <th class="table-header">Description</th>
+          <th class="table-header">Appointment Date & Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="appointment in appointments" :key="appointment.id">
+          <td>{{ appointment.id }}</td>
+          <td>{{ appointment.title }}</td>
+          <td>{{ appointment.description }}</td>
+          <td>{{ appointment.date_time }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div v-if="error" class="error-message">
+      Error fetching appointments: {{ error }}
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      appointments: [],
+      error: null,
+    };
+  },
+  mounted() {
+    // Fetch appointments from the backend
+    this.fetchAppointments();
+  },
+  methods: {
+    async fetchAppointments() {
+      try {
+        const response = await axios.get('/api/appointment');
+        this.appointments = response.data;
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+        this.error = error.message || 'An error occurred while fetching appointments.';
+      }
     },
-    methods: {
-      addApplicant() {
-        this.applicants.push({ ...this.newApplicant });
-        this.newApplicant = { name: "", email: "" };
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  /* Add your custom styles here */
-  </style>
-  
+  },
+};
+</script>
+
+<style>
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-header {
+  background-color: #f2f2f2;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+</style>

@@ -1,13 +1,10 @@
-<!-- views/Overview.vue -->
-
 <template>
   <section class="overview">
     <h2>PCGA Overview</h2>
 
     <form>
       <div class="overview-content">
-        <!-- Display relevant information about the PCGA -->
-        <v-card class="info-card">
+        <v-card class="info-card" @click="viewCard('members')" :class="{ 'selected-card': selectedCard === 'members' }">
           <v-card-title>
             <h3>Members</h3>
           </v-card-title>
@@ -16,7 +13,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card class="info-card">
+        <v-card class="info-card" @click="viewCard('alerts')" :class="{ 'selected-card': selectedCard === 'alerts' }">
           <v-card-title>
             <h3>Active Alerts</h3>
           </v-card-title>
@@ -25,7 +22,9 @@
           </v-card-text>
         </v-card>
 
-        <v-card class="info-card">
+        <!-- Add similar click handling for other cards -->
+
+        <v-card class="info-card" @click="viewCard('revenue')" :class="{ 'selected-card': selectedCard === 'revenue' }">
           <v-card-title>
             <h3>Revenue</h3>
           </v-card-title>
@@ -34,7 +33,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card class="info-card">
+        <v-card class="info-card" @click="viewCard('projects')" :class="{ 'selected-card': selectedCard === 'projects' }">
           <v-card-title>
             <h3>Projects</h3>
           </v-card-title>
@@ -50,16 +49,64 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Chart from 'chart.js/auto';
+
 export default {
   data() {
     return {
-      // Placeholder data, you can replace this with actual data from your API
-      memberCount: 500,
-      activeAlertsCount: 10,
-      totalRevenue: 1000000, // Placeholder value, replace with actual data
-      totalProjects: 20, // Placeholder value, replace with actual data
-      // Add more data properties as needed
+      memberCount: null,
+      activeAlertsCount: null,
+      totalRevenue: null,
+      totalProjects: null,
+      selectedCard: null,
     };
+  },
+  mounted() {
+    axios.get('/api/overview')
+      .then(response => {
+        const data = response.data;
+        this.memberCount = data.memberCount;
+        this.activeAlertsCount = data.activeAlertsCount;
+        this.totalRevenue = data.totalRevenue;
+        this.totalProjects = data.totalProjects;
+
+        // Call the correct method to update the age chart
+        this.updateAgeChart(data.ageChartData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  },
+  methods: {
+    updateAgeChart(ageChartData) {
+      const ctx = document.getElementById('ageChart').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ageChartData.labels,
+          datasets: [{
+            label: 'Applicant Ages',
+            data: ageChartData.ages,
+            backgroundColor: 'rgba(63, 81, 181, 0.5)',
+            borderColor: 'rgba(63, 81, 181, 1)',
+            borderWidth: 1,
+          }],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    },
+    viewCard(card) {
+      // Toggle the selected card state
+      this.selectedCard = this.selectedCard === card ? null : card;
+    },
   },
 };
 </script>
@@ -77,17 +124,12 @@ export default {
 }
 
 .info-card {
-  max-width: 300px;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: fit-content;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.info-card h3 {
-  color: #3f51b5;
-}
-
-.info-card p {
-  margin: 0;
+.selected-card {
+  background-color: #e0e0e0;
 }
 </style>

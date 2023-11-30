@@ -1,0 +1,590 @@
+CRITICAL - 2023-11-30 05:11:07 --> Argument 2 passed to CodeIgniter\Router\RouteCollection::resource() must be of the type array or null, string given, called in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Config\Routes.php on line 11
+in SYSTEMPATH\Router\RouteCollection.php on line 828.
+ 1 APPPATH\Config\Routes.php(11): CodeIgniter\Router\RouteCollection->resource('api/appointment', 'AppointmentController')
+ 2 SYSTEMPATH\Router\RouteCollection.php(344): require('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Config\\Routes.php')
+ 3 SYSTEMPATH\CodeIgniter.php(810): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 4 SYSTEMPATH\CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 05:11:23 --> Argument 1 passed to CodeIgniter\Router\RouteCollection::resource() must be of the type string, array given, called in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Config\Routes.php on line 11
+in SYSTEMPATH\Router\RouteCollection.php on line 828.
+ 1 APPPATH\Config\Routes.php(11): CodeIgniter\Router\RouteCollection->resource([...], 'api/appointment', 'AppointmentController::index')
+ 2 SYSTEMPATH\Router\RouteCollection.php(344): require('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Config\\Routes.php')
+ 3 SYSTEMPATH\CodeIgniter.php(810): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 4 SYSTEMPATH\CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 05:20:39 --> Class 'App\Controllers\YourModel' not found
+in APPPATH\Controllers\AppointmentController.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\AppointmentController->index()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AppointmentController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 07:17:56 --> mysqli_sql_exception: Table 'capstone.revenues' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT SUM(`amo...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`amo...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`amo...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`amo...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(871): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(46): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(23): App\Controllers\OverviewController->getTotalRevenue()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#12 {main}
+CRITICAL - 2023-11-30 07:17:56 --> Table 'capstone.revenues' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`amount`) AS `amount`
+FROM `revenues`', [], false)
+ 2 SYSTEMPATH\Model.php(871): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\OverviewController.php(46): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\OverviewController.php(23): App\Controllers\OverviewController->getTotalRevenue()
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 07:18:12 --> mysqli_sql_exception: Table 'capstone.revenues' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT SUM(`amo...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`amo...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`amo...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`amo...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(871): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(46): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(23): App\Controllers\OverviewController->getTotalRevenue()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#12 {main}
+CRITICAL - 2023-11-30 07:18:12 --> Table 'capstone.revenues' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`amount`) AS `amount`
+FROM `revenues`', [], false)
+ 2 SYSTEMPATH\Model.php(871): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\OverviewController.php(46): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\OverviewController.php(23): App\Controllers\OverviewController->getTotalRevenue()
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 07:19:01 --> mysqli_sql_exception: Table 'capstone.revenues' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT SUM(`amo...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`amo...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`amo...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`amo...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(871): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(46): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(23): App\Controllers\OverviewController->getTotalRevenue()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#12 {main}
+CRITICAL - 2023-11-30 07:19:01 --> Table 'capstone.revenues' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`amount`) AS `amount`
+FROM `revenues`', [], false)
+ 2 SYSTEMPATH\Model.php(871): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\OverviewController.php(46): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\OverviewController.php(23): App\Controllers\OverviewController->getTotalRevenue()
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 07:19:55 --> mysqli_sql_exception: Table 'capstone.agedistributions' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(59): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(25): App\Controllers\OverviewController->getAgeChartData()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#13 {main}
+CRITICAL - 2023-11-30 07:19:55 --> Table 'capstone.agedistributions' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `agedistributions`', [], false)
+ 2 SYSTEMPATH\Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\OverviewController.php(59): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\OverviewController.php(25): App\Controllers\OverviewController->getAgeChartData()
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 11:05:01 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it.
+ in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:185
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'capstone', 3306, '', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\Usercontroller.php(60): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\UserController->users()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it.
+ in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:229
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\Usercontroller.php(60): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\UserController->users()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2023-11-30 11:05:01 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it.
+
+in SYSTEMPATH\Database\BaseConnection.php on line 428.
+ 1 SYSTEMPATH\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`', [], false)
+ 3 SYSTEMPATH\Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Usercontroller.php(60): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->users()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 11:24:06 --> Object of class CodeIgniter\Router\RouteCollection could not be converted to string
+in APPPATH\Config\Routes.php on line 14.
+ 1 SYSTEMPATH\Router\RouteCollection.php(344): require()
+ 2 SYSTEMPATH\CodeIgniter.php(810): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 11:24:08 --> Object of class CodeIgniter\Router\RouteCollection could not be converted to string
+in APPPATH\Config\Routes.php on line 14.
+ 1 SYSTEMPATH\Router\RouteCollection.php(344): require()
+ 2 SYSTEMPATH\CodeIgniter.php(810): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 11:26:18 --> mysqli_sql_exception: Column 'username' cannot be null in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(698): CodeIgniter\Model->insert(Array, false)
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\Usercontroller.php(77): CodeIgniter\BaseModel->save(Array)
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\UserController->createUser()
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#14 {main}
+CRITICAL - 2023-11-30 11:26:18 --> Column 'username' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `token`, `status`, `role`) VALUES (:username:, :password:, :token:, :status:, :role:)', [...], false)
+ 2 SYSTEMPATH\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(788): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(698): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Usercontroller.php(77): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->createUser()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 11:26:18 --> mysqli_sql_exception: Column 'username' cannot be null in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(698): CodeIgniter\Model->insert(Array, false)
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\Usercontroller.php(77): CodeIgniter\BaseModel->save(Array)
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\UserController->createUser()
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#14 {main}
+CRITICAL - 2023-11-30 11:26:18 --> Column 'username' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `token`, `status`, `role`) VALUES (:username:, :password:, :token:, :status:, :role:)', [...], false)
+ 2 SYSTEMPATH\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(788): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(698): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Usercontroller.php(77): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->createUser()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2023-11-30 11:26:18 --> mysqli_sql_exception: Column 'username' cannot be null in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(698): CodeIgniter\Model->insert(Array, false)
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\Usercontroller.php(77): CodeIgniter\BaseModel->save(Array)
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\UserController->createUser()
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#14 {main}
+CRITICAL - 2023-11-30 11:26:18 --> Column 'username' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`username`, `password`, `token`, `status`, `role`) VALUES (:username:, :password:, :token:, :status:, :role:)', [...], false)
+ 2 SYSTEMPATH\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(788): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(698): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Usercontroller.php(77): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->createUser()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 11:51:51 --> Declaration of App\Controllers\UserController::update($id) should be compatible with CodeIgniter\RESTful\ResourceController::update($id = NULL)
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 APPPATH\Controllers\Usercontroller.php(10): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Declaration of App\\Controllers\\UserController::update($id) should be compatible with CodeIgniter\\RESTful\\ResourceController::update($id = NULL)', 'C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\Usercontroller.php', 79, [...])
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\Usercontroller.php')
+ 3 SYSTEMPATH\Autoloader\Autoloader.php(291): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\UserController.php')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(269): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\UserController')
+ 5 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\UserController')
+ 6 [internal function]: spl_autoload_call('App\\Controllers\\UserController')
+ 7 SYSTEMPATH\CodeIgniter.php(900): class_exists('\\App\\Controllers\\UserController', true)
+ 8 SYSTEMPATH\CodeIgniter.php(489): CodeIgniter\CodeIgniter->startController()
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 11:51:55 --> Declaration of App\Controllers\UserController::update($id) should be compatible with CodeIgniter\RESTful\ResourceController::update($id = NULL)
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 APPPATH\Controllers\Usercontroller.php(10): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Declaration of App\\Controllers\\UserController::update($id) should be compatible with CodeIgniter\\RESTful\\ResourceController::update($id = NULL)', 'C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\Usercontroller.php', 79, [...])
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\Usercontroller.php')
+ 3 SYSTEMPATH\Autoloader\Autoloader.php(291): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\UserController.php')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(269): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\UserController')
+ 5 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\UserController')
+ 6 [internal function]: spl_autoload_call('App\\Controllers\\UserController')
+ 7 SYSTEMPATH\CodeIgniter.php(900): class_exists('\\App\\Controllers\\UserController', true)
+ 8 SYSTEMPATH\CodeIgniter.php(489): CodeIgniter\CodeIgniter->startController()
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 11:52:46 --> Declaration of App\Controllers\UserController::update($id) should be compatible with CodeIgniter\RESTful\ResourceController::update($id = NULL)
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 APPPATH\Controllers\Usercontroller.php(10): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Declaration of App\\Controllers\\UserController::update($id) should be compatible with CodeIgniter\\RESTful\\ResourceController::update($id = NULL)', 'C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\Usercontroller.php', 79, [...])
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\Usercontroller.php')
+ 3 SYSTEMPATH\Autoloader\Autoloader.php(291): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\UserController.php')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(269): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\UserController')
+ 5 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\UserController')
+ 6 [internal function]: spl_autoload_call('App\\Controllers\\UserController')
+ 7 SYSTEMPATH\CodeIgniter.php(900): class_exists('\\App\\Controllers\\UserController', true)
+ 8 SYSTEMPATH\CodeIgniter.php(489): CodeIgniter\CodeIgniter->startController()
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:47 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:48 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:48 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:49 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:49 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:50 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:51 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:29:56 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:30:22 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:30:22 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:30:22 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:30:23 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:30:23 --> Call to a member function where() on null
+in APPPATH\Controllers\Usercontroller.php on line 79.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->delete_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:31:42 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:31:43 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:31:46 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:31:46 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:31:47 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:31:47 --> Too few arguments to function App\Controllers\UserController::update_user(), 1 passed in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php on line 942 and exactly 2 expected
+in APPPATH\Controllers\Usercontroller.php on line 71.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('27')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:31 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:32 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:32 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:32 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:33 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:33 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:34 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:34 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:44 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:53 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:53 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:53 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2023-11-30 13:34:56 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 930.
+ 1 SYSTEMPATH\BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Usercontroller.php(87): CodeIgniter\Model->update('28', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\UserController->update_user('28')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')

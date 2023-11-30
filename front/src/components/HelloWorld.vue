@@ -1,17 +1,16 @@
 <template>
   <v-app>
-    <v-app-bar app dark color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
-        505th PCGA Application System
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn text @click="redirectTo('/LoginComponent')">Login</v-btn>
-      <v-btn text @click="redirectTo('/RegisterComponent')">Register</v-btn>
-    </v-app-bar>
+    <v-app-bar>
+  <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+  <v-toolbar-title>
+    <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+    505th PCGA Application System
+  </v-toolbar-title>
+  <v-spacer></v-spacer>
+  <v-btn text @click="loginOrLogout">Logout</v-btn>
+</v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer" dark color="primary">
+    <v-navigation-drawer app v-model="drawer">
       <v-list>
         <v-list-item link @click="redirectTo('/home')">
           <v-list-item-content>
@@ -63,17 +62,14 @@
         <v-row>
           <v-col>
             <v-container class="my-5">
-              <h1 class="display-4">Welcome to the 505th PCGA Application System</h1>
-              <p class="subtitle-1">Apply online and schedule your appointment interview with ease.</p>
+              <v-card elevation="2" class="pa-5 text-center rounded-lg">
+                <v-card-title class="display-2 mb-3">Welcome to the 505th PCGA Application System</v-card-title>
+                <v-card-subtitle class="subtitle-1">Apply online and schedule your appointment interview with ease.</v-card-subtitle>
+              </v-card>
             </v-container>
           </v-col>
         </v-row>
-
-        <v-row>
-          <v-col class="chat-col" cols="2">
-            <Chatcomponent />
-          </v-col>
-        </v-row>
+     
 
    
         <v-row v-if="showApplicationForm">
@@ -81,47 +77,41 @@
             <v-container class="my-5">
               <v-dialog v-model="showApplicationForm" max-width="600">
                 <v-card>
-                  <v-card-title class="headline">Application Process Form</v-card-title>
+                  <v-card-title class="headline text-center">Application Process Form</v-card-title>
                   <v-card-text>
                     <v-form>
                       <v-text-field label="Full Name" v-model="applicationForm.fullName"></v-text-field>
                       <v-text-field label="Email" v-model="applicationForm.email"></v-text-field>
                       <v-text-field label="Phone Number" v-model="applicationForm.phoneNumber"></v-text-field>
 
-                      <v-btn @click="submitApplicationForm">Submit Application</v-btn>
+                      <v-btn color="primary" dark class="mt-4" @click="submitApplicationForm">Submit Application</v-btn>
                     </v-form>
                   </v-card-text>
-                  <v-card-actions>
-                    <v-btn @click="showApplicationForm = false">Close</v-btn>
+                  <v-card-actions class="justify-center">
+                    <v-btn @click="showApplicationForm = false" color="grey">Close</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
             </v-container>
           </v-col>
         </v-row>
-        <v-row>
-      <v-col>
-        <!-- ... Your existing code ... -->
-        <ApplicantList :applicants="applicants" />
-      </v-col>
-    </v-row>    
         <v-row v-if="showInterviewForm">
           <v-col>
             <v-container class="my-5">
               <v-dialog v-model="showInterviewForm" max-width="600">
                 <v-card>
-                  <v-card-title class="headline">Interview Process Form</v-card-title>
+                  <v-card-title class="headline text-center">Interview Process Form</v-card-title>
                   <v-card-text>
                     <v-form>
                       <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
                       <v-text-field label="Interview Date" v-model="interviewForm.interviewDate" type="date"></v-text-field>
                       <v-textarea label="Comments" v-model="interviewForm.comments"></v-textarea>
 
-                      <v-btn @click="submitInterviewForm">Submit Interview</v-btn>
+                      <v-btn color="primary" dark class="mt-4" @click="submitInterviewForm">Submit Interview</v-btn>
                     </v-form>
                   </v-card-text>
-                  <v-card-actions>
-                    <v-btn @click="showInterviewForm = false">Close</v-btn>
+                  <v-card-actions class="justify-center">
+                    <v-btn @click="showInterviewForm = false" color="grey">Close</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -132,7 +122,7 @@
       </v-container>
     </v-main>
 
-    <v-footer app dark color="primary">
+    <v-footer>
       <v-container>
         <v-row>
           <v-col>
@@ -142,9 +132,7 @@
       </v-container>
     </v-footer>
   </v-app>
-  
 </template>
-
 <script>
 import Chatcomponent from './Chatcomponent.vue';
 export default {
@@ -164,6 +152,22 @@ export default {
     };
   },
   methods: {
+    loginOrLogout() {
+      if (this.isLoggedIn) {
+        // User is logged in, perform logout action
+        this.logout();
+      } else {
+        // User is not logged in, redirect to login page
+        this.redirectTo('/LoginComponent');
+      }
+    },
+
+    logout() {
+      // Perform logout actions (e.g., clear session, reset state)
+      console.log("Logout clicked");
+      this.isLoggedIn = false;
+    },
+
     redirectTo(path) {
       this.$router.push(path);
       this.drawer = false;
@@ -215,23 +219,23 @@ export default {
 /* Global styles */
 body {
   font-family: 'Roboto', sans-serif;
-  margin: 30;
+  margin: 0;
   overflow-x: hidden;
-  
-  
 }
 
 /* Header styles */
 .v-app-bar {
   box-shadow: 0px 1px 5px rgba(149, 6, 6, 0.2);
   margin-top: 0;
-  
+  background-color: rgb(78, 32, 134); /* Update with your preferred color */
+  color: white;
 }
 
 .v-toolbar-title {
   font-size: 24px;
-  font-weight: bold; /* Make the title bold */
+  font-weight: bold;
 }
+
 .application-form {
   text-align: left;
   margin-top: 20px;
@@ -269,6 +273,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
 /* Navigation drawer styles */
 .v-navigation-drawer {
   background-color: #303030;
@@ -277,7 +282,7 @@ body {
 
 .v-list-item-title {
   color: white;
-  font-weight: bold; /* Make the list item titles bold */
+  font-weight: bold;
 }
 
 .v-divider {
@@ -294,7 +299,7 @@ body {
 .v-main {
   padding: 20px;
   margin-top: 0;
-  background-image: image('@/assets/A_letter_tech_logo.png'); /* Adjust the path based on your project structure */
+  background-image: url(''); /* Adjust the path based on your project structure */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -303,7 +308,7 @@ body {
 .display-4 {
   font-size: 2.5rem;
   color: #333;
-  font-weight: bold; /* Make the display-4 text bold */
+  font-weight: bold;
 }
 
 .subtitle-1 {
@@ -314,8 +319,9 @@ body {
 .headline {
   font-size: 1.8rem;
   color: #333;
-  font-weight: bold; /* Make the headline text bold */
+  font-weight: bold;
 }
+
 .applicant-list {
   margin-top: 20px;
 }
@@ -340,14 +346,15 @@ body {
   background-color: #4caf50;
   color: white;
 }
+
 /* Footer styles */
 .v-footer {
-  background-color: #333;
+  background-color:rgb(78, 32, 134);
   color: white;
-  padding: 5px 0; /* Reduce padding to make it smaller */
-  position: fixed; /* Fix the footer at the bottom */
-  bottom: 0; /* Position at the bottom of the viewport */
-  width: 100%; /* Make the footer span the entire width of the viewport */
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 /* Responsive styles */
