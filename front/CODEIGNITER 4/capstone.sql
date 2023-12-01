@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 27, 2023 at 11:31 PM
+-- Generation Time: Nov 30, 2023 at 11:46 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,67 +24,141 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productlist`
+-- Table structure for table `age_distribution`
 --
 
-CREATE TABLE `productlist` (
+CREATE TABLE `age_distribution` (
   `id` int NOT NULL,
-  `ProductName` text NOT NULL,
-  `ProductPrice` text NOT NULL,
-  `created_at` datetime NOT NULL
+  `age_group` varchar(10) NOT NULL,
+  `count` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `age_distribution`
+--
+
+INSERT INTO `age_distribution` (`id`, `age_group`, `count`, `created_at`) VALUES
+(1, '18-25', 20, '2023-11-30 07:00:03'),
+(2, '26-30', 15, '2023-11-30 07:00:03'),
+(3, '31-35', 10, '2023-11-30 07:00:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alerts`
+--
+
+CREATE TABLE `alerts` (
+  `id` int NOT NULL,
+  `message` text NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `alerts`
+--
+
+INSERT INTO `alerts` (`id`, `message`, `is_active`, `created_at`) VALUES
+(1, 'Alert 1', 1, '2023-11-30 07:00:03'),
+(2, 'Alert 2', 0, '2023-11-30 07:00:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `date_time` datetime NOT NULL,
+  `user_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `title`, `description`, `date_time`, `user_id`) VALUES
+(1, 'Doctor Appointment', 'Checkup with Dr. Smith', '2023-11-30 10:00:00', 123);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `members`
+--
+
+CREATE TABLE `members` (
+  `id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`id`, `name`, `email`, `created_at`) VALUES
+(1, 'John Doe', 'john@example.com', '2023-11-30 07:00:03'),
+(2, 'Jane Doe', 'jane@example.com', '2023-11-30 07:00:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `text` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Table structure for table `projects`
 --
 
-CREATE TABLE `roles` (
-  `role_id` int NOT NULL,
-  `role_name` varchar(50) NOT NULL
+CREATE TABLE `projects` (
+  `id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `projects`
 --
 
-INSERT INTO `roles` (`role_id`, `role_name`) VALUES
-(1, 'admin'),
-(2, 'user');
+INSERT INTO `projects` (`id`, `name`, `description`, `created_at`) VALUES
+(1, 'Project A', 'Description A', '2023-11-30 07:00:03'),
+(2, 'Project B', 'Description B', '2023-11-30 07:00:03');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shopping_cartlist`
+-- Table structure for table `revenue`
 --
 
-CREATE TABLE `shopping_cartlist` (
+CREATE TABLE `revenue` (
   `id` int NOT NULL,
-  `product_added` text NOT NULL,
-  `date` datetime NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `userlist`
---
-
-CREATE TABLE `userlist` (
-  `id` int NOT NULL,
-  `staff_name` text NOT NULL
+  `amount` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `userlist`
+-- Dumping data for table `revenue`
 --
 
-INSERT INTO `userlist` (`id`, `staff_name`) VALUES
-(1, 'John Doe'),
-(2, 'Jane Smith'),
-(3, 'Bob Johnson');
+INSERT INTO `revenue` (`id`, `amount`, `created_at`) VALUES
+(1, 50000.50, '2023-11-30 07:00:03'),
+(2, 75000.75, '2023-11-30 07:00:03');
 
 -- --------------------------------------------------------
 
@@ -107,39 +181,53 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `token`, `status`, `role`, `created_at`) VALUES
-(1, 'john_doe', 'hashed_password_123', 'random_token_abc', 'active', 'user', '2023-11-27 12:34:56'),
-(2, 'jane_smith', 'hashed_password_xyz', 'another_token_def', 'inactive', 'admin', '2023-11-27 14:45:00'),
-(3, 'bob_jackson', 'hashed_password_789', 'yet_another_token_ghi', 'active', 'user', '2023-11-28 08:00:00'),
-(4, '123', '$2y$10$f/bCF.J0QYbn8jyU.956bu/aPN0E34XsqvmegvVf3sMy67Tkz4gRq', 'Q5734VtZDMT2YXco60pjeaALldxvBOqhrFuUSbPW9gICn8isfw', 'active', 'user', '0000-00-00 00:00:00'),
-(5, '123', '$2y$10$Wd92necAVtWXeLtLhqxWIOsQT5/58imjzTeBGbMLEkjGswSwRASUC', 'j0yvpUPBCX9lstF7uVeRQnhYGoqzTScIAb1Ogfi2W3Zx54kHM8', 'active', 'user', '0000-00-00 00:00:00'),
-(6, '123', '$2y$10$XmRUze8iJBpENqirSnzjxurwtCvvsR6qCewzH7FNmGbk.9Bsx.l9y', '4NRonO5vqaBjSbz1eJPygEfrZ2mMLwXIpYd8WHiDuQAlUh3st9', 'active', 'user', '0000-00-00 00:00:00'),
-(7, '123', '$2y$10$jJHFrQAdX60WLzYHRuEW/Oj9.bS187N6GMdv/TBwqwV80m4LEAtJi', 'hEXCJiWH8dbAk7leuT5jcnx3Ny0MgoBSmD2a64IFz1QrRKsGLP', 'active', 'user', '0000-00-00 00:00:00'),
-(8, '123', '$2y$10$./tWikgmZ3HJV/phAAPHR.AgcoIfmS3HrLvlQDkfIfAl8eUvYdsDW', 'NcJhoOXjU8Dz3MtI42qnGKsCxeQAwfuv1abRpklHWm7T9i0yLE', 'active', 'admin', '0000-00-00 00:00:00'),
-(9, '1', '$2y$10$5xrDKLWcjXVCHJ362Qz2Ru8GPo4gp8dbNoW1HPlKCqgGs2C.Nepwy', '8C1bAiqxLZPjtkMhwgIHolv3UsamXVK6n2F9YE5ry70DRTuzOc', 'active', 'admin', '0000-00-00 00:00:00'),
-(10, '123', '$2y$10$X4.tdKrFLVMESWc.M6Z77eUUS1WIfJh.vH8DGNvLMwk2a6Rvc1Uoi', 'ATW357CDjMLRf9gHy8rbIS1JeEdNsUwkoaVKY2vXGFQmOxpPZz', 'active', 'user', '0000-00-00 00:00:00'),
-(11, '123', '$2y$10$kTR5tk5GlIyAY4eQzBGy9eH2E2YZOHEB0FLvMghambYawZLM3KCPW', '50Wzl4DxXnJRwMOqjQAmYfahN7sdy6eiZBCuLHkrKo3EF1UITv', 'active', 'user', '0000-00-00 00:00:00');
+(35, 'wow', '$2y$10$FOEyc/os2gVW585ZH/LLWe6rcUyuEaAs6JSwfert98nDoEHNXHRgG', 'F7pvXBzkuMdWmI693nVhTZo5eycqODlsQ1tYaE2JRirNfjL8HP', 'active', 'user', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `productlist`
+-- Indexes for table `age_distribution`
 --
-ALTER TABLE `productlist`
+ALTER TABLE `age_distribution`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `roles`
+-- Indexes for table `alerts`
 --
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`role_id`),
-  ADD UNIQUE KEY `role_name` (`role_name`);
+ALTER TABLE `alerts`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `userlist`
+-- Indexes for table `appointments`
 --
-ALTER TABLE `userlist`
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `revenue`
+--
+ALTER TABLE `revenue`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -153,22 +241,52 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `productlist`
+-- AUTO_INCREMENT for table `age_distribution`
 --
-ALTER TABLE `productlist`
+ALTER TABLE `age_distribution`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `alerts`
+--
+ALTER TABLE `alerts`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `userlist`
+-- AUTO_INCREMENT for table `projects`
 --
-ALTER TABLE `userlist`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `projects`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `revenue`
+--
+ALTER TABLE `revenue`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
