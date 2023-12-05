@@ -1,9 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
-    path: '/',
+    path: '/Helloworld',
     name: 'home',
     component: () => import('@/views/HomeView.vue'),
+  },
+  {
+    path: '/',
+    name: 'NavBar',
+    component: () => import('@/views/NavBar.vue'),
   },
   {
     path: '/CountryVisited',
