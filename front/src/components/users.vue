@@ -32,7 +32,7 @@
         <form @submit.prevent="updateUser">
           <div class="form-group">
             <label for="id">ID:</label>
-            <input type="number" id="id" v-model="editedUserId" readonly>
+            <input type="number" id="id" v-model="editedUserId">
           </div>
           <div class="form-group">
             <label for="name">Name:</label>

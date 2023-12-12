@@ -43,8 +43,17 @@
 
 <v-main>
     <HelloWorld />
+    
 </v-main>
-
+<v-footer>
+      <v-container>
+        <v-row>
+          <v-col>
+            <p class="white--text">&copy; 2023 505th PCGA Application System. All rights reserved.</p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
       <v-container>
         <v-row v-if="showInterviewForm">
           <v-col>
@@ -124,3 +133,166 @@ export default {
     components: { HelloWorld }
 };
 </script>
+
+
+<style scoped>
+/* Global styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Header styles */
+.v-app-bar {
+  box-shadow: 0px 1px 5px rgba(149, 6, 6, 0.2);
+  margin-top: 0;
+  background-color: rgb(78, 32, 134); /* Update with your preferred color */
+  color: white;
+}
+
+.v-toolbar-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.application-form {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.application-form h2 {
+  color: #333;
+}
+
+.application-form form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.application-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.application-form input,
+.application-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.application-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Navigation drawer styles */
+.v-navigation-drawer {
+  background-color: #303030;
+  margin-top: 0;
+}
+
+.v-list-item-title {
+  color: white;
+  font-weight: bold;
+}
+
+.v-divider {
+  background-color: #757575;
+}
+
+.coast-guard-logo {
+  max-height: 40px;
+  max-width: 100%;
+  margin-right: 8px;
+}
+
+/* Main content styles */
+.v-main {
+  padding: 20px;
+  margin-top: 0;
+  background-image: url(''); /* Adjust the path based on your project structure */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.display-4 {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.subtitle-1 {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.headline {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.applicant-list {
+  margin-top: 20px;
+}
+
+.applicant-list h2 {
+  color: #333;
+}
+
+.applicant-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.applicant-list th, .applicant-list td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.applicant-list th {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Footer styles */
+.v-footer {
+  background-color:rgb(78, 32, 134);
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+  .v-app-bar {
+    /* Adjust styles for small screens */
+  }
+
+  .v-navigation-drawer {
+    /* Adjust styles for small screens */
+  }
+
+  .v-main {
+    /* Adjust styles for small screens */
+  }
+
+  .v-footer {
+    /* Adjust styles for small screens */
+  }
+}
+</style>
