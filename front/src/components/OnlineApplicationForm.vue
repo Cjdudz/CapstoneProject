@@ -1,65 +1,55 @@
 <template>
   <div class="pagination-container">
-    <p>PAGES</p>
-
     <div v-for="(page, index) in paginatedLinks" :key="index">
       <router-link v-for="link in page" :key="link.to" v-bind:to="link.to" class="pagination-link">{{ link.label }}</router-link>
     </div>
 
     <div class="pagination-buttons">
-      <button @click="prevPage" :disabled="currentPage === 1" class="pagination-button">Previous Page</button>
-      <button @click="nextPage" :disabled="currentPage === totalPages" class="pagination-button">Next Page</button>
+      <button v-for="pageNumber in totalPages" :key="pageNumber" @click="goToPage(pageNumber)" :disabled="currentPage === pageNumber" class="pagination-button">{{ pageNumber }}</button>
     </div>
   </div>
 </template>
 
-
-    <script>
-    export default {
-      name: 'LandingPage',
-      data() {
-        return {
-          links: [
-            { to: '/PcgaapplicationForm', label: 'PCGA Application Form' },
-            { to: '/MembershipapplicationPAge1', label: 'Membership Application Page 1' },
-            { to: '/MembershipapplicationPAge2', label: 'Membership Application Page 2' },
-            { to: '/MembershipapplicationPAge5', label: 'Membership Application Page 3' },
-            { to: '/MembershipapplicationPAge4', label: 'Membership Application Page 4' },
-            { to: '/Personalhistory', label: 'Personal History' },
-            { to: '/Maritalhistory', label: 'Marital History' },
-            { to: '/MilitaryHistory', label: 'Military History' },
-            { to: '/CountryVisited', label: 'Country Visited' },
-            { to: '/Neighbors', label: 'Neighbors' },
-            { to: '/LastpageApplication', label: 'Last Page Application' },
-          ],
-          itemsPerPage: 3,
-          currentPage: 1,
-        };
-      },
-      computed: {
-        totalPages() {
-          return Math.ceil(this.links.length / this.itemsPerPage);
-        },
-        paginatedLinks() {
-          const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-          const endIndex = startIndex + this.itemsPerPage;
-          return this.links.slice(startIndex, endIndex).map(link => [link]);
-        },
-      },
-      methods: {
-        nextPage() {
-          if (this.currentPage < this.totalPages) {
-            this.currentPage += 1;
-          }
-        },
-        prevPage() {
-          if (this.currentPage > 1) {
-            this.currentPage -= 1;
-          }
-        },
-      },
+<script>
+export default {
+  name: 'LandingPage',
+  data() {
+    return {
+      links: [
+        { to: '/PcgaapplicationForm', label: 'PCGA Applicat on Form' },
+        { to: '/MembershipapplicationPAge1', label: 'Membership Application Page 1' },
+        { to: '/MembershipapplicationPAge2', label: 'Membership Application Page 2' },
+        { to: '/MembershipapplicationPAge5', label: 'Membership Application Page 3' },
+        { to: '/MembershipapplicationPAge4', label: 'Membership Application Page 4' },
+        { to: '/Personalhistory', label: 'Personal History' },
+        { to: '/Maritalhistory', label: 'Marital History' },
+        { to: '/MilitaryHistory', label: 'Military History' },
+        { to: '/CountryVisited', label: 'Country Visited' },
+        { to: '/Neighbors', label: 'Neighbors' },
+        { to: '/LastpageApplication', label: 'Last Page Application' },
+      ],
+      itemsPerPage: 3,
+      currentPage: 1,
     };
-    </script>
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.links.length / this.itemsPerPage);
+    },
+    paginatedLinks() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.links.slice(startIndex, endIndex).map(link => [link]);
+    },
+  },
+  methods: {
+    goToPage(pageNumber) {
+      this.currentPage = pageNumber;
+    },
+  },
+};
+</script>
+
 
     <style scoped>
       h1 {

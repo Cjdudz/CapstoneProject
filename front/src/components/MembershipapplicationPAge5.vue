@@ -1,29 +1,31 @@
 <template>
   <v-app>
     <v-container class="form-container">
-      <v-form>
-        <v-row>
-          <v-col>
-            <v-h1 class="form-title">MA - 2009 Page 3 of 4 MEMBERSHIP APPLICATION</v-h1>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-h2 class="section-title">SECTION K - MISCELLANEOUS</v-h2>
-            <v-textarea v-model="pangaka" label="I certify the following 'PANGAKA' in my own handwriting"></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-h2 class="section-title">SECTION L - ACCEPTANCE OF SPONSORSHIP</v-h2>
-            <v-text-field v-model="applicantSignature" label="Applicant's Signature"></v-text-field>
-            <v-text-field v-model="sponsorSignature" label="Sponsor's Signature"></v-text-field>
-            <v-text-field v-model="applicantDate" label="Applicant's Date" type="date"></v-text-field>
-            <v-text-field v-model="sponsorDate" label="Sponsor's Date" type="date"></v-text-field>
-            <v-btn @click.prevent="submitForm" class="submit-btn">Submit</v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
+      <v-card class="form-card">
+        <v-form>
+          <v-row>
+            <v-col>
+              <v-h1 class="form-title">MA - 2009 Page 3 of 4 MEMBERSHIP APPLICATION</v-h1>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-h2 class="section-title">SECTION K - MISCELLANEOUS</v-h2>
+              <v-textarea v-model="pangaka" label="I certify the following 'PANGAKA' in my own handwriting"></v-textarea>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-h2 class="section-title">SECTION L - ACCEPTANCE OF SPONSORSHIP</v-h2>
+              <v-text-field v-model="applicantSignature" label="Applicant's Signature"></v-text-field>
+              <v-text-field v-model="sponsorSignature" label="Sponsor's Signature"></v-text-field>
+              <v-text-field v-model="applicantDate" label="Applicant's Date" type="date"></v-text-field>
+              <v-text-field v-model="sponsorDate" label="Sponsor's Date" type="date"></v-text-field>
+              <v-btn @click.prevent="submitForm" class="submit-btn">Submit</v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-card>
     </v-container>
   </v-app>
 </template>
@@ -47,12 +49,20 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 170vh;
+  height: 120vh;
+}
+
+.form-card {
+  height: 100vh;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
 }
 
 .form-title {
@@ -74,8 +84,9 @@ export default {
 }
 
 .submit-btn {
-  background-color: #2196F3; /* Blue */
-  border: none;
+  margin-top: 20px;
+  width: 100%;
+  background-color: #2196F3;
   color: white;
   padding: 12px 24px;
   text-align: center;

@@ -1,48 +1,48 @@
 <template>
   <v-app>
     <v-container>
-      <v-card>
-          <h1>PCGA APPLICATION FORM</h1>
-        <v-form @submit.prevent="submitForm" class="form">
+      <v-card class="form-card">
+        <h1 class="form-title">PCGA APPLICATION FORM</h1>
+        <v-form @submit.prevent="submitForm" ref="form" class="form">
           <v-row>
-            <v-col>
-              <v-text-field v-model="form.name" label="Name of Applicant"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.name" label="Name of Applicant" required></v-text-field>
             </v-col>
-            <v-col>
-              <v-text-field v-model="form.nationality" label="Nationality"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.nationality" label="Nationality" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
-              <v-text-field v-model="form.dob" label="Date of Birth" type="date"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.dob" label="Date of Birth" type="date" required></v-text-field>
             </v-col>
-            <v-col>
-              <v-text-field v-model="form.passport" label="Passport No."></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field v-model="form.address" label="Address"></v-text-field>
-            </v-col>
-            <v-col>
-              <v-text-field v-model="form.telephone" label="Telephone" type="tel"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.passport" label="Passport No." required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
-              <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.address" label="Address" required></v-text-field>
             </v-col>
-            <v-col>
-              <v-text-field v-model="form.occupation" label="Occupation"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.telephone" label="Telephone" type="tel" required></v-text-field>
             </v-col>
           </v-row>
-          <v-text-field v-model="form.club" label="Name of Club"></v-text-field>
           <v-row>
-            <v-col>
-              <v-text-field v-model="form.applicationDate" label="Date of Application" type="date"></v-text-field>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.email" label="Email" type="email" required></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.occupation" label="Occupation" required></v-text-field>
             </v-col>
           </v-row>
-          <v-btn type="submit">Submit</v-btn>
+          <v-text-field v-model="form.club" label="Name of Club" required></v-text-field>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="form.applicationDate" label="Date of Application" type="date" required></v-text-field>
+            </v-col>
+          </v-row>
+          <v-btn type="submit" class="submit-btn">Submit</v-btn>
         </v-form>
       </v-card>
     </v-container>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -68,26 +69,49 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      // Handle form submission logic
+    async submitForm() {
+      try {
+        const isValid = await this.$refs.form.validate();
+        if (isValid) {
+          const response = await axios.post('/api/pcga-application-form-submit', this.form);
+          console.log(response.data); // You can handle the response as needed
+        } else {
+          console.warn('Form is not valid');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
     }
   }
 };
 </script>
-<style scoped>
-/* Add your styles here */
 
-.form {
+<style scoped>
+.form-card {
   max-width: 600px;
   margin: auto;
+  padding: 20px;
+}
+
+.form-title {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form {
+  width: 100%;
 }
 
 .v-text-field {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.v-btn {
-  margin-top: 16px;
+.submit-btn {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #4caf50;
+  color: #fff;
 }
 </style>

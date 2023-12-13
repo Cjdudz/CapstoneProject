@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <v-main>
+    <v-main style="  background-image: url('https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/385484006_730465255796324_334538059090882611_n.png?_nc_cat=110&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeFDXZJtjJ1Z3MIJIPvivsWyTeyjUxuKVXFN7KNTG4pVcaeUtReE_OVHKxy2N-AFpmnmttCsQCwaATNlz1xXEwZf&_nc_ohc=xBIQskDQGwcAX-x7_GB&_nc_ht=scontent.fmnl30-2.fna&oh=03_AdRIv9tBY72xRzE3kUmh7nj1cEtB1VxpWT9zHy17wTUEhA&oe=65A0C06D');">
       <v-container>
        
 

@@ -4,7 +4,7 @@
       <v-form @submit.prevent="submitForm">
         <v-row justify="center">
           <v-col cols="12" md="8">
-            <v-sheet class="pa-4 form-container">
+            <v-sheet class="pa-4 form-card">
               <h1 class="form-title">IMA-2009 Page 2 of 4</h1>
               <h2 class="form-subtitle">IMA MEMBERSHIP APPLICATION</h2>
 
@@ -50,21 +50,20 @@ export default {
   },
   computed: {
     formIsValid() {
-      // Add any form validation logic here
       return this.lastName && this.firstName && this.telHome;
     }
   },
   methods: {
     submitForm() {
-      // Add your form submission logic here
       console.log('Form submitted!', this.lastName, this.firstName);
-      // You can send the data to the server or perform any other actions
+      // Add your form submission logic here
     }
   }
 };
 </script>
+
 <style scoped>
-.v-container {
+.form-card {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -78,10 +77,8 @@ export default {
 }
 
 .submit-button {
-  background-color: #2196F3; /* Blue */
+  background-color: #4caf50; /* Green */
   color: white;
   margin-top: 20px;
 }
-
-/* Add more styling as needed */
 </style>

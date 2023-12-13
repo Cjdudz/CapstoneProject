@@ -1,7 +1,9 @@
 <!-- ParentComponent.vue -->
 <template>
     <Maritalhistory />
+    <div class="online-application-form">
     <OnlineApplicationForm />
+  </div>
   </template>
   
   <script>
@@ -18,4 +20,9 @@ import OnlineApplicationForm from './OnlineApplicationForm.vue';
 },
   });
   </script>
-  
+  <style scoped>
+  .online-application-form {
+    margin-top: 600px;
+  }
+  /* Component-specific styles go here */
+  </style>
