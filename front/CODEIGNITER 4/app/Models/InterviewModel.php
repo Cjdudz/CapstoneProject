@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class RcgaApplication extends Model
+class InterviewModel extends Model
 {
-    protected $table            = 'rcga_applications';
+    protected $table            = 'interviews';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'nationality', 'dob', 'passport', 'address', 'telephone', 'email', 'occupation', 'club', 'applicationDate'];
-   
+    protected $allowedFields = ['intervieweeName', 'interviewDate', 'comments'];
 
     // Dates
     protected $useTimestamps = false;

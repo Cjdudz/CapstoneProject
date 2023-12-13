@@ -13,9 +13,9 @@
       <tbody>
         <tr v-for="appointment in appointments" :key="appointment.id">
           <td>{{ appointment.id }}</td>
-          <td>{{ appointment.title }}</td>
-          <td>{{ appointment.description }}</td>
-          <td>{{ appointment.date_time }}</td>
+          <td>{{ appointment.intervieweeName }}</td>
+          <td>{{ appointment.comments }}</td>
+          <td>{{ appointment.interviewDate }}</td>
         </tr>
       </tbody>
     </table>
@@ -46,7 +46,17 @@ export default {
         this.appointments = response.data;
       } catch (error) {
         console.error('Error fetching appointments:', error);
-        this.error = error.message || 'An error occurred while fetching appointments.';
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          this.error = `Error: ${error.response.status} - ${error.response.data.message}`;
+        } else if (error.request) {
+          // The request was made but no response was received
+          this.error = 'No response received from the server';
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          this.error = 'An error occurred while fetching appointments.';
+        }
       }
     },
   },

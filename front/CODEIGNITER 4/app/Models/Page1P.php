@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class RcgaApplication extends Model
+class Page1P extends Model
 {
-    protected $table            = 'rcga_applications';
+    protected $table            = 'pcgpa_application';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'nationality', 'dob', 'passport', 'address', 'telephone', 'email', 'occupation', 'club', 'applicationDate'];
-   
+    protected $allowedFields    = ['lastName', 'firstName', 'middleName', 'suffix', 'maritalStatus', 'numChildren', 'sex', 'height', 'weight'];
 
     // Dates
     protected $useTimestamps = false;

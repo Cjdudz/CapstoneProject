@@ -14,5 +14,10 @@ $routes->get('/api/overview', 'OverviewController::index');
 $routes->post('/api/create', 'UserController::create_user'); // Route to create a new user
 $routes->put('/api/update_user/(:num)', 'UserController::update_user/$1'); // Route to update a user by ID
 $routes->delete('/api/delete/(:num)', 'UserController::delete_user/$1'); // Route to delete a user by ID
-$routes->post('/api/pcga-application-form-submit', 'RcgaApplicationController::submitForm');
-
+$routes->post('/api/submitForm', 'RcgaApplicationController::submitForm');
+$routes->post('/api/submit-form', 'RcgaApplicationController::submitForm');
+$routes->post('/api/passForm', 'RcgaApplicationController::passForm');
+$routes->post('/api/submitForm', 'RcgaApplicationController::submitForm');  
+$routes->post('/api/submit_interview_form', 'InterviewController::submitInterviewForm');
+$routes->post('/api/Forms', 'InterviewController::Forms');
+$routes->post('api/Page1/submitForm', 'Page1::submitForm');

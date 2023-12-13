@@ -97,7 +97,7 @@
 </template>
 <script>
 import HelloWorld from './HelloWorld.vue';
-
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -113,6 +113,7 @@ export default {
     };
   },
   methods: {
+
     loginOrLogout() {
       if (this.isLoggedIn) {
         this.logout();
@@ -143,8 +144,20 @@ export default {
       this.showInterviewForm = true;
     },
     submitInterviewForm() {
-      console.log("Interview Form submitted:", this.interviewForm);
-    },
+    // Adjust the URL based on your CodeIgniter setup
+    const apiUrl = '/api/submit_interview_form'; // Corrected URL with quotes
+
+    // Use Axios to send a POST request to the backend
+    axios.post(apiUrl, this.interviewForm) // Corrected URL variable
+        .then(response => {
+            console.log("Interview Form submitted:", response.data.message);
+            // Add any additional logic based on the response
+        })
+        .catch(error => {
+            console.error("Error submitting interview form:", error);
+            // Handle errors if needed
+        });
+},
     handleMessageOK() {
       this.showMessage = false;
       this.$router.push('/PcgaapplicationForm');

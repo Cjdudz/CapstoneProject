@@ -48,13 +48,45 @@
     </v-container>
   </v-app>
 </template>
-
 <script>
 import axios from 'axios';
+
 export default {
-  data() {
-    return {
-      form: {
+  
+      data() {
+  return {
+    form: {
+      name: '',
+      nationality: '',
+      dob: '',
+      passport: '',
+      address: '',
+      telephone: '',
+      email: '',
+      occupation: '',
+      club: '',
+      applicationDate: '',
+    },
+  };
+},
+methods: {
+    async submitForm() {
+      try {
+        // Send form data to CodeIgniter backend
+        const response = await axios.post('/api/passForm', this.form);
+
+        // Assuming the backend responds with a success message
+        console.log('Form submitted successfully:', response.data);
+
+        // Reset the form after successful submission (optional)
+        this.resetForm();
+      } catch (error) {
+        console.error('Error submitting form:', error.message);
+      }
+    },
+    resetForm() {
+      // Reset form fields after successful submission
+      this.form = {
         name: '',
         nationality: '',
         dob: '',
@@ -65,26 +97,12 @@ export default {
         occupation: '',
         club: '',
         applicationDate: '',
-      }
-    };
+      };
+    },
   },
-  methods: {
-    async submitForm() {
-      try {
-        const isValid = await this.$refs.form.validate();
-        if (isValid) {
-          const response = await axios.post('/api/pcga-application-form-submit', this.form);
-          console.log(response.data); // You can handle the response as needed
-        } else {
-          console.warn('Form is not valid');
-        }
-      } catch (error) {
-        console.error('Error submitting form:', error);
-      }
-    }
-  }
 };
 </script>
+
 
 <style scoped>
 .form-card {

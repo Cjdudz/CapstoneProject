@@ -1,45 +1,58 @@
-<template>
-  <div>
-    <h2>Appointment List</h2>
-    <ul>
-      <li v-for="appointment in appointments" :key="appointment.id">
-        {{ appointment.title }} - {{ appointment.date_time }}
-      </li>
-    </ul>
-    <div v-if="error" class="error-message">
-      Error fetching appointments: {{ error }}
+  <!-- ApplicantManagement.vue -->
+  <template>
+    <div>
+      <h2>Applicant Management</h2>
+      <div v-if="applicants.length > 0">
+        <h3>Applicants</h3>
+        <ul>
+          <li v-for="applicant in applicants" :key="applicant.id">
+            {{ applicant.name }} - {{ applicant.email }}
+          </li>
+        </ul>
+      </div>
+
+      <div v-if="interviews.length > 0">
+        <h3>Interviews</h3>
+        <ul>
+          <li v-for="interview in interviews" :key="interview.id">
+            {{ interview.applicant_name }} - {{ interview.appointment_date }}
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
 
-<script>
-import axios from 'axios';
+  <script>
+  import axios from 'axios';
 
-export default {
-  data() {
-    return {
-      appointments: [],
-      error: null,
-    };
-  },
-  mounted() {
-    // Fetch appointments from the backend
-    this.fetchAppointments();
-  },
-  methods: {
-    async fetchAppointments() {
-      try {
-        const response = await axios.get('/api/appointment'); // Assuming your API endpoint is at the root level
-        this.appointments = response.data;
-      } catch (error) {
-        console.error('Error fetching appointments:', error);
-        this.error = error.response ? error.response.data : 'Failed to fetch appointments. Please try again later.';
-      }
+  export default {
+    data() {
+      return {
+        applicants: [],
+        interviews: [],
+      };
     },
+    mounted() {
+      // Fetch applicants and interviews on component mount
+      this.fetchApplicants();
+      this.fetchInterviews();
+    },
+    methods: {
+  async fetchApplicantsAndInterviews() {
+    try {
+      const response = await axios.get('/rcga/getApplicantsAndInterviews'); // Update the endpoint
+      if ('applicants' in response.data && 'interviews' in response.data) {
+        this.applicants = response.data.applicants;
+        this.interviews = response.data.interviews;
+      } else {
+        console.error('Invalid response structure:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching applicants and interviews:', error);
+    }
   },
-};
-</script>
-
+},}
+  </script>
 <style>
 .error-message {
   color: red;
