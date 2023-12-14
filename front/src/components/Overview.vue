@@ -22,8 +22,6 @@
           </v-card-text>
         </v-card>
 
-        <!-- Add similar click handling for other cards -->
-
         <v-card class="info-card" @click="viewCard('revenue')" :class="{ 'selected-card': selectedCard === 'revenue' }">
           <v-card-title>
             <h3>Revenue</h3>
@@ -42,7 +40,9 @@
           </v-card-text>
         </v-card>
 
-        <!-- Add more information cards as needed -->
+        <div class="chart-container">
+          <canvas id="ageChart"></canvas>
+        </div>
       </div>
     </form>
   </section>
@@ -71,8 +71,9 @@ export default {
         this.totalRevenue = data.totalRevenue;
         this.totalProjects = data.totalProjects;
 
-        // Call the correct method to update the age chart
-        this.updateAgeChart(data.ageChartData);
+        if (data.ageChartData) {
+          this.updateAgeChart(data.ageChartData);
+        }
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -104,7 +105,6 @@ export default {
       });
     },
     viewCard(card) {
-      // Toggle the selected card state
       this.selectedCard = this.selectedCard === card ? null : card;
     },
   },
@@ -132,4 +132,11 @@ export default {
 .selected-card {
   background-color: #e0e0e0;
 }
+
+.chart-container {
+  width: 100%;
+  max-width: 600px; /* Set the max-width as per your design */
+  margin: 20px auto; /* Adjust the margin as per your design */
+}
+
 </style>

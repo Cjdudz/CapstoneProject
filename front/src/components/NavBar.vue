@@ -1,52 +1,63 @@
 <template>
-  <v-app style>
-    <v-app-bar app fixed>
+  <v-app>
+    <v-app-bar>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
-        505th PCGA Application System
+        <span class="app-title">505th PCGA Application System</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text @click="loginOrLogout">Logout</v-btn>
+      <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
     </v-app-bar>
 
-     <v-dialog v-model="showMessage" max-width="400">
-      <v-card>
+    <v-dialog v-model="showMessage" max-width="400">
+      <v-card class="message-dialog">
         <v-card-title class="headline">Message</v-card-title>
         <v-card-text>
-          Please fill up all forms from 1 - 3 before proceeding.
+          Please fill out all the required forms.
         </v-card-text>
         <v-card-actions>
-        
           <v-btn @click="handleMessageOK" color="primary">OK</v-btn>
           <v-btn @click="handleCancelMessage" color="grey">Cancel</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    
+
     <v-navigation-drawer app v-model="drawer">
       <v-list>
         <v-list-item link @click="redirectTo('/home')">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>About</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <v-divider></v-divider>
 
         <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
+          <v-list-item-icon>
+            <v-icon>mdi-file-document-edit</v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Apply Online</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item>
+        <v-list-item link @click="startInterviewProcess">
+          <v-list-item-icon>
+            <v-icon>mdi-calendar-clock</v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title @click="startInterviewProcess">Appointment Interview</v-list-item-title>
+            <v-list-item-title>Appointment Interview</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <v-list-item v-if="isLoggedIn" @click="logout">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Logout</v-list-item-title>
           </v-list-item-content>
@@ -95,6 +106,7 @@
     </v-container>
   </v-app>
 </template>
+
 <script>
 import HelloWorld from './HelloWorld.vue';
 import axios from 'axios';

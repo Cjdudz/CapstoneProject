@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>User Table</h2>
+    <h2 class="table-title">User Appointments</h2>
     <table class="user-table">
       <thead>
         <tr>
@@ -15,12 +15,12 @@
           <td>{{ appointment.id }}</td>
           <td>{{ appointment.intervieweeName }}</td>
           <td>{{ appointment.comments }}</td>
-          <td>{{ appointment.interviewDate }}</td>
+          <td>{{ formatDateTime(appointment.interviewDate) }}</td>
         </tr>
       </tbody>
     </table>
     <div v-if="error" class="error-message">
-      Error fetching appointments: {{ error }}
+      <i class="fas fa-exclamation-circle"></i> Error fetching appointments: {{ error }}
     </div>
   </div>
 </template>
@@ -59,19 +59,31 @@ export default {
         }
       }
     },
+    formatDateTime(dateTime) {
+      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+      return new Date(dateTime).toLocaleDateString('en-US', options);
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .user-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
+.table-title {
+  font-size: 24px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
 .table-header {
-  background-color: #f2f2f2;
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
 }
 
 .user-table th, .user-table td {
@@ -80,8 +92,19 @@ export default {
   text-align: left;
 }
 
+.user-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
 .error-message {
   color: red;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message i {
+  margin-right: 5px;
+  color: #ff6347;
 }
 </style>
