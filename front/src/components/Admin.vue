@@ -45,6 +45,12 @@
         <section class="overview">
           <h2>PCGA Overview</h2>
 
+
+
+          <div class="chart-container">
+            <canvas id="ageChart"></canvas>
+          </div>
+
           <!-- Info Cards -->
           <v-card class="info-card" @click="viewCard('members')" :class="{ 'selected-card': selectedCard === 'members' }">
             <v-card-title>
@@ -83,9 +89,7 @@
           </v-card>
 
           <!-- Chart Container -->
-          <div class="chart-container">
-            <canvas id="ageChart"></canvas>
-          </div>
+          
         </section>
       </v-container>
     </v-main>
