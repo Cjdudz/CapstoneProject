@@ -2,12 +2,12 @@
     <div>
       <!-- Your existing content for HomeView -->
   
-      <ApplicantList :applicants="applicants" />
+      <Userstatus/>
     </div>
   </template>
   
   <script>
-  import ApplicantList from '../components/ApplicantList.vue';
+  import Userstatus from '../components/Userstatus.vue';
   
   export default {
     data() {
@@ -16,7 +16,7 @@
       };
     },
     components: {
-      ApplicantList,
+      Userstatus,
     },
   };
   </script>

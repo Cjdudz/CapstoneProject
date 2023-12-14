@@ -53,6 +53,14 @@
             <v-list-item-title>Appointment Interview</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item link @click="redirectTo('/Userstatus')">
+  <v-list-item-icon>
+    <v-icon>mdi-account-check</v-icon>
+  </v-list-item-icon>
+  <v-list-item-content>
+    <v-list-item-title>User Status</v-list-item-title>
+  </v-list-item-content>
+</v-list-item>
 
         <v-list-item v-if="isLoggedIn" @click="logout">
           <v-list-item-icon>
@@ -67,6 +75,7 @@
 
     <v-main>
       <HelloWorld />
+      
     </v-main>
 
     <v-footer app>
@@ -130,7 +139,7 @@ export default {
       if (this.isLoggedIn) {
         this.logout();
       } else {
-        this.redirectTo('/LoginComponent');
+        this.redirectTo('/');
       }
     },
     logout() {

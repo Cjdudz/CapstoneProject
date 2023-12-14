@@ -23,4 +23,6 @@ class RcgaApplicationController extends ResourceController
 
         return $this->respond(['message' => 'Interview form submitted successfully']);
     }
+
 }
+

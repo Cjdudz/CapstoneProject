@@ -6,13 +6,21 @@ const routes = [
     component: () => import('@/views/HomeView.vue'),
   },
   {
-    path: '/',
+    path: '/NavBar',
     name: 'NavBar',
     component: () => import('@/views/NavBar.vue'),
+  },
+
+  {
+
   },
   {
     path: '/Overview',
     component: () => import('@/views/Overview.vue'),
+  },
+  {
+    path: '/',
+    component: () => import('@/views/Landingpage.vue'),
   },
  
 
@@ -36,9 +44,9 @@ const routes = [
   },
  
   {
-    path: '/ApplicantList',
-    name: 'ApplicantList',
-    component: () => import('@/views/ApplicantList.vue'),
+    path: '/Userstatus',
+    name: 'Userstatus',
+    component: () => import('@/views/Userstatus.vue'),
   },
   {
     path: '/Home',

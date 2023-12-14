@@ -2,11 +2,15 @@
   <v-app>
     <v-container>
       <v-card class="form-card">
+        <div class="header-design"></div>
         <h1 class="form-title">PCGA APPLICATION FORM</h1>
         <v-form @submit.prevent="submitForm" ref="form" class="form">
           <v-row>
             <v-col cols="12" md="6">
               <v-text-field v-model="form.name" label="Name of Applicant" required></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-text-field v-model="form.age" label="Age" required></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
               <v-text-field v-model="form.nationality" label="Nationality" required></v-text-field>
@@ -109,27 +113,24 @@ methods: {
   max-width: 600px;
   margin: auto;
   padding: 20px;
+  position: relative;
+}
+
+.header-design {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to right, #4caf50, #2196f3); /* Gradient background */
 }
 
 .form-title {
   font-size: 28px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 40px; /* Adjusted margin for spacing */
+  color: white; /* Text color on top of the gradient background */
 }
 
-.form {
-  width: 100%;
-}
-
-.v-text-field {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.submit-btn {
-  margin-top: 20px;
-  width: 100%;
-  background-color: #4caf50;
-  color: #fff;
-}
+/* ... (your existing styles remain unchanged) ... */
 </style>

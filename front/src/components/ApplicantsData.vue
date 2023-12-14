@@ -6,21 +6,49 @@
         <tr>
           <th class="table-header">ID</th>
           <th class="table-header">Name</th>
-          <th class="table-header">Description</th>
-          <th class="table-header">Appointment Date & Time</th>
+          <th class="table-header">Age</th>
+          <th class="table-header">Nationality</th>
+          <th class="table-header">Date of Birth</th>
+          <th class="table-header">Passport</th>
+          <th class="table-header">Address</th>
+          <th class="table-header">Telephone</th>
+          <th class="table-header">Email</th>
+          <th class="table-header">Occupation</th>
+          <th class="table-header">Club</th>
+          <th class="table-header">Application Date</th>
+          <th class="table-header">Status</th>
+          <th class="table-header">Actions</th>
+          
         </tr>
       </thead>
       <tbody>
         <tr v-for="appointment in appointments" :key="appointment.id">
           <td>{{ appointment.id }}</td>
-          <td>{{ appointment.intervieweeName }}</td>
-          <td>{{ appointment.comments }}</td>
-          <td>{{ formatDateTime(appointment.interviewDate) }}</td>
+          <td>{{ appointment.name }}</td>
+          <td>{{ appointment.age }}</td>
+          <td>{{ appointment.nationality }}</td>
+          <td>{{ formatDateTime(appointment.dob) }}</td>
+          <td>{{ appointment.passport }}</td>
+          <td>{{ appointment.address }}</td>
+          <td>{{ appointment.telephone }}</td>
+          <td>{{ appointment.email }}</td>
+          <td>{{ appointment.occupation }}</td>
+          <td>{{ appointment.club }}</td>
+          
+          <td>{{ formatDateTime(appointment.applicationDate) }}</td>
+          <td>{{ appointment.status }}</td>
+          <td>
+            <button @click="acceptAppointment(appointment.id)">Accept</button>
+            <button @click="rejectAppointment(appointment.id)">Reject</button>
+          </td>
         </tr>
       </tbody>
     </table>
     <div v-if="error" class="error-message">
-      <i class="fas fa-exclamation-circle"></i> Error fetching appointments: {{ error }}
+      <i class="fas fa-exclamation-circle"></i> {{ error }}
+    </div>
+    <div v-if="loading" class="loading-message">
+      Loading...
     </div>
   </div>
 </template>
@@ -33,30 +61,54 @@ export default {
     return {
       appointments: [],
       error: null,
+      loading: false,
     };
   },
   mounted() {
-    // Fetch appointments from the backend
     this.fetchAppointments();
   },
   methods: {
     async fetchAppointments() {
+      this.loading = true;
       try {
         const response = await axios.get('/api/appointment');
         this.appointments = response.data;
       } catch (error) {
-        console.error('Error fetching appointments:', error);
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          this.error = `Error: ${error.response.status} - ${error.response.data.message}`;
-        } else if (error.request) {
-          // The request was made but no response was received
-          this.error = 'No response received from the server';
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          this.error = 'An error occurred while fetching appointments.';
-        }
+        this.handleError(error, 'Error fetching appointments');
+      } finally {
+        this.loading = false;
+      }
+    },
+    async acceptAppointment(appointmentId) {
+      this.loading = true;
+      try {
+        const response = await axios.post('/api/accept', { id: appointmentId });
+        // Handle success if needed
+        this.fetchAppointments(); // Refresh appointments after accepting
+      } catch (error) {
+        this.handleError(error, 'Error accepting appointment');
+      } finally {
+        this.loading = false;
+      }
+    },
+    async rejectAppointment(appointmentId) {
+      this.loading = true;
+      try {
+        const response = await axios.post('/api/reject', { id: appointmentId });
+        // Handle success if needed
+        this.fetchAppointments(); // Refresh appointments after rejecting
+      } catch (error) {
+        this.handleError(error, 'Error rejecting appointment');
+      } finally {
+        this.loading = false;
+      }
+    },
+    handleError(error, defaultMessage) {
+      console.error(defaultMessage, error);
+      if (error.response && error.response.data && error.response.data.message) {
+        this.error = error.response.data.message;
+      } else {
+        this.error = defaultMessage;
       }
     },
     formatDateTime(dateTime) {
@@ -106,5 +158,10 @@ export default {
 .error-message i {
   margin-right: 5px;
   color: #ff6347;
+}
+
+.loading-message {
+  margin-top: 10px;
+  color: #3498db;
 }
 </style>

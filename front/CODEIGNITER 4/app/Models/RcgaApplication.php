@@ -12,7 +12,7 @@ class RcgaApplication extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'nationality', 'dob', 'passport', 'address', 'telephone', 'email', 'occupation', 'club', 'applicationDate'];
+    protected $allowedFields    = ['name','age', 'nationality', 'dob', 'passport', 'address', 'telephone', 'email', 'occupation', 'club', 'applicationDate', 'status'];
    
 
     // Dates

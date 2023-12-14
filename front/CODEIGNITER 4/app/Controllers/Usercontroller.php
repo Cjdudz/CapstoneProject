@@ -30,7 +30,46 @@ class UserController extends ResourceController
             return $this->respond(['msg' => 'failed']);
         }
     }
+    public function registerAdmin()
+    {
+        $user = new UserModel();
+        $token = $this->verification(50);
+        $data = [
+            'username' => $this->request->getVar('username'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'token' => $token,
+            'status' => 'active',
+            'role' => 'admin', // Set the role as 'admin' for admin users
+        ];
 
+        $u = $user->save($data);
+        if ($u) {
+            return $this->respond(['msg' => 'okay', 'token' => $token]);
+        } else {
+            return $this->respond(['msg' => 'failed']);
+        }
+    }
+
+
+    public function loginAdmin()
+    {
+        $user = new UserModel();
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
+        $data = $user->where('username', $username)->where('role', 'admin')->first();
+
+        if ($data) {
+            $pass = $data['password'];
+            $authenticatePassword = password_verify($password, $pass);
+            if ($authenticatePassword) {
+                return $this->respond(['msg' => 'okay', 'token' => $data['token']]);
+            } else {
+                return $this->respond(['msg' => 'error'], 200);
+            }
+        } else {
+            return $this->respond(['msg' => 'error'], 200);
+        }
+    }
     public function verification($length)
     {
         $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
