@@ -1,21 +1,33 @@
 <template>
-  <div class="user-container">
+  <div class="container">
     <div class="login-container">
-      <v-sheet width="300" class="mx-auto form-container">
+      <v-sheet width="300" class="mx-auto custom-border">
         <v-form @submit.prevent="register">
-          <div v-if="message === 'error'" class="error-message">Invalid response</div>
-          <v-text-field v-model="username" label="Username" required></v-text-field>
+          <v-alert v-if="message === 'error'" type="error" dense dismissible>
+            Invalid response
+          </v-alert>
+          <v-text-field v-model="username" label="Username" required class="mt-3"></v-text-field>
           <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
-          <v-text-field v-model="passwordConfirm" label="Password Confirm" type="password" required></v-text-field>
-          <v-select v-model="role" :items="['user', 'admin']" label="Role" required></v-select>
-          <div v-if="message === 'passwordMismatch'" class="error-message">Passwords do not match</div>
-          <div v-if="message === 'registrationFailed'" class="error-message">Registration failed. Please try again.</div>
-          <v-btn type="submit" block class="mt-2">Submit</v-btn>
+          <v-text-field v-model="passwordConfirm" label="Confirm Password" type="password" required></v-text-field>
+          <v-select v-model="userRole" :items="userRoles" label="Select User Role" required class="mt-3"></v-select>
+          <v-alert v-if="message === 'passwordMismatch'" type="error" dense dismissible>
+            Passwords do not match
+          </v-alert>
+          <v-alert v-if="message === 'registrationFailed'" type="error" dense dismissible>
+            Registration failed. Please try again.
+          </v-alert>
+          <v-btn type="submit" block class="mt-4" color="primary">Submit</v-btn>
+          <div class="mt-3 text-center">
+            <v-divider></v-divider>
+            <span class="caption">Already have an account?</span>
+            <router-link to="/logincomponent" class="router-link">Login here</router-link>
+          </div>
         </v-form>
       </v-sheet>
     </div>
   </div>
 </template>
+
 <script>
 import axios from 'axios';
 
@@ -25,7 +37,8 @@ export default {
       username: '',
       password: '',
       passwordConfirm: '',
-      role: 'user', // Default role is 'user'
+      userRole: '',
+      userRoles: ['user', 'admin'],
       message: '',
     };
   },
@@ -33,60 +46,83 @@ export default {
     async register() {
       if (this.password === this.passwordConfirm) {
         try {
-          let apiUrl = "api/register";
-
-          // Check if the selected role is 'admin' and update the API URL accordingly
-          if (this.role === 'admin') {
-            apiUrl = "api/registerAdmin";
-          }
-
-          const response = await axios.post(apiUrl, {
+          const response = await axios.post('api/register', {
             username: this.username,
             password: this.password,
-            role: this.role,
+            role: this.userRole,
           });
 
           if (response.data.msg === 'okay') {
-            alert("Registered successfully");
-            this.$router.push('/LoginComponent');
+            alert('Registered successfully');
+            this.$router.push('/logincomponent');
           } else {
             this.message = 'registrationFailed';
           }
         } catch (error) {
-          console.error("Error during registration:", error);
+          console.error('Error during registration:', error);
           this.message = 'error';
         }
       } else {
-        this.message = "passwordMismatch";
+        this.message = 'passwordMismatch';
       }
-    }
-  }
+    },
+  },
 };
 </script>
-
 <style scoped>
-.user-container {
+.container {
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #a95454; /* Add a background color */
+  background-color: #7c5d5d; /* Change to a common background color */
 }
 
 .login-container {
-  text-align: center;
-  background-color: #ffffff;
+  max-width: 400px;
+  width: 100%;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  height: 70;
 }
 
-.form-container {
-  max-width:px;
+.custom-border {
+  border: 1px solid #ccc;
+}
+
+.v-text-field {
+  margin: 20px 0;
 }
 
 .error-message {
-  color: red;
-  margin-top: 5px;
+  color: #d32f2f; /* Use the same color for error messages */
+}
+
+.router-link {
+  color: #1976D2; /* Use the same color for router links */
+  text-decoration: none;
+}
+
+.router-link:hover {
+  text-decoration: underline;
+}
+
+.caption {
+  font-size: 12px;
+  margin-top: 8px;
+  display: block;
+  color: #555;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Add styles for the v-divider */
+.v-divider {
+  margin: 16px 0;
 }
 </style>

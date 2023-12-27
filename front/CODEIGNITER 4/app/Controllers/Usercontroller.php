@@ -15,14 +15,16 @@ class UserController extends ResourceController
     {
         $user = new UserModel();
         $token = $this->verification(50);
+        $userRole = $this->request->getVar('role'); // Get the selected user role
+    
         $data = [
             'username' => $this->request->getVar('username'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'token' => $token,
             'status' => 'active',
-            'role' => 'user', // Assuming you want to set the role as 'user'
+            'role' => $userRole, // Use the selected user role in the data array
         ];
-
+    
         $u = $user->save($data);
         if ($u) {
             return $this->respond(['msg' => 'okay', 'token' => $token]);
@@ -30,6 +32,33 @@ class UserController extends ResourceController
             return $this->respond(['msg' => 'failed']);
         }
     }
+    
+
+    public function verification($length)
+    {
+        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        return substr(str_shuffle($str_result), 0, $length);
+    }
+
+    public function login()
+    {
+        $user = new UserModel();
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
+        $data = $user->where('username', $username)->first();
+    
+        if ($data) {
+            $pass = $data['password'];
+            $authenticatePassword = password_verify($password, $pass);
+            if ($authenticatePassword) {
+                return $this->respond(['msg' => 'okay', 'token' => $data['token'], 'role' => $data['role']]);
+            } else {
+                return $this->respond(['msg' => 'error'], 200);
+            }
+        }
+        return $this->respond(['msg' => 'userNotFound'], 404);
+    }
+    
     public function registerAdmin()
     {
         $user = new UserModel();
@@ -70,29 +99,9 @@ class UserController extends ResourceController
             return $this->respond(['msg' => 'error'], 200);
         }
     }
-    public function verification($length)
-    {
-        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        return substr(str_shuffle($str_result), 0, $length);
-    }
 
-    public function login()
-    {
-        $user = new UserModel();
-        $username = $this->request->getVar('username');
-        $password = $this->request->getVar('password');
-        $data = $user->where('username', $username)->first();
 
-        if ($data) {
-            $pass = $data['password'];
-            $authenticatePassword = password_verify($password, $pass);
-            if ($authenticatePassword) {
-                return $this->respond(['msg' => 'okay', 'token' => $data['token']]);
-            } else {
-                return $this->respond(['msg' => 'error'], 200);
-            }
-        }
-    }
+
 
     public function users($id = null)
     {

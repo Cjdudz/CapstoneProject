@@ -6,7 +6,7 @@ import { loadFonts } from './plugins/webfontloader'
 import axios from 'axios'
 
 loadFonts()
-axios.defaults.baseURL="http://localhost:8080/";
+axios.defaults.baseURL="https://pcgabackend.tech/";
 createApp(App)
   .use(router)
   .use(vuetify)

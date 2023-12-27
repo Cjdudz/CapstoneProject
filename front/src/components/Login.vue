@@ -1,20 +1,31 @@
 <template>
-  <div class="container">
-    <v-sheet width="300" class="mx-auto login-container artistic-login-container">
-      <v-form @submit.prevent="login" class="form-container artistic-form-container">
-        <v-text-field v-model="username" label="Username" required class="artistic-text-field"></v-text-field>
-        <v-text-field v-model="password" label="Password" type="password" required class="artistic-text-field"></v-text-field>
-        <v-btn type="submit" block class="mt-2 artistic-btn">Login</v-btn>
-      </v-form>
-
-      <p v-if="message" class="error-message artistic-error-message">{{ message }}</p>
-
-      <div class="forgot-register-links">
-        <router-link to="/forgot-password" class="link artistic-link">Forgot Password?</router-link>
-        <v-card-text>If you don't have an account, register <router-link to="/RegisterComponent" class="link artistic-link">here</router-link> first.</v-card-text>
-      </div>
-    </v-sheet>
-  </div>
+  <v-app>
+    <v-container class="login-container" fluid fill-height>
+      <v-row justify="center" align="center">
+        <v-col cols="12" sm="8" md="4">
+          <v-card class="login-card">
+            <v-card-title class="title headline">Login</v-card-title>
+            <v-card-text class="form">
+              <v-form @submit.prevent="login">
+                <v-text-field v-model="username" label="Username"></v-text-field>
+                <v-text-field v-model="password" label="Password" type="password"></v-text-field>
+                <v-btn type="submit" block class="login-button">Login</v-btn>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <router-link to="/forgot-password" class="forgot-password">Forgot Password?</router-link>
+            </v-card-actions>
+            <v-card-actions>
+              <router-link to="/registercomponent" class="register-link">Don't have an account? Register here</router-link>
+            </v-card-actions>
+            <v-alert v-if="message" type="error" dismissible class="error-message">
+              {{ message }}
+            </v-alert>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -29,18 +40,23 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.post('api/login', {
+        const response = await axios.post('/api/login', {
           username: this.username,
           password: this.password,
         });
 
         if ('msg' in response.data) {
           if (response.data.msg === 'okay') {
-            // Check the role and redirect accordingly
-            if (response.data.role === 'admin') {
-              this.$router.push('/Admin');
-            } else {
-              this.$router.push('/NavBar'); // Update the route for regular users
+            // Check the user role and redirect accordingly
+            switch (response.data.role) {
+              case 'admin':
+                this.$router.push('/Admin');
+                break;
+              case 'user':
+                this.$router.push('/NavBar');
+                break;
+              default:
+                this.message = 'Invalid role. Please contact support.';
             }
           } else {
             this.message = 'Login failed. Please try again.';
@@ -59,68 +75,67 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #9897d6;
+.v-app {
+  background-color: #7c5d5d;
 }
 
 .login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7c5d5d;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.title {
   text-align: center;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+  margin-bottom: 16px;
+  font-size: 25px;
+  font-weight: 700;
 }
 
-.artistic-login-container {
-  background-color: #f0f0f0;
-  border-radius: 12px;
+.form {
   padding: 20px;
 }
 
-.form-container {
-  max-width: 300px;
+.login-button {
+  margin-top: 16px;
+  background-color: #1976D2;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
-.artistic-form-container {
-  background-color: #f0f0f0;
-  border-radius: 12px;
-  padding: 20px;
+.login-button:hover {
+  background-color: #1565C0;
 }
 
-.artistic-text-field {
-  border: 2px solid #9897d6;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.artistic-error-message {
-  color: #ff0000;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.artistic-btn {
-  background-color: #9897d6;
-  color: #ffffff;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.artistic-btn:hover {
-  background-color: #6d3131;
-}
-
-.artistic-link {
-  margin-right: 10px;
-  color: #1745c1;
+.forgot-password,
+.register-link {
+  text-align: center;
+  margin-top: 16px;
+  color: #555;
   text-decoration: none;
+  display: inline-block;
 }
 
-.forgot-register-links .v-card-text {
-  margin-top: 10px;
+.forgot-password:hover,
+.register-link:hover {
+  color: #1976D2;
+}
+
+.error-message {
+  margin-top: 16px;
+  color: #d32f2f;
 }
 </style>
