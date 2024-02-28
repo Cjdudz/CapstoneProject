@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <h2 class="heading">RCGA Application Form</h2>
+    <h2 class="heading">PCGA Application Form</h2>
     <form @submit.prevent="submitForm" class="form">
       <div class="section">
       <h3>Personal Information</h3>
@@ -283,9 +283,8 @@ export default {
 }
 </script>
 
-
-<style scoped>
-/* Add your CSS styles here */
+<style>
+/* Basic styling */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -293,48 +292,62 @@ export default {
 
 .heading {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-.sub-heading {
-  margin-top: 20px;
-  font-size: 20px;
 }
 
 .form {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 8px;
+  margin-top: 20px;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.section {
+  margin-bottom: 20px;
 }
 
-.input-field {
+/* Input field styling */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.input-field:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
-.submit-button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+select {
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
-  background-color: #2980b9;
+/* Button styling */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
 }
 </style>
