@@ -1,14 +1,53 @@
 <template>
   <v-app>
     <v-app-bar>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
-        <span class="app-title">505th PCGA Application System</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
-    </v-app-bar>
+  <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+  <v-toolbar-title>
+    <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+    <span class="app-title">505th PCGA Application System</span>
+  </v-toolbar-title>
+  <v-spacer></v-spacer>
+
+  <!-- Transparency Seal Dropdown Menu -->
+  <v-menu offset-y>
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn text v-bind="attrs" v-on="on" class="header-button">Transparency Seal</v-btn>
+    </template>
+    <v-list>
+      <v-list-item href="/transparency-seal">Transparency Seal Data 1</v-list-item>
+      <v-list-item href="/transparency-seal-2">Transparency Seal Data 2</v-list-item>
+      <!-- Add more items as needed -->
+    </v-list>
+  </v-menu>
+
+  <!-- Coast Guard Districts Dropdown Menu -->
+  <v-menu offset-y>
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn text v-bind="attrs" v-on="on" class="header-button">Coast Guard Districts</v-btn>
+    </template>
+    <v-list>
+      <v-list-item href="/coast-guard-districts">District 1</v-list-item>
+      <v-list-item href="/coast-guard-districts-2">District 2</v-list-item>
+      <!-- Add more items as needed -->
+    </v-list>
+  </v-menu>
+
+  <!-- Procurement Dropdown Menu -->
+  <v-menu offset-y>
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn text v-bind="attrs" v-on="on" class="header-button">Procurement</v-btn>
+    </template>
+    <v-list>
+      <v-list-item href="/procurement">Procurement Data 1</v-list-item>
+      <v-list-item href="/procurement-2">Procurement Data 2</v-list-item>
+      <!-- Add more items as needed -->
+    </v-list>
+  </v-menu>
+
+  <v-btn text href="/contact-us" class="header-button">Contact Us</v-btn>
+  <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
+</v-app-bar>
+
 
     <v-dialog v-model="showMessage" max-width="400">
       <v-card class="message-dialog">
@@ -307,7 +346,10 @@ body {
     margin-top: 56px;
   }
 }
-
+.header-button {
+  color: white;
+  margin-left: 10px; /* Adjust spacing between buttons */
+}
 @media only screen and (max-width: 960px) {
   .v-app-bar {
     font-size: 18px;
