@@ -2,13 +2,13 @@
   <v-app>
     <v-container class="login-container" fluid fill-height>
       <v-row justify="center" align="center">
-        <v-col cols="12" sm="8" md="4">
+        <v-col cols="12" sm="8" md="6" lg="4">
           <v-card class="login-card">
-            <v-card-title class="title headline">Login</v-card-title>
+            <v-card-title class="title">Login</v-card-title>
             <v-card-text class="form">
               <v-form @submit.prevent="login">
-                <v-text-field v-model="username" label="Username"></v-text-field>
-                <v-text-field v-model="password" label="Password" type="password"></v-text-field>
+                <v-text-field v-model="username" label="Username" outlined dense color="white"></v-text-field>
+                <v-text-field v-model="password" label="Password" type="password" outlined dense color="white"></v-text-field>
                 <v-btn type="submit" block class="login-button">Login</v-btn>
               </v-form>
             </v-card-text>
@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .v-app {
-  background-color: #7c5d5d;
+  background: linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
 }
 
 .login-container {
@@ -84,21 +84,16 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #7c5d5d;
 }
 
 .login-card {
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .title {
   text-align: center;
-  color: #333;
+  color: #1976D2;
   margin-bottom: 16px;
   font-size: 25px;
   font-weight: 700;
@@ -110,32 +105,32 @@ export default {
 
 .login-button {
   margin-top: 16px;
-  background-color: #1976D2;
-  color: white;
+  background-color: #3f51b5;
+  color: #fff;
   border: none;
   border-radius: 5px;
 }
 
 .login-button:hover {
-  background-color: #1565C0;
+  background-color: #303f9f;
 }
 
 .forgot-password,
 .register-link {
   text-align: center;
   margin-top: 16px;
-  color: #555;
+  color: #1976D2;
   text-decoration: none;
   display: inline-block;
 }
 
 .forgot-password:hover,
 .register-link:hover {
-  color: #1976D2;
+  color: #296540;
 }
 
 .error-message {
   margin-top: 16px;
-  color: #d32f2f;
+  color: #f44336;
 }
 </style>

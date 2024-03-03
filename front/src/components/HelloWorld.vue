@@ -1,76 +1,122 @@
 <template>
-  <v-app>
+  <div class="philippine-coast-guard-auxiliary">
+    <header>
+      <h1>Philippine Coast Guard Auxiliary</h1>
+      <p>Welcome to the Philippine Coast Guard Auxiliary website!</p>
+    </header>
 
-    <v-main style="  background-image: url('https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/385484006_730465255796324_334538059090882611_n.png?_nc_cat=110&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeFDXZJtjJ1Z3MIJIPvivsWyTeyjUxuKVXFN7KNTG4pVcaeUtReE_OVHKxy2N-AFpmnmttCsQCwaATNlz1xXEwZf&_nc_ohc=xBIQskDQGwcAX-x7_GB&_nc_ht=scontent.fmnl30-2.fna&oh=03_AdRIv9tBY72xRzE3kUmh7nj1cEtB1VxpWT9zHy17wTUEhA&oe=65A0C06D');">
-      <v-container>
-       
+    <div class="divider"></div> <!-- Divider between welcome message and news -->
 
-        <v-row>
-          <v-col>
-            <v-container class="my-5">
-              <v-card elevation="2" class="pa-5 text-center rounded-lg">
-                <v-card-title class="display-2 mb-3">Welcome to the 505th PCGA Application System</v-card-title>
-                <v-card-subtitle class="subtitle-1">Apply online and schedule your appointment interview with ease.</v-card-subtitle>
-              </v-card>
-            </v-container>
-          </v-col>
-        </v-row>
-     
+    <div class="content-wrapper">
+      <section class="news-section">
+        <h2>News</h2>
+        <ul class="news-list">
+          <li v-for="newsItem in news" :key="newsItem.id" class="news-item">
+            <h3>{{ newsItem.title }}</h3>
+            <p>{{ newsItem.content }}</p>
+            <p><strong>Date:</strong> {{ newsItem.date }}</p>
+          </li>
+        </ul>
+      </section>
 
-   
-        <v-row v-if="showApplicationForm">
-          <v-col>
-            <v-container class="my-5">
-              <v-dialog v-model="showApplicationForm" max-width="600">
-                <v-card>
-                  <v-card-title class="headline text-center">Application Process Form</v-card-title>
-                  <v-card-text>
-                    <v-form>
-                      <v-text-field label="Full Name" v-model="applicationForm.fullName"></v-text-field>
-                      <v-text-field label="Email" v-model="applicationForm.email"></v-text-field>
-                      <v-text-field label="Phone Number" v-model="applicationForm.phoneNumber"></v-text-field>
-
-                      <v-btn color="primary" dark class="mt-4" @click="submitApplicationForm">Submit Application</v-btn>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions class="justify-center">
-                    <v-btn @click="showApplicationForm = false" color="grey">Close</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-container>
-          </v-col>
-        </v-row>
-        <v-row v-if="showInterviewForm">
-          <v-col>
-            <v-container class="my-5">
-              <v-dialog v-model="showInterviewForm" max-width="600">
-                <v-card>
-                  <v-card-title class="headline text-center">Interview Process Form</v-card-title>
-                  <v-card-text>
-                    <v-form>
-                      <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
-                      <v-text-field label="Interview Date" v-model="interviewForm.interviewDate" type="date"></v-text-field>
-                      <v-textarea label="Comments" v-model="interviewForm.comments"></v-textarea>
-
-                      <v-btn color="primary" dark class="mt-4" @click="submitInterviewForm">Submit Interview</v-btn>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions class="justify-center">
-                    <v-btn @click="showInterviewForm = false" color="grey">Close</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-container>
-          </v-col>
-        </v-row>
-
-      </v-container>
-    </v-main>
-
-
-  </v-app>
+      <section class="updates-section">
+        <h2>Updates</h2>
+        <ul class="updates-list">
+          <li v-for="updateItem in updates" :key="updateItem.id" class="update-item">
+            <h3>{{ updateItem.title }}</h3>
+            <p>{{ updateItem.content }}</p>
+            <p><strong>Date:</strong> {{ updateItem.date }}</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
 </template>
-<script>
 
+<script>
+export default {
+  name: 'PhilippineCoastGuardAuxiliary',
+  data() {
+    return {
+      news: [
+        { id: 1, title: 'Coast Guard Rescues Fishermen', content: 'Philippine Coast Guard rescued 20 fishermen stranded at sea.', date: '2024-03-04' },
+        { id: 2, title: 'New Coast Guard Training Program', content: 'Philippine Coast Guard launches a new training program for maritime security.', date: '2024-03-03' },
+        // Add more news items here
+      ],
+      updates: [
+        { id: 1, title: 'Coast Guard Implements New Safety Measures', content: 'The Philippine Coast Guard has implemented new safety measures to enhance maritime security.', date: '2024-03-02' },
+        { id: 2, title: 'Coast Guard Conducts Search and Rescue Exercise', content: 'Philippine Coast Guard conducts a search and rescue exercise in collaboration with neighboring countries.', date: '2024-03-01' },
+        // Add more updates here
+      ]
+    };
+  }
+};
 </script>
+
+<style scoped>
+  .philippine-coast-guard-auxiliary {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .news-section, .updates-section {
+    flex-basis: 48%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .news-item, .update-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .news-item:hover, .update-item:hover {
+    transform: translateY(-5px);
+  }
+
+  h2 {
+    color: #333;
+  }
+
+  h3 {
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  .news-list, .updates-list {
+    list-style-type: none;
+    padding: 0;
+  }
+</style>

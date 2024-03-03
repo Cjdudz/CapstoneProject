@@ -4,7 +4,7 @@
   <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
   <v-toolbar-title>
     <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
-    <span class="app-title">505th PCGA Application System</span>
+    <span class="app-title">PCGA</span>
   </v-toolbar-title>
   <v-spacer></v-spacer>
 

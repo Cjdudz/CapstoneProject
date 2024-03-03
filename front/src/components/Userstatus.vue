@@ -2,7 +2,7 @@
   <v-container>
     <v-card class="compact-card" elevation="2">
       <v-card-title class="compact-header">
-        <h2 class="compact-title">🌟 User Status</h2>
+        <h2 class="compact-title"> User Status</h2>
       </v-card-title>
       <v-card-text class="compact-body">
         <v-row>
@@ -16,9 +16,9 @@
                 :dense="true"
                 :hide-default-footer="true"
               >
-                <template v-slot:items="props">
-                  <td>{{ props.item.name }}</td>
-                  <td>{{ getStatusEmoji(props.item.status) }}</td>
+                <template v-slot:items="{ item }">
+                  <td>{{ item.name }}</td>
+                  <td>{{ getStatusEmoji(item.status) }}</td>
                 </template>
               </v-data-table>
             </v-card>
@@ -33,16 +33,18 @@
 import axios from 'axios';
 
 export default {
-  data: () => ({
-    appointmentGroups: {
-      'Accepted Appointments': [],
-      'Rejected Appointments': [],
-    },
-    tableHeaders: [
-      { text: 'Name', value: 'name' },
-      { text: 'Status', value: 'status' },
-    ],
-  }),
+  data() {
+    return {
+      appointmentGroups: {
+        'Accepted Appointments': [],
+        'Rejected Appointments': [],
+      },
+      tableHeaders: [
+        { text: 'Name', value: 'name' },
+        { text: 'Status', value: 'status' },
+      ],
+    };
+  },
   mounted() {
     this.fetchAppointmentStatus();
   },
@@ -66,20 +68,20 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .compact-card {
-  border: 1px solid #e0e0e0;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .compact-title {
   margin-bottom: 0;
-  font-size: 20px;
+  font-size: 24px;
+  color: #333;
 }
 
 .table-title {
-  font-size: 16px;
-  color: #333;
+  font-size: 18px;
+  color: #555;
 }
 </style>

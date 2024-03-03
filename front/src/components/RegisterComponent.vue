@@ -6,17 +6,17 @@
           <v-alert v-if="message === 'error'" type="error" dense dismissible>
             Invalid response
           </v-alert>
-          <v-text-field v-model="username" label="Username" required class="mt-3"></v-text-field>
-          <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
-          <v-text-field v-model="passwordConfirm" label="Confirm Password" type="password" required></v-text-field>
-          <v-select v-model="userRole" :items="userRoles" label="Select User Role" required class="mt-3"></v-select>
+          <v-text-field v-model="username" label="Username" required dense></v-text-field>
+          <v-text-field v-model="password" label="Password" type="password" required dense></v-text-field>
+          <v-text-field v-model="passwordConfirm" label="Confirm Password" type="password" required dense></v-text-field>
+          <v-select v-model="userRole" :items="userRoles" label="Select User Role" required dense></v-select>
           <v-alert v-if="message === 'passwordMismatch'" type="error" dense dismissible>
             Passwords do not match
           </v-alert>
           <v-alert v-if="message === 'registrationFailed'" type="error" dense dismissible>
             Registration failed. Please try again.
           </v-alert>
-          <v-btn type="submit" block class="mt-4" color="primary">Submit</v-btn>
+          <v-btn type="submit" block class="mt-4 custom-btn" color="primary">Submit</v-btn>
           <div class="mt-3 text-center">
             <v-divider></v-divider>
             <span class="caption">Already have an account?</span>
@@ -46,13 +46,8 @@ export default {
     async register() {
       if (this.password === this.passwordConfirm) {
         try {
-          const response = await axios.post('api/register', {
-            username: this.username,
-            password: this.password,
-            role: this.userRole,
-          });
-
-          if (response.data.msg === 'okay') {
+          const { data } = await axios.post('api/register', { username: this.username, password: this.password, role: this.userRole });
+          if (data.msg === 'okay') {
             alert('Registered successfully');
             this.$router.push('/logincomponent');
           } else {
@@ -69,40 +64,39 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .container {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #7c5d5d; /* Change to a common background color */
+  background-color: #f5f5f5;
 }
 
 .login-container {
   max-width: 400px;
   width: 100%;
   padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
-  height: 70;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .custom-border {
-  border: 1px solid #ccc;
+  border: none;
 }
 
 .v-text-field {
-  margin: 20px 0;
+  margin-top: 15px;
 }
 
 .error-message {
-  color: #d32f2f; /* Use the same color for error messages */
+  color: #f44336;
 }
 
 .router-link {
-  color: #1976D2; /* Use the same color for router links */
+  color: #1976D2;
   text-decoration: none;
 }
 
@@ -111,18 +105,17 @@ export default {
 }
 
 .caption {
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 8px;
   display: block;
-  color: #555;
+  color: #757575;
 }
 
 .text-center {
   text-align: center;
 }
 
-/* Add styles for the v-divider */
-.v-divider {
-  margin: 16px 0;
+.custom-btn {
+  border-radius: 5px;
 }
 </style>
