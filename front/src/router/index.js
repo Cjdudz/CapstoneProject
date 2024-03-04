@@ -10,9 +10,20 @@ const routes = [
     name: 'NavBar',
     component: () => import('@/views/NavBar.vue'),
   },
-
   {
-
+    path: '/Transparency',
+    name: 'Transparency',
+    component: () => import('@/views/transparency.vue'),
+  },
+  {
+    path: '/Procurement',
+    name: 'Procurement',
+    component: () => import('@/views/Procurement.vue'),
+  },
+  {
+    path: '/Disctricts',
+    name: 'Disctricts',
+    component: () => import('@/views/Disctricts.vue'),
   },
   {
     path: '/Overview',
