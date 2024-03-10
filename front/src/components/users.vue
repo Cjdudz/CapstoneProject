@@ -1,63 +1,105 @@
 <template>
-  <div class="admin-panel">
-    <h1 class="title">User Management</h1>
+  <v-app>
+    <!-- Navigation Drawer -->
+    <v-navigation-drawer app v-model="drawer">
+      <v-list>
+        <!-- Navigation items -->
+        <v-list-item v-for="(item, index) in items" :key="index" link>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title @click="navigateTo(item.route)">
+              {{ item.text }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
-    <div class="user-list">
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-              <button @click="editUser(user)" class="edit-btn">
-                <i class="fas fa-edit"></i> Edit
-              </button>
-              <button @click="deleteUser(user)" class="delete-btn">
-                <i class="fas fa-trash-alt"></i> Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <!-- Logout Button -->
+        <v-list-item>
+          <v-row>
+            <v-col>
+              <v-list-item-action>
+                <v-btn icon @click="logout">
+                  <v-icon>mdi-logout</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-col>
+          </v-row>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-    <div v-if="editMode" class="user-form-modal">
-      <div class="user-form">
-        <h2 class="form-title">Edit User</h2>
-        <form @submit.prevent="updateUser">
-          <div class="form-group">
-            <label for="id" class="form-label">ID:</label>
-            <input type="number" id="id" v-model="editedUserId" class="form-input">
-          </div>
-          <div class="form-group">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" id="name" v-model="editedUserName" class="form-input">
-          </div>
-          <div class="form-group">
-            <label for="role" class="form-label">Role:</label>
-            <input type="text" id="role" v-model="editedUserRole" class="form-input">
-          </div>
-          <button type="submit" class="update-btn">
-            <i class="fas fa-check"></i> Update User
-          </button>
-          <button type="button" @click="cancelEdit" class="cancel-btn">
-            <i class="fas fa-times"></i> Cancel
-          </button>
-        </form>
+    <!-- App Bar -->
+    <v-app-bar app>
+      <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+        <v-app-bar-nav-icon v-if="!drawer"></v-app-bar-nav-icon>
       </div>
-    </div>
-  </div>
-</template>
+      <v-toolbar-title class="custom-title">User Management</v-toolbar-title>
+    </v-app-bar>
 
+    <!-- Main Content -->
+    <v-main>
+      <div class="admin-panel">
+        <h1 class="title">User Management</h1>
+
+        <div class="user-list">
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user.id">
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <button @click="editUser(user)" class="edit-btn">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                  <button @click="deleteUser(user)" class="delete-btn">
+                    <i class="fas fa-trash-alt"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div v-if="editMode" class="user-form-modal">
+          <div class="user-form">
+            <h2 class="form-title">Edit User</h2>
+            <form @submit.prevent="updateUser">
+              <div class="form-group">
+                <label for="id" class="form-label">ID:</label>
+                <input type="number" id="id" v-model="editedUserId" class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" v-model="editedUserName" class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="role" class="form-label">Role:</label>
+                <input type="text" id="role" v-model="editedUserRole" class="form-input">
+              </div>
+              <button type="submit" class="update-btn">
+                <i class="fas fa-check"></i> Update User
+              </button>
+              <button type="button" @click="cancelEdit" class="cancel-btn">
+                <i class="fas fa-times"></i> Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </v-main>
+  </v-app>
+</template>
 
 <script>
 import axios from 'axios';
@@ -65,6 +107,15 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      drawer: true,
+      items: [
+        { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
+        { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
+        { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
+        { text: 'Procurement', icon: 'mdi-cart', route: '/ProcurementManagement' },
+        { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/updates' },
+        { text: 'Services Management', icon: 'mdi-cogs', route: '/services' }
+      ],
       users: [],
       editMode: false,
       editedUserId: null,
@@ -77,9 +128,9 @@ export default {
   },
   methods: {
     cancelEdit() {
-    console.log('Editing canceled!');
-    this.editMode = false; // Make sure this line is present
-  },
+      console.log('Editing canceled!');
+      this.editMode = false; // Make sure this line is present
+    },
     editUser(user) {
       this.editMode = true;
       this.editedUserId = user.id;
@@ -119,20 +170,42 @@ export default {
           console.error('Error deleting user:', error);
         });
     },
+    onMouseEnter() {
+      this.drawer = true;
+    },
+    onMouseLeave() {
+      this.drawer = false;
+    },
+    logout() {
+      // Handle logout functionality
+      console.log('Logout button clicked');
+      // Example: Redirect to login page
+      this.$router.push('/LoginComponent');
+    },
+    navigateTo(route) {
+      this.$router.push(route);
+      this.drawer = false;
+    },
   },
 };
 </script>
 
 <style scoped>
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f0f0f0;
+  /* Resetting default margin and padding */
+  * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
   }
 
   .admin-panel {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 50px auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
@@ -141,7 +214,7 @@ export default {
 
   .title {
     font-size: 32px;
-    color: #3498db;
+    color: #007bff;
     margin-bottom: 20px;
   }
 
@@ -153,18 +226,18 @@ export default {
 
   .user-table th,
   .user-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #dee2e6;
     padding: 12px;
     text-align: left;
   }
 
   .user-table th {
-    background-color: #3498db;
-    color: #fff;
+    background-color: #007bff;
+    color: #ffffff;
   }
 
   .user-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
   }
 
   .edit-btn,
@@ -175,18 +248,20 @@ export default {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 4px;
+    font-weight: bold;
   }
 
   .edit-btn,
   .update-btn {
-    background-color: #2ecc71;
-    color: #fff;
+    background-color: #28a745;
+    color: #ffffff;
   }
 
   .delete-btn,
   .cancel-btn {
-    background-color: #e74c3c;
-    color: #fff;
+    background-color: #dc3545;
+    color: #ffffff;
   }
 
   .edit-btn:hover,
@@ -209,7 +284,7 @@ export default {
   }
 
   .user-form {
-    background: #fff;
+    background: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -217,7 +292,7 @@ export default {
 
   .form-title {
     font-size: 24px;
-    color: #333;
+    color: #333333;
     margin-bottom: 20px;
   }
 
@@ -227,7 +302,7 @@ export default {
 
   .form-label {
     font-size: 16px;
-    color: #333;
+    color: #333333;
     margin-bottom: 8px;
     display: block;
   }
@@ -236,8 +311,71 @@ export default {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid #ddd;
+    border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 14px;
+  }
+
+   /* Navigation Drawer Styles */
+   .v-navigation-drawer {
+    background-color: #1a237e; /* Dark blue background color */
+    color: white;
+  }
+
+  .v-list-item {
+    border-bottom: 1px solid #3949ab; /* Dark blue border between items */
+  }
+
+  .v-list-item-title {
+    color: white;
+    font-weight: bold;
+  }
+
+  /* App Bar Styles */
+  .v-app-bar {
+    background-color: #283593; /* Darker blue app bar */
+    color: white;
+  }
+
+  .custom-title {
+    font-family: 'Pacifico', cursive; /* Custom font for the title */
+    font-size: 24px;
+  }
+
+  /* Main Content Styles */
+  .overview {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .info-card {
+    cursor: pointer;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .info-card:hover {
+    background-color: #7986cb; /* Lighter blue on hover */
+  }
+
+  .selected-card {
+    background-color: #303f9f; /* Darker blue for selected card */
+  }
+
+  .chart-container {
+    margin-top: 20px;
+  }
+
+  /* Logout Button Styles */
+  .v-btn {
+    color: #ffffff; /* White button text color */
+  }
+
+  /* Global Styles */
+  body {
+    font-family: 'Roboto', sans-serif; /* Default font family */
+    background-color: #fafafa; /* Light gray background color */
   }
 </style>

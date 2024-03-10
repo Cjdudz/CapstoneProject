@@ -46,8 +46,13 @@ export default {
     async register() {
       if (this.password === this.passwordConfirm) {
         try {
-          const { data } = await axios.post('api/register', { username: this.username, password: this.password, role: this.userRole });
-          if (data.msg === 'okay') {
+          const response = await axios.post('api/register', {
+            username: this.username,
+            password: this.password,
+            role: this.userRole,
+          });
+
+          if (response.data.msg === 'okay') {
             alert('Registered successfully');
             this.$router.push('/logincomponent');
           } else {

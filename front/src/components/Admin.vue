@@ -106,10 +106,15 @@ export default {
       drawer: true,
       hoverDelay: null,
       items: [
-        { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/Overview' },
-        { text: 'Users', icon: 'mdi-page-1', route: '/users' },
-        { text: 'Applicants data', icon: 'mdi-page-2', route: '/ApplicantsData' }
-      ],
+  { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
+  { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
+  { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
+  { text: 'Procurement', icon: 'mdi-cart', route: '/ProcurementManagement' },
+  { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
+  { text: 'Services Management', icon: 'mdi-cogs', route: '/ManageDistrict' }
+],
+
+
       memberCount: null,
       activeAlertsCount: null,
       totalRevenue: null,
@@ -140,33 +145,65 @@ export default {
         });
     },
     updateAgeChart(ageChartData) {
-      const ctx = document.getElementById('ageChart').getContext('2d');
-      // Destroy previous chart instance if exists
-      if (this.ageChart) {
-        this.ageChart.destroy();
-      }
+  const ctx = document.getElementById('ageChart').getContext('2d');
+  // Destroy previous chart instance if exists
+  if (this.ageChart) {
+    this.ageChart.destroy();
+  }
 
-      this.ageChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ageChartData.labels,
-          datasets: [{
-            label: 'Applicant Ages',
-            data: ageChartData.ages,
-            backgroundColor: 'rgba(63, 81, 181, 0.5)',
-            borderColor: 'rgba(63, 81, 181, 1)',
-            borderWidth: 1,
-          }],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
+  this.ageChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ageChartData.labels,
+      datasets: [{
+        label: 'Applicant Ages',
+        data: ageChartData.ages,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1,
+      }],
     },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(0, 0, 0, 0.1)'
+          }
+        }
+      },
+      cornerRadius: 10,
+      responsive: true,
+      maintainAspectRatio: false
+    },
+  });
+},
     viewCard(card) {
       this.selectedCard = this.selectedCard === card ? null : card;
     },

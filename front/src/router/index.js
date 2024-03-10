@@ -10,6 +10,21 @@ const routes = [
     name: 'NavBar',
     component: () => import('@/views/NavBar.vue'),
   },
+ {
+    path: '/ProcurementManagement',
+    name: 'ProcurementManagement',
+    component: () => import('@/views/ProcurementManagement.vue'),
+  },
+  {
+    path: '/ManageDistrict',
+    name: 'ManageDistrict',
+    component: () => import('@/views/ManageDistrict.vue'),
+  },
+  {
+    path: '/Updates&news',
+    name: 'Updates&news',
+    component: () => import('@/views/Updates&news.vue'),
+  },
   {
     path: '/Transparency',
     name: 'Transparency',

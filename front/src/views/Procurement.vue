@@ -1,9 +1,84 @@
 <template>
-    <div>
-      <header>
-        <h1>PCGA Procurement</h1>
-      </header>
-      <main>
+  <v-app>
+    <!-- Navigation Drawer -->
+    <v-navigation-drawer app v-model="drawer">
+      <v-list>
+        <v-list-item link @click="redirectTo('/home')">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>About</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
+          <v-list-item-icon>
+            <v-icon>mdi-file-document-edit</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Apply Online</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link @click="startInterviewProcess">
+          <v-list-item-icon>
+            <v-icon>mdi-calendar-clock</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Appointment Interview</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link @click="redirectTo('/Userstatus')">
+          <v-list-item-icon>
+            <v-icon>mdi-account-check</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>User Status</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item v-if="isLoggedIn" @click="logout">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <!-- App Bar -->
+    <v-app-bar>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+        <span class="app-title">PCGA</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <!-- Transparency Seal Dropdown Menu -->
+      <v-btn text class="header-button" href="/Transparency">Transparency Seal</v-btn>
+      
+      <!-- Coast Guard Districts Button -->
+      <v-btn text class="header-button" href="/Disctricts">Coast Guard Districts</v-btn>
+      
+      <!-- Procurement Button -->
+      <v-btn text class="header-button" href="/Procurement">Procurement</v-btn>
+
+      <v-btn text href="/contact-us" class="header-button">Contact Us</v-btn>
+      <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
+    </v-app-bar>
+
+    <!-- Main Content -->
+    <v-main>
+      <!-- PCGA Procurement Content -->
+      <div>
+       
         <div v-if="loading" class="loading">Loading...</div>
         <div v-else>
           <div v-for="(section, index) in procurementSections" :key="index">
@@ -19,38 +94,68 @@
             </div>
           </div>
         </div>
-      </main>
-      <footer>
-        <p>&copy; 2024 PCGA</p>
-      </footer>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        loading: true,
-        procurementSections: [
-          { title: "Reports", items: [] },
-          { title: "Bidding Opportunities", items: [] },
-          { title: "Bidding Documents", items: [] },
-          { title: "Supplemental/Bid Bulletin", items: [] },
-          { title: "Minutes of Pre-Bid Conference & Bid Opening", items: [] },
-          { title: "Notice of Awards", items: [] },
-          { title: "Notice to Proceed", items: [] },
-          { title: "Notice of Postponement", items: [] },
-          { title: "Notice of Resumption", items: [] }
-        ]
-      };
+      </div>
+    </v-main>
+
+    <!-- Footer -->
+    <v-footer app>
+      <v-container>
+        <v-row>
+          <v-col>
+            <p class="white--text">&copy; 2024 PCGA. All rights reserved.</p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
+  </v-app>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      drawer: false,
+      loading: true,
+      isLoggedIn: false,
+      procurementSections: [
+        { title: "Reports", items: [] },
+        { title: "Bidding Opportunities", items: [] },
+        { title: "Bidding Documents", items: [] },
+        { title: "Supplemental/Bid Bulletin", items: [] },
+        { title: "Minutes of Pre-Bid Conference & Bid Opening", items: [] },
+        { title: "Notice of Awards", items: [] },
+        { title: "Notice to Proceed", items: [] },
+        { title: "Notice of Postponement", items: [] },
+        { title: "Notice of Resumption", items: [] }
+      ]
+    };
+  },
+  methods: {
+    loginOrLogout() {
+      if (this.isLoggedIn) {
+        this.logout();
+      } else {
+        this.redirectTo('/');
+      }
     },
-    mounted() {
+    logout() {
+      console.log("Logout clicked");
+      this.isLoggedIn = false;
+    },
+    redirectTo(path) {
+      // Redirect logic
+    },
+    startInterviewProcess() {
+      // Interview process logic
+    },
+    fetchData() {
       Promise.all(
         this.procurementSections.map(section => {
-          return fetch(`https://api.example.com/pcga/${section.title.toLowerCase().replace(/ /g, '-')}`)
-            .then(response => response.json())
-            .then(data => {
-              section.items = data;
+          return axios.get(`https://api.example.com/pcga/${section.title.toLowerCase().replace(/ /g, '-')}`)
+            .then(response => {
+              section.items = response.data;
             })
             .catch(error => {
               console.error(`Error fetching ${section.title}:`, error);
@@ -61,8 +166,17 @@
         this.loading = false;
       });
     }
-  };
-  </script>
+  },
+  mounted() {
+    this.fetchData();
+  }
+};
+</script>
+
+<style scoped>
+/* Styles specific to this component */
+</style>
+
   
   <style>
   h1 {
@@ -105,5 +219,6 @@
     margin-top: 20px;
     color: #666;
   }
+  
   </style>
   

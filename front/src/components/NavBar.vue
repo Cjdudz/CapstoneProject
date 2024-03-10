@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+
     <v-app-bar>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
@@ -106,7 +106,7 @@
           <v-container class="my-5">
             <v-dialog v-model="showInterviewForm" max-width="600">
               <v-card>
-                <v-card-title class="headline text-center">Interview Process Form</v-card-title>
+                <v-card-title class="headline text- center">Interview Process Form</v-card-title>
                 <v-card-text>
                   <v-form>
                     <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
@@ -125,7 +125,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-app>
+ 
 </template>
 
 <script>
