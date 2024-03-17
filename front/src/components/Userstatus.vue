@@ -62,7 +62,7 @@ export default {
       this.appointmentGroups['Rejected Appointments'] = appointments.filter(appointment => appointment.status === 'rejected');
     },
     getStatusEmoji(status) {
-      return status === 'confirmed' || status === 'accepted' ? '✅' : '❌';
+      return status === 'accepted' ? '✅' : '❌';
     },
   },
 };

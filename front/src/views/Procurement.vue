@@ -67,8 +67,6 @@
       <!-- Coast Guard Districts Button -->
       <v-btn text class="header-button" href="/Disctricts">Coast Guard Districts</v-btn>
       
-      <!-- Procurement Button -->
-      <v-btn text class="header-button" href="/Procurement">Procurement</v-btn>
 
       <v-btn text href="/contact-us" class="header-button">Contact Us</v-btn>
       <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Login' }}</v-btn>

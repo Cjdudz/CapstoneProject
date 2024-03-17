@@ -11,9 +11,6 @@ $routes->match(['post','get'],'/api/loginAdmin', 'UserController::loginAdmin');
 $routes->match(['post','get'],'/api/register', 'UserController::register');
 $routes->match(['post','get'],'/api/login', 'UserController::login');
 $routes->get('api/getAgeChartData', 'OverviewController::getAgeChartData');
-
-
-
 $routes->get( '/api/appointment', 'AppointmentController::index');
 $routes->get('/api/users', 'UserController::users');
 $routes->get('/api/overview', 'OverviewController::index');
@@ -30,3 +27,20 @@ $routes->post('api/Page1/submitForm', 'Page1::submitForm');
 $routes->post('/api/accept', 'AppointmentController::accept');
 $routes->post('/api/reject', 'AppointmentController::reject');
 $routes->get('/api/UserStatus', 'AppointmentController::UserStatus');
+$routes->delete('/api/news/(:num)', 'News::delete/$1');
+$routes->put('/api/UpdateNews/(:num)', 'News::update_news/$1');
+$routes->post('/api/news', 'News::create');
+$routes->get('/api/news', 'News::news');
+$routes->post('/api/AddNews', 'News::CreateNews');
+$routes->post('/api/Updates', 'Updates::create');
+$routes->get('/api/showupdate', 'Updates::show');
+$routes->put('/api/UpdateNews/(:num)', 'Updates::makeupdate/$1');
+$routes->delete('/api/deletenews/(:num)', 'Updates::delete/$1');
+
+
+
+$routes->post('/api/CreateDistrict', 'Districts::create');
+$routes->get('/api/ShowDistricts', 'Districts::show');
+$routes->put('/api/UpdateDistrict/(:num)', 'Districts::update/$1');
+$routes->delete('/api/DeleteDistrict/(:num)', 'Districts::delete/$1');
+$routes->post('/api/SubmitPersonalHistory', 'PersonalHistory::submitForm');  

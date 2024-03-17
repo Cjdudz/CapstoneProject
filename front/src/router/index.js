@@ -41,14 +41,24 @@ const routes = [
     component: () => import('@/views/Disctricts.vue'),
   },
   {
-    path: '/Overview',
-    component: () => import('@/views/Overview.vue'),
+    path: '/Availableupdates',
+    name: 'Availableupdates',
+    component: () => import('@/views/Availableupdates.vue'),
   },
   {
     path: '/',
     component: () => import('@/views/Landingpage.vue'),
   },
  
+
+  {
+    path: '/IdentificationCard',
+    component: () => import('@/views/IdentificationCard.vue'),
+  },
+  {
+    path: '/PersonalHistory',
+    component: () => import('@/views/PersonalHistory.vue'),
+  },
 
   {
     path: '/PcgaapplicationForm',

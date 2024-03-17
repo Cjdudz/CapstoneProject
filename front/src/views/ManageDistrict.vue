@@ -44,6 +44,7 @@
           <ul class="district-list">
             <li v-for="(district, index) in coastGuardDistricts" :key="index" class="district-item">
               <span class="district-name">{{ district.name }}</span>
+              <span class="district-name">{{ district.description }}</span>
               <button @click="editDistrict(index)" class="edit-btn">Edit</button>
               <button @click="deleteDistrict(index)" class="delete-btn">Delete</button>
             </li>
@@ -78,26 +79,19 @@
 
 <script>
 import axios from 'axios';
-import Chart from 'chart.js/auto';
 
 export default {
   data() {
     return {
       drawer: true,
-      hoverDelay: null,
       items: [
-        { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
-        { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
-        { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
-        { text: 'Procurement', icon: 'mdi-cart', route: '/ProcurementManagement' },
+        { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/Admin' },
+        { text: 'Users', icon: 'mdi-account', route: '/users' },
+        { text: 'Applicants data', icon: 'mdi-account-multiple', route: '/ApplicantsData' },
         { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
         { text: 'Services Management', icon: 'mdi-cogs', route: '/ManageDistrict' }
       ],
-      coastGuardDistricts: [
-        { id: 1, name: 'Bicol', description: 'Bicol region' },
-        { id: 2, name: 'Southern Tagalog', description: 'Southern Tagalog region' },
-        // Add more districts as needed
-      ],
+      coastGuardDistricts: [],
       newDistrict: { name: '', description: '' },
       editedDistrict: { name: '', description: '' },
       isEditModalOpen: false,
@@ -105,7 +99,7 @@ export default {
     };
   },
   mounted() {
-    // Add any initialization code here
+    this.loadDistricts();
   },
   methods: {
     navigateTo(route) {
@@ -124,6 +118,14 @@ export default {
       console.log('Logout button clicked');
       this.$router.push('/LoginComponent');
     },
+    async loadDistricts() {
+      try {
+        const response = await axios.get('/api/ShowDistricts');
+        this.coastGuardDistricts = response.data;
+      } catch (error) {
+        console.error('Error loading districts:', error);
+      }
+    },
     editDistrict(index) {
       this.editedDistrict = { ...this.coastGuardDistricts[index] };
       this.editedDistrictIndex = index;
@@ -135,22 +137,36 @@ export default {
     closeEditModal() {
       this.isEditModalOpen = false;
     },
-    saveEditedDistrict() {
+    async saveEditedDistrict() {
       if (this.editedDistrict.name.trim() !== '') {
-        this.coastGuardDistricts[this.editedDistrictIndex] = { ...this.editedDistrict };
-        this.closeEditModal();
+        try {
+          await axios.put(`/api/UpdateDistrict/${this.coastGuardDistricts[this.editedDistrictIndex].id}`, this.editedDistrict);
+          this.loadDistricts();
+          this.closeEditModal();
+        } catch (error) {
+          console.error('Error saving edited district:', error);
+        }
       }
     },
-    deleteDistrict(index) {
+    async deleteDistrict(index) {
       if (confirm('Are you sure you want to delete this district?')) {
-        this.coastGuardDistricts.splice(index, 1);
+        try {
+          await axios.delete(`/api/DeleteDistrict/${this.coastGuardDistricts[index].id}`);
+          this.loadDistricts();
+        } catch (error) {
+          console.error('Error deleting district:', error);
+        }
       }
     },
-    addDistrict() {
+    async addDistrict() {
       if (this.newDistrict.name.trim() !== '') {
-        const newDistrict = { ...this.newDistrict, id: this.coastGuardDistricts.length + 1 };
-        this.coastGuardDistricts.push(newDistrict);
-        this.newDistrict = { name: '', description: '' }; // Clear input fields after adding
+        try {
+          await axios.post('/api/CreateDistrict', this.newDistrict);
+          this.loadDistricts();
+          this.newDistrict = { name: '', description: '' }; // Clear input fields after adding
+        } catch (error) {
+          console.error('Error adding district:', error);
+        }
       }
     }
   }

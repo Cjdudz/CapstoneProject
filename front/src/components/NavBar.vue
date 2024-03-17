@@ -1,21 +1,23 @@
 <template>
 
-    <v-app-bar>
+<v-app-bar app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
         <span class="app-title">PCGA</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-btn text @click="$router.push({ name: 'NavBar' })">
+        Home
+      </v-btn>
+     
+   
 
       <!-- Transparency Seal Dropdown Menu -->
       <v-btn text class="header-button" href="/Transparency">Transparency Seal</v-btn>
     
     <!-- Coast Guard Districts Button -->
     <v-btn text class="header-button" href="/Disctricts">Coast Guard Districts</v-btn>
-    
-    <!-- Procurement Button -->
-    <v-btn text class="header-button" href="/Procurement">Procurement</v-btn>
+   
 
       <v-btn text href="/contact-us" class="header-button">Contact Us</v-btn>
       <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
@@ -56,6 +58,15 @@
             <v-list-item-title>Apply Online</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item link @click="redirectTo('/IdentificationCard')">
+  <v-list-item-icon>
+    <v-icon>mdi-identification</v-icon>
+  </v-list-item-icon>
+  <v-list-item-content>
+    <v-list-item-title>Identification</v-list-item-title>
+  </v-list-item-content>
+</v-list-item>
 
         <v-list-item link @click="startInterviewProcess">
           <v-list-item-icon>
