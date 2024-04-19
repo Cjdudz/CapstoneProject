@@ -26,15 +26,7 @@
     <!-- Navigation Drawer -->
     <v-navigation-drawer app v-model="drawer">
       <v-list>
-        <v-list-item link @click="redirectTo('/home')">
-          <v-list-item-icon>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>About</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
+      
         <v-divider></v-divider>
 
         <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
@@ -147,17 +139,18 @@ export default {
     };
   },
   mounted() {
-    // Fetch districts from API
-    axios.get("https://api.example.com/pcga/districts")
-      .then(response => {
-        this.districts = response.data;
-        this.loading = false;
-      })
-      .catch(error => {
-        console.error("Error fetching districts:", error);
-        this.loading = false;
-      });
-  },
+  // Fetch districts from API
+  axios.get("/api/ShowDistricts")
+    .then(response => {
+      this.districts = response.data;
+      this.loading = false;
+    })
+    .catch(error => {
+      console.error("Error fetching districts:", error);
+      this.loading = false;
+    });
+},
+
   methods: {
     loginOrLogout() {
       if (this.isLoggedIn) {

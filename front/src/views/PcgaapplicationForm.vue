@@ -241,6 +241,8 @@
 
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -343,16 +345,24 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-    // Handle form submission
-    console.log('Form submitted');
-    
-    // Assuming successful submission, navigate to the Applicant's Personal History form
-    this.$router.push('/PersonalHistory');
-  }
+    async submitForm() {
+      try {
+        // Send form data to CodeIgniter backend
+        const response = await axios.post('/api/passForm', this.form);
+
+        // Assuming the backend responds with a success message
+        console.log('Form submitted successfully:', response.data);
+
+        // Reset the form after successful submission (optional)
+        this.resetForm();
+      } catch (error) {
+        console.error('Error submitting form:', error.message);
+      }
+    },
   }
 }
-</script><style scoped>
+</script>
+<style scoped>
 /* General styles */
 .application-form {
   font-family: 'Roboto', sans-serif;

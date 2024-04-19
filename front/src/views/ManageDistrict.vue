@@ -85,11 +85,12 @@ export default {
     return {
       drawer: true,
       items: [
-        { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/Admin' },
-        { text: 'Users', icon: 'mdi-account', route: '/users' },
-        { text: 'Applicants data', icon: 'mdi-account-multiple', route: '/ApplicantsData' },
-        { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
-        { text: 'Services Management', icon: 'mdi-cogs', route: '/ManageDistrict' }
+      { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
+  { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
+  { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
+  { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
+  { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
+  { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
       ],
       coastGuardDistricts: [],
       newDistrict: { name: '', description: '' },

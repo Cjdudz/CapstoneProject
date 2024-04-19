@@ -6,35 +6,72 @@ use CodeIgniter\Model;
 
 class IdModel extends Model
 {
-    protected $table            = 'ids';
+    protected $table            = 'formData';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'idNo', 'auxiliaryDistrict', 'squadronNo', 'firstName', 'middleName',
+        'lastName', 'maidenLastName', 'rankDesignationAuthority', 'homeAddress',
+        'maritalStatus', 'weight', 'eyes', 'height', 'hair', 'bloodType',
+        'sex', 'religion', 'dateOfBirth', 'identifyingData', 'emergencyContact',
+        'emergencyContactAddress', 'emergencyContactNumber'
+    ];
 
     // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $useTimestamps = true; // Enable timestamps
+    protected $dateFormat    = 'datetime'; // Set datetime format
+    protected $createdField  = 'created_at'; // Set created_at field name
+    protected $updatedField  = 'updated_at'; // Set updated_at field name
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
+    // Validation rules
+    protected $validationRules = [
+        'idNo' => 'required',
+        'firstName' => 'required',
+        'lastName' => 'required',
+        // Add validation rules for other fields as needed
+    ];
+
+    // Validation messages
+    protected $validationMessages = [
+        'idNo' => [
+            'required' => 'ID No. is required.'
+        ],
+        'firstName' => [
+            'required' => 'First Name is required.'
+        ],
+        'lastName' => [
+            'required' => 'Last Name is required.'
+        ],
+        // Add custom error messages for other fields as needed
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+
+    // Callbacks: before insert
+    protected $beforeInsert = [];
+
+    // Callbacks: after insert
+    protected $afterInsert = [];
+
+    // Callbacks: before update
+    protected $beforeUpdate = [];
+
+    // Callbacks: after update
+    protected $afterUpdate = [];
+
+    // Callbacks: before find
+    protected $beforeFind = [];
+
+    // Callbacks: after find
+    protected $afterFind = [];
+
+    // Callbacks: before delete
+    protected $beforeDelete = [];
+
+    // Callbacks: after delete
+    protected $afterDelete = [];
 }

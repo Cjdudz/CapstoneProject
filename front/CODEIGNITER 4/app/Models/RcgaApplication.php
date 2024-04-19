@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class RcgaApplication extends Model
 {
-    protected $table            = 'RCGAApplicationForm';
+    protected $table            = 'MembershipApplication';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

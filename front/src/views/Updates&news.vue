@@ -87,7 +87,7 @@ export default {
   { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
   { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
   { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
-  { text: 'Services Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
+  { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
   { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
       ],
       title: '',
@@ -137,7 +137,7 @@ export default {
         });
     },
     fetchNews() {
-      axios.get('/api/news')
+      axios.get('/api/Shownews')
         .then(response => {
           this.newsList = response.data;
         })

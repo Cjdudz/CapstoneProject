@@ -2,12 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 
-class IdForm extends BaseController
+use CodeIgniter\RESTful\ResourceController;
+use App\Controllers\BaseController;
+use CodeIgniter\API\ResponseTrait;
+use App\Models\IdModel;
+
+class IdForm extends ResourceController
 {
-    public function index()
+    public function passForm()
     {
-        //
+        $data = $this->request->getJSON(true);
+
+        // Validate and process the data as needed
+        // For example, save the interview data to the database
+        $interviewModel = new IdModel();
+        $interviewModel->insert($data);
+
+        return $this->respond(['message' => 'Interview form submitted successfully']);
     }
 }

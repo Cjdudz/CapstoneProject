@@ -3,27 +3,26 @@
     <div class="login-container">
       <v-sheet width="300" class="mx-auto custom-border">
         <v-form @submit.prevent="register">
-          <v-alert v-if="message === 'error'" type="error" dense dismissible>
-            Invalid response
-          </v-alert>
-          <v-text-field v-model="username" label="Username" required dense></v-text-field>
-          <v-text-field v-model="password" label="Password" type="password" required dense></v-text-field>
-          <v-text-field v-model="passwordConfirm" label="Confirm Password" type="password" required dense></v-text-field>
-          <v-select v-model="userRole" :items="userRoles" label="Select User Role" required dense></v-select>
-          <v-alert v-if="message === 'passwordMismatch'" type="error" dense dismissible>
-            Passwords do not match
-          </v-alert>
-          <v-alert v-if="message === 'registrationFailed'" type="error" dense dismissible>
-            Registration failed. Please try again.
-          </v-alert>
-          <v-btn type="submit" block class="mt-4 custom-btn" color="primary">Submit</v-btn>
-          <div class="mt-3 text-center">
-            <v-divider></v-divider>
-            <span class="caption">Already have an account?</span>
-            <router-link to="/logincomponent" class="router-link">Login here</router-link>
-          </div>
-        </v-form>
-      </v-sheet>
+            <v-alert v-if="message === 'error'" type="error" dense dismissible>
+              Invalid response
+            </v-alert>
+            <v-text-field v-model="username" label="Username" required dense></v-text-field>
+            <v-text-field v-model="password" label="Password" type="password" required dense></v-text-field>
+            <v-text-field v-model="passwordConfirm" label="Confirm Password" type="password" required dense></v-text-field>
+            <v-alert v-if="message === 'passwordMismatch'" type="error" dense dismissible>
+              Passwords do not match
+            </v-alert>
+            <v-alert v-if="message === 'registrationFailed'" type="error" dense dismissible>
+              Registration failed. Please try again.
+            </v-alert>
+            <v-btn type="submit" block class="mt-4 custom-btn" color="primary">Submit</v-btn>
+            <div class="mt-3 text-center">
+              <v-divider></v-divider>
+              <span class="caption">Already have an account?</span>
+              <router-link to="/loginComponent" class="router-link">Login here</router-link>
+            </div>
+          </v-form>
+              </v-sheet>
     </div>
   </div>
 </template>
@@ -37,8 +36,6 @@ export default {
       username: '',
       password: '',
       passwordConfirm: '',
-      userRole: '',
-      userRoles: ['user', 'admin'],
       message: '',
     };
   },
@@ -49,12 +46,12 @@ export default {
           const response = await axios.post('api/register', {
             username: this.username,
             password: this.password,
-            role: this.userRole,
+            role: 'user', // Hardcoded role as 'user'
           });
 
           if (response.data.msg === 'okay') {
             alert('Registered successfully');
-            this.$router.push('/logincomponent');
+            this.$router.push('/LoginComponent');
           } else {
             this.message = 'registrationFailed';
           }
@@ -69,7 +66,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .container {
   height: 100vh;

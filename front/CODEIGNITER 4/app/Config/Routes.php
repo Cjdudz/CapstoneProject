@@ -44,3 +44,4 @@ $routes->get('/api/ShowDistricts', 'Districts::show');
 $routes->put('/api/UpdateDistrict/(:num)', 'Districts::update/$1');
 $routes->delete('/api/DeleteDistrict/(:num)', 'Districts::delete/$1');
 $routes->post('/api/SubmitPersonalHistory', 'PersonalHistory::submitForm');  
+$routes->post('/api/SubmitForm', 'IdForm::passForm');

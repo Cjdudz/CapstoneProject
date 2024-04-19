@@ -32,26 +32,32 @@
     </div>
   </div>
 </template>
-
 <script>
+
+import axios from 'axios';
 export default {
   name: 'PhilippineCoastGuardAuxiliary',
   data() {
     return {
-      news: [
-        { id: 1, title: 'Coast Guard Rescues Fishermen', content: 'Philippine Coast Guard rescued 20 fishermen stranded at sea.', date: '2024-03-04' },
-        { id: 2, title: 'New Coast Guard Training Program', content: 'Philippine Coast Guard launches a new training program for maritime security.', date: '2024-03-03' },
-        // Add more news items here
-      ],
-      updates: [
-        { id: 1, title: 'Coast Guard Implements New Safety Measures', content: 'The Philippine Coast Guard has implemented new safety measures to enhance maritime security.', date: '2024-03-02' },
-        { id: 2, title: 'Coast Guard Conducts Search and Rescue Exercise', content: 'Philippine Coast Guard conducts a search and rescue exercise in collaboration with neighboring countries.', date: '2024-03-01' },
-        // Add more updates here
-      ]
+      news: [],
+      updates: []
     };
+  },
+  mounted() { 
+    axios.get('/api/news')
+      .then(response => response.json())
+      .then(data => {
+        // Assuming the API response contains 'news' and 'updates' arrays
+        this.news = data.news;
+        this.updates = data.updates;
+      })
+      .catch(error => {
+        console.error('Error fetching news:', error);
+      });
   }
 };
 </script>
+
 
 <style scoped>
   .philippine-coast-guard-auxiliary {
