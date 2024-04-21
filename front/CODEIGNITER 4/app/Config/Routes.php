@@ -30,7 +30,7 @@ $routes->get('/api/UserStatus', 'AppointmentController::UserStatus');
 $routes->delete('/api/news/(:num)', 'News::delete/$1');
 $routes->put('/api/UpdateNews/(:num)', 'News::update_news/$1');
 $routes->post('/api/news', 'News::create');
-$routes->get('/api/news', 'News::news');
+$routes->get('/api/ShowNews', 'News::news');
 $routes->post('/api/AddNews', 'News::CreateNews');
 $routes->post('/api/Updates', 'Updates::create');
 $routes->get('/api/showupdate', 'Updates::show');

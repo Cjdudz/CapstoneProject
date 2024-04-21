@@ -1,342 +1,341 @@
-  <template>
-
-  <v-app-bar app>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>
+<template>
+  <div>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <router-link to="/Home" class="logo-link">
           <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
           <span class="app-title">PCGA</span>
-        </v-toolbar-title>
-    
-
-        <!-- Transparency Seal Dropdown Menu -->
-        <v-btn text class="header-button" href="/Transparency">Transparency Seal</v-btn>
-      
-      <!-- Coast Guard Districts Button -->
-      <v-btn text class="header-button" href="/Disctricts">Coast Guard Districts</v-btn>
-    
-
-        <v-btn text href="/contact-us" class="header-button">Contact Us</v-btn>
+        </router-link>
+      </div>
+      <div class="nav-right">
+        <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
+        <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
+        <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
+        <router-link to="/Userstatus" class="header-button">User Status</router-link>
         <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
-      </v-app-bar>
+      </div>
+    </nav>
 
+    <!-- Main content -->
+    <HelloWorld />
 
-      <v-dialog v-model="showMessage" max-width="400">
-        <v-card class="message-dialog">
-          <v-card-title class="headline">Message</v-card-title>
-          <v-card-text>
-            Please fill out all the required forms.
-          </v-card-text>
-          <v-card-actions>
-            <v-btn @click="handleMessageOK" color="primary">OK</v-btn>
-            <v-btn @click="handleCancelMessage" color="grey">Cancel</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <v-navigation-drawer app v-model="drawer">
-        <v-list>
+    <!-- Landing page -->
+    <div class="landing-page">
+      <!-- Hero section -->
+      <header class="hero">
+        <div class="hero-image">
+          <img src="img/download.jpg" alt="Philippine Coast Guard Auxiliary Hero Image" /> 
+        </div>
+        <div class="hero-text">
+         
+          <p>
+            The PCGA fulfills its mission by:
+          </p> The PCGA operates under the guidance of the Philippine Coast Guard and is organized into flotillas and squadrons located across the country. It is led by volunteer officers who are appointed based on their experience and dedication to the organization's mission. Members of the PCGA come from diverse backgrounds, including maritime professionals, students, and concerned citizens, who share a commitment to serving their communities and protecting the marine environment.
+          <h2>Functions</h2>
+            <p>Participating in maritime patrols and law enforcement operations</p>
+            <p>Conducting training programs on maritime safety and security</p>
+            <p>Assisting in search and rescue missions during emergencies</p>
+            <p>Providing support during disaster response and humanitarian assistance operations</p>
+            <p>Engaging in environmental protection and conservation initiatives</p>
         
+        </div>
+      </header>
 
-          <v-divider></v-divider>
+      <!-- Services section -->
+      <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-grid"> 
+          <div v-for="service in services" :key="service.id" class="service-card">
+            <i :class="service.icon"></i> 
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+          </div>
+        </div>
+      </section>
+    </div>
 
-          <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
-            <v-list-item-icon>
-              <v-icon>mdi-file-document-edit</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Apply Online</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+    <!-- Footer -->
+    <footer class="feedback">
+      <div class="social-links">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="footer-links">
+        <router-link to="/terms" class="footer-link">Terms of Service</router-link>
+        <router-link to="/privacy" class="footer-link">Privacy Policy</router-link>
+      </div>
+      <div class="feedback-text">
+        <p>Have feedback? Let us know!</p>
+        <button class="feedback-btn">Leave Feedback</button>
+      </div>
+    </footer>
+  </div>
+</template>
 
-          <v-list-item link @click="redirectTo('/IdentificationCard')">
-    <v-list-item-icon>
-      <v-icon>mdi-identification</v-icon>
-    </v-list-item-icon>
-    <v-list-item-content>
-      <v-list-item-title>Identification</v-list-item-title>
-    </v-list-item-content>
-  </v-list-item>
+<script>
+import HelloWorld from './HelloWorld.vue';
 
-          
-          <v-list-item link @click="redirectTo('/Userstatus')">
-    <v-list-item-icon>
-      <v-icon>mdi-account-check</v-icon>
-    </v-list-item-icon>
-    <v-list-item-content>
-      <v-list-item-title>User Status</v-list-item-title>
-    </v-list-item-content>
-  </v-list-item>
-
-          <v-list-item v-if="isLoggedIn" @click="logout">
-            <v-list-item-icon>
-              <v-icon>mdi-logout</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Logout</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-
-      <v-main>
-        <HelloWorld />
-        
-      </v-main>
-
-      <v-footer app>
-        <v-container>
-          <v-row>
-            <v-col>
-              <p class="white--text">&copy; 2023 505th PCGA Application System. All rights reserved.</p>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-footer>
-
-      <v-container>
-        <v-row v-if="showInterviewForm">
-          <v-col>
-            <v-container class="my-5">
-              <v-dialog v-model="showInterviewForm" max-width="600">
-                <v-card>
-                  <v-card-title class="headline text- center">Interview Process Form</v-card-title>
-                  <v-card-text>
-                    <v-form>
-                      <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
-                      <v-text-field label="Interview Date" v-model="interviewForm.interviewDate" type="date"></v-text-field>
-                      <v-textarea label="Comments" v-model="interviewForm.comments"></v-textarea>
-
-                      <v-btn color="primary" dark class="mt-4" @click="submitInterviewForm">Submit Interview</v-btn>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions class="justify-center">
-                    <v-btn @click="showInterviewForm = false" color="grey">Close</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-container>
-          </v-col>
-        </v-row>
-      </v-container>
-  
-  </template>
-
-  <script>
-  import HelloWorld from './HelloWorld.vue';
-  import axios from 'axios';
-  export default {
-    data() {
-      return {
-        drawer: false,
-        showMessage: false,
-        showInterviewForm: false,
-        isLoggedIn: false,
-        interviewForm: {
-          intervieweeName: "",
-          interviewDate: "",
-          comments: "",
-        },
-      };
-    },
-    methods: {
-
-      loginOrLogout() {
-        if (this.isLoggedIn) {
-          this.logout();
-        } else {
-          this.redirectTo('/');
-        }
-      },
-      logout() {
-        console.log("Logout clicked");
-        this.isLoggedIn = false;
-      },
-      redirectTo(path) {
-        if (path === '/PcgaapplicationForm' && !this.areFormsFilled()) {
-          this.showMessage = true;
-        } else {
-          this.$router.push(path);
-          this.drawer = false;
-        }
-      },
-      areFormsFilled() {
-        return (
-          this.interviewForm.intervieweeName.trim() !== "" &&
-          this.interviewForm.interviewDate.trim() !== "" &&
-          this.interviewForm.comments.trim() !== ""
-        );
-      },
-      startInterviewProcess() {
-        this.showInterviewForm = true;
-      },
-      submitInterviewForm() {
-      // Adjust the URL based on your CodeIgniter setup
-      const apiUrl = '/api/submit_interview_form'; // Corrected URL with quotes
-
-      // Use Axios to send a POST request to the backend
-      axios.post(apiUrl, this.interviewForm) // Corrected URL variable
-          .then(response => {
-              console.log("Interview Form submitted:", response.data.message);
-              // Add any additional logic based on the response
-          })
-          .catch(error => {
-              console.error("Error submitting interview form:", error);
-              // Handle errors if needed
-          });
+export default {
+  data() {
+    return {
+      drawer: false,
+      isLoggedIn: false,
+      services: [
+        { id: 1, title: 'Search and Rescue', description: 'The Philippine Coast Guard is always ready to respond to emergencies at sea.', icon: 'fas fa-life-ring' },
+        { id: 2, title: 'Maritime Law Enforcement', description: 'Ensuring safety and security on our waterways.', icon: 'fas fa-ship' },
+        { id: 3, title: 'Environmental Protection', description: 'Protecting our oceans and coasts for future generations.', icon: 'fas fa-leaf' },
+        { id: 4, title: 'Port Security', description: 'Keeping our ports safe and secure.', icon: 'fas fa-anchor' }
+      ]
+    };
   },
-      handleMessageOK() {
-        this.showMessage = false;
-        this.$router.push('/PcgaapplicationForm');
-        this.drawer = false;
-      },
-      handleCancelMessage() {
-        this.showMessage = false;
-        // Handle any additional logic on cancel
-      },
+  methods: {
+    loginOrLogout() {
+      if (this.isLoggedIn) {
+        this.logout();
+      } else {
+        this.redirectTo('/');
+      }
     },
-    components: { HelloWorld },
-  };
-  </script>
-
-
-  <style scoped>
-  /* Global styles */
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    overflow-x: hidden;
-
-  }
-
-  /* Header styles */
-  .v-app-bar {
-    box-shadow: 0px 1px 5px rgba(149, 6, 6, 0.2);
-    margin-top: 0;
-    background-color: rgb(78, 32, 134);
-    color: white;
-    
-  }
-
-  .v-toolbar-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .coast-guard-logo {
-    max-height: 40px;
-    max-width: 100%;
-    margin-right: 8px;
-  }
-
-  /* Navigation drawer styles */
-  .v-navigation-drawer {
-    background-color: #303030;
-    margin-top: 0;
-  }
-
-  .v-list-item-title {
-    color: white;
-    font-weight: bold;
-  }
-
-  .v-divider {
-    background-color: #757575;
-  }
-
-  /* Main content styles */
-  .v-main {
-    padding: 20px;
-    margin-top: 60px;
-    background-image: url('C:\laragon\www\CapstoneProject\front\public\img\385484006_730465255796324_334538059090882611_n.png'); 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    
-  }
-
-  .display-4 {
-    font-size: 2.5rem;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .subtitle-1 {
-    font-size: 1.2rem;
-    color: #555;
-  }
-
-  .headline {
-    font-size: 1.8rem;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .applicant-list {
-    margin-top: 20px;
-  }
-
-  .applicant-list h2 {
-    color: #333;
-  }
-
-  .applicant-list table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-
-  .applicant-list th, .applicant-list td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
-
-  .applicant-list th {
-    background-color: #4caf50;
-    color: white;
-  }
-
-  /* Footer styles */
-  .v-footer {
-    background-color: rgb(78, 32, 134);
-    color: white;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-
-  /* Responsive styles */
-  @media only screen and (max-width: 1264px) {
-    .v-main {
-      margin-top: 56px;
+    logout() {
+      console.log("Logout clicked");
+      this.isLoggedIn = false;
+    },
+    redirectTo(path) {
+      this.$router.push(path);
+      this.drawer = false;
     }
-  }
-  .header-button {
-    color: white;
-    margin-left: 10px; /* Adjust spacing between buttons */
-  }
-  @media only screen and (max-width: 960px) {
-    .v-app-bar {
-      font-size: 18px;
-    }
-  }
+  },
+  components: { HelloWorld },
+};
+</script>
 
-  @media only screen and (max-width: 600px) {
-    .v-app-bar {
-      font-size: 16px;
-    }
+ loginOrLogout() {
+      if (this.isLoggedIn) {
+        this.logout();
+      } else {
+        this.redirectTo('/');
+      }
+    },
+    logout() {
+      console.log("Logout clicked");
+      this.isLoggedIn = false;
+    },
+<style scoped>
+/* Global styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #fff;
+}
 
-    .v-navigation-drawer {
-      /* Adjust styles for small screens */
-    }
+.nav-left {
+  display: flex;
+  align-items: center;
+}
 
-    .v-main {
-      /* Adjust styles for small screens */
-    }
+.nav-center {
+  flex-grow: 1;
+}
 
-    .v-footer {
-      /* Adjust styles for small screens */
-    }
-  }
-  </style>
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.coast-guard-logo {
+  height: 40px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.app-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-btn {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header-button {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+
+.logout-btn {
+  color: #0e0d0d;
+  margin-left: 20px;
+  
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+.header-button:hover {
+  text-decoration: underline;
+}
+
+/* Landing Page Styles */
+.landing-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Hero Section Styles */
+.hero {
+  display: flex;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.hero-text {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.hero-btn {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* Services Section Styles */
+.services {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.service-card i {
+  font-size: 2em;
+  margin-bottom: 15px;
+  color: #3498db;
+}
+
+.service-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.service-card p {
+  font-size: 1em;
+  text-align: center;
+}
+
+.no-results {
+  color: #ff0000;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Footer Styles */
+.feedback {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.social-icon {
+  color: #fff;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.footer-link {
+  color: #fff;
+  margin-right: 20px;
+  text-decoration: none;
+}
+.footer {
+  position: fixed;
+}
+.feedback-btn {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>

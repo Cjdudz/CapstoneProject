@@ -1,56 +1,23 @@
 <template>
   <div>
-    <v-app>
-      <!-- App Bar -->
-      <v-app-bar app>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <router-link to="/Home" class="logo-link">
           <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
           <span class="app-title">PCGA</span>
-        </v-toolbar-title>
-        <v-btn text @click="redirectTo('/Navbar')">Home</v-btn>
-        <v-btn text @click="redirectTo('/Transparency')">Transparency Seal</v-btn>
-        <v-btn text @click="redirectTo('/Disctricts')">Coast Guard Districts</v-btn>
-        <v-btn text @click="redirectTo('/contact-us')">Contact Us</v-btn>
-        <v-btn text @click="loginOrLogout" class="header-button">{{ isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
-      </v-app-bar>
-
-      <!-- Navigation Drawer -->
-      <v-navigation-drawer app v-model="drawer">
-        <v-list>
-          <v-list-item link @click="redirectTo('/home')">
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>About</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
-            <v-list-item-icon>
-              <v-icon>mdi-file-document-edit</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Apply Online</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link @click="redirectTo('/Userstatus')">
-            <v-list-item-icon>
-              <v-icon>mdi-account-check</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>User Status</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <!-- Add more navigation items here if needed -->
-        </v-list>
-      </v-navigation-drawer>
-
+        </router-link>
+      </div>
+        <div class="nav-right">
+          <router-link to="/Navbar" class = "header-button">Home</router-link>
+        <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
+        <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
+        <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
+        <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
+        <router-link to="/Userstatus" class="header-button">User Status</router-link>
+        <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
+      </div>
+    </nav>
       <!-- Main Content -->
       <v-main>
         <div class="transparency-seal">
@@ -65,41 +32,46 @@
           </div>
         </div>
       </v-main>
-
-      <!-- Footer -->
-      <v-footer app>
-        <v-container>
-          <v-row>
-            <v-col>
-              <p class="white--text">&copy; 2023 505th PCGA Application System. All rights reserved.</p>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-footer>
-    </v-app>
   </div>
 </template>
-
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
       drawer: false,
-      loading: false, // Set to false to display static data immediately
+      loading: false,
       seals: [
-        {
-          name: "Seal 1",
-          image: "/img/seal1.png",
-          description: "Description for Seal 1"
-        },
-        {
-          name: "Seal 2",
-          image: "/img/seal2.png",
-          description: "Description for Seal 2"
-        },
-        // Add more seals as needed
+  {
+    name: "Certificate of Accreditation",
+    image: "/img/certificate1.png",
+    description: "This certificate verifies the accreditation of the organization by the Philippine Coast Guard Auxiliary.",
+  },
+  {
+    name: "License to Operate",
+    image: "/img/license1.png",
+    description: "This license grants permission for the organization to operate in accordance with the regulations set forth by the Philippine Coast Guard Auxiliary.",
+  },
+  {
+    name: "Training Certification",
+    image: "/img/certificate2.png",
+    description: "This certificate certifies that the organization has completed the required training program as mandated by the Philippine Coast Guard Auxiliary.",
+  },
+  {
+    name: "Safety Inspection Certificate",
+    image: "/img/certificate3.png",
+    description: "This certificate confirms that the organization's facilities and equipment have passed the safety inspection conducted by the Philippine Coast Guard Auxiliary.",
+  },
+  {
+    name: "Community Service Award",
+    image: "/img/award1.png",
+    description: "This award recognizes the organization's outstanding contribution to community service as acknowledged by the Philippine Coast Guard Auxiliary.",
+  },
+  {
+    name: "Leadership Excellence Award",
+    image: "/img/award2.png",
+    description: "This award is presented to the organization for demonstrating exceptional leadership qualities and initiatives in support of the Philippine Coast Guard Auxiliary's mission.",
+  },
+  // Add more certificates and licenses as needed
       ],
       isLoggedIn: false,
       interviewForm: {
@@ -133,14 +105,8 @@ export default {
       this.showInterviewForm = true;
     },
     submitInterviewForm() {
-      const apiUrl = '/api/submit_interview_form';
-      axios.post(apiUrl, this.interviewForm)
-        .then(response => {
-          console.log("Interview Form submitted:", response.data.message);
-        })
-        .catch(error => {
-          console.error("Error submitting interview form:", error);
-        });
+      // Mock submission for static data
+      console.log("Interview Form submitted");
     },
     areFormsFilled() {
       return (
@@ -153,63 +119,78 @@ export default {
 };
 </script>
 
+
 <style scoped>
-/* Global styles */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  overflow-x: hidden;
+/* Navigation bar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #fff;
 }
 
-/* Header styles */
-.v-app-bar {
-  box-shadow: 0px 1px 5px rgba(149, 6, 6, 0.2);
-  margin-top: 0;
-  background-color: rgb(78, 32, 134);
-  color: white;
+.nav-left {
+  display: flex;
+  align-items: center;
 }
 
-.v-toolbar-title {
-  font-size: 24px;
-  font-weight: bold;
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
 }
 
 .coast-guard-logo {
-  max-height: 40px;
-  max-width: 100%;
-  margin-right: 8px;
+  height: 40px;
+  margin-right: 10px;
 }
 
-/* Navigation drawer styles */
-.v-navigation-drawer {
-  background-color: #303030;
-  margin-top: 0;
-}
-
-.v-list-item-title {
-  color: white;
+.app-title {
+  font-size: 1.5em;
   font-weight: bold;
 }
 
-.v-divider {
-  background-color: #757575;
+.header-button {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
-/* Main content styles */
-.v-main {
+.logout-btn {
+  color: #0e0d0d;
+  margin-left: 20px;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+.header-button:hover {
+  text-decoration: underline;
+}
+
+/* General form styles */
+.form-card {
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  margin-top: 60px;
+  background-color: #f2f5f8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Footer styles */
-.v-footer {
-  background-color: rgb(78, 32, 134);
-  color: white;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+.header-design {
+  /* Add your header design styles here */
 }
+
 
 /* Responsive styles */
 @media only screen and (max-width: 960px) {

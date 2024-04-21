@@ -1,63 +1,71 @@
 <template>
-  <div class="philippine-coast-guard-auxiliary">
-    <header>
-      <h1>Philippine Coast Guard Auxiliary</h1>
-      <p>Welcome to the Philippine Coast Guard Auxiliary website!</p>
-    </header>
+  <header>
+    <h1>Philippine Coast Guard Auxiliary</h1>
+    <p>Welcome to the Philippine Coast Guard Auxiliary website!</p>
+  </header>
 
-    <div class="divider"></div> <!-- Divider between welcome message and news -->
+  <div class="divider"></div> <!-- Divider between welcome message and news -->
 
-    <div class="content-wrapper">
-      <section class="news-section">
-        <h2>News</h2>
-        <ul class="news-list">
-          <li v-for="newsItem in news" :key="newsItem.id" class="news-item">
-            <h3>{{ newsItem.title }}</h3>
-            <p>{{ newsItem.content }}</p>
-            <p><strong>Date:</strong> {{ newsItem.date }}</p>
-          </li>
-        </ul>
-      </section>
+  <div class="content-wrapper">
+    <section class="news-section">
+      <h2>News</h2>
+      <ul class="news-list">
+        <li v-for="newsItem in news" :key="newsItem.id" class="news-item">
+          <h3>{{ newsItem.title }}</h3>
+          <p>{{ newsItem.content }}</p>
+          <p><strong>Date:</strong> {{ newsItem.date }}</p>
+        </li>
+      </ul>
+    </section>
 
-      <section class="updates-section">
-        <h2>Updates</h2>
-        <ul class="updates-list">
-          <li v-for="updateItem in updates" :key="updateItem.id" class="update-item">
-            <h3>{{ updateItem.title }}</h3>
-            <p>{{ updateItem.content }}</p>
-            <p><strong>Date:</strong> {{ updateItem.date }}</p>
-          </li>
-        </ul>
-      </section>
-    </div>
+    <section class="updates-section">
+      <h2>Updates</h2>
+      <ul class="updates-list">
+        <li v-for="updateItem in updates" :key="updateItem.id" class="update-item">
+          <h3>{{ updateItem.title }}</h3>
+          <p>{{ updateItem.content }}</p>
+          <p><strong>Date:</strong> {{ updateItem.date }}</p>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 <script>
-
 import axios from 'axios';
+
 export default {
-  name: 'PhilippineCoastGuardAuxiliary',
   data() {
     return {
       news: [],
-      updates: []
+      updates: [],
     };
   },
-  mounted() { 
-    axios.get('/api/news')
-      .then(response => response.json())
-      .then(data => {
-        // Assuming the API response contains 'news' and 'updates' arrays
-        this.news = data.news;
-        this.updates = data.updates;
-      })
-      .catch(error => {
-        console.error('Error fetching news:', error);
-      });
+  mounted() {
+    this.fetchNews();
+    this.fetchUpdates(); // Call fetchUpdates() when the component is mounted
+  },
+  methods: {
+    fetchNews() {
+      axios.get('/api/ShowNews')
+        .then(response => {
+          this.news = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching news:', error);
+        });
+    },
+    fetchUpdates() {
+      axios.get('/api/showupdate')
+        .then(response => {
+          this.updates = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching updates:', error);
+        });
+    }
   }
 };
 </script>
-
 
 <style scoped>
   .philippine-coast-guard-auxiliary {

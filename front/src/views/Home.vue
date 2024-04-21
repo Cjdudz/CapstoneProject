@@ -10,7 +10,6 @@
         <!-- Navigation Links using Vue Router -->
         <router-link to="/" class="nav-link" exact>Home</router-link> 
         <router-link to="/about" class="nav-link">About</router-link>
-        <router-link to="/contacts" class="nav-link">Contact</router-link>
         <router-link to="/login" class="nav-link">Login</router-link>
       </div>
     </nav>
@@ -34,8 +33,7 @@
       <!-- Mission and Objectives -->
       <h2>Mission and Objectives</h2>
       <p>
-        The mission of the Philippine Coast Guard Auxiliary is to assist the Philippine Coast Guard in the promotion of safety of life and property at sea, the preservation of the marine environment and its resources, maritime search and rescue, maintenance of aids to navigation, and other related activities. The PCGA aims to achieve these objectives through training, community engagement, and collaboration with government agencies and stakeholders.
-      </p>
+        The pcga shall assist the pcg in the promotion of safety of life and property at sea. the preservation of the marine  environment and resources the conduct of maritime seach and rescue. the maintenance  of aids to navigaton and such other activities that enhance maritime community  relations which include civic action, participation under the national service training program youth development recreational safety and other related activities    </p>
 
       <!-- Functions -->
       <h2>Functions</h2>

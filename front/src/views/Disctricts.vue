@@ -1,123 +1,40 @@
 <template>
-  <div id="app">
-    <!-- Navigation Bar -->
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <router-link to="/Home" class="logo-link">
         <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
         <span class="app-title">PCGA</span>
-      </v-toolbar-title>
-      <v-btn text @click="$router.push({ name: 'NavBar' })">
-        Home
-      </v-btn>
+      </router-link>
+    </div>
+    <div class="nav-right">
+      <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
+      <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
+      <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
+      <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
+      <router-link to="/Userstatus" class="header-button">User Status</router-link>
+      <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
+    </div>
+  </nav>
 
-      <!-- Transparency Seal Dropdown Menu -->
-      <v-btn text class="header-button" href="/Transparency">Transparency Seal</v-btn>
-      
-      <!-- Coast Guard Districts Button -->
-      <v-btn text class="header-button" href="/Disctricts">Coast Guard Districts</v-btn>
-      
-      <!-- Procurement Button -->
-
-      <v-btn text href="/contact-us" class="header-button">Contact Us</v-btn>
-      <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
-    </v-app-bar>
-
-    <!-- Navigation Drawer -->
-    <v-navigation-drawer app v-model="drawer">
-      <v-list>
-      
-        <v-divider></v-divider>
-
-        <v-list-item link @click="redirectTo('/PcgaapplicationForm')">
-          <v-list-item-icon>
-            <v-icon>mdi-file-document-edit</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Apply Online</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link @click="startInterviewProcess">
-          <v-list-item-icon>
-            <v-icon>mdi-calendar-clock</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Appointment Interview</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link @click="redirectTo('/Userstatus')">
-          <v-list-item-icon>
-            <v-icon>mdi-account-check</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>User Status</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item v-if="isLoggedIn" @click="logout">
-          <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Logout</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <!-- Main Content -->
-    <main>
-      <header>
-        <h1>Philippine Coast Guard Auxiliary Districts</h1>
-      </header>
-      <div v-if="loading" class="loading">Loading...</div>
-      <div v-else class="districts">
-        <div v-for="district in districts" :key="district.id" class="card">
-          <h2>{{ district.name }}</h2>
-          <p>{{ district.description }}</p>
-          <p>Contact: {{ district.contact }}</p>
-        </div>
-      </div>
-    </main>
-
-    <!-- Interview Form -->
-    <v-container v-if="showInterviewForm">
-      <v-row>
-        <v-col cols="12">
-          <v-dialog v-model="showInterviewForm" max-width="600">
-            <v-card>
-              <v-card-title class="headline text-center">Interview Process Form</v-card-title>
-              <v-card-text>
-                <v-form>
-                  <v-text-field label="Interviewee Name" v-model="interviewForm.intervieweeName"></v-text-field>
-                  <v-text-field label="Interview Date" v-model="interviewForm.interviewDate" type="date"></v-text-field>
-                  <v-textarea label="Comments" v-model="interviewForm.comments"></v-textarea>
-
-                  <v-btn color="primary" dark class="mt-4" @click="submitInterviewForm">Submit Interview</v-btn>
-                </v-form>
-              </v-card-text>
-              <v-card-actions class="justify-center">
-                <v-btn @click="showInterviewForm = false" color="grey">Close</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-col>
-      </v-row>
-    </v-container>
-
-    <!-- Footer -->
-    <v-footer app>
-      <v-container>
-        <v-row>
-          <v-col>
-            <p class="white--text">&copy; 2023 505th PCGA Application System. All rights reserved.</p>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-footer>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Display districts -->
+    <div v-if="loading" class="loading-message">Loading...</div>
+    <div v-else-if="districts.length === 0" class="no-districts-message">No districts found.</div>
+    <div v-else class="districts-container">
+      <h2>Districts</h2>
+      <ul>
+        <li v-for="district in districts" :key="district.id" class="district-item">
+          <span>{{ district.name }}</span><br>
+          <span>{{ district.description }}</span>
+          <!-- Add more properties as needed -->
+        </li>
+      </ul>
+    </div>
   </div>
+
+
 </template>
 
 <script>
@@ -126,31 +43,21 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      districts: [],
-      loading: true,
       drawer: false,
-      showInterviewForm: false,
       isLoggedIn: false,
-      interviewForm: {
-        intervieweeName: "",
-        interviewDate: "",
-        comments: "",
-      },
+      services: [
+        { id: 1, title: 'Search and Rescue', description: 'The Philippine Coast Guard is always ready to respond to emergencies at sea.', icon: 'fas fa-life-ring' },
+        { id: 2, title: 'Maritime Law Enforcement', description: 'Ensuring safety and security on our waterways.', icon: 'fas fa-ship' },
+        { id: 3, title: 'Environmental Protection', description: 'Protecting our oceans and coasts for future generations.', icon: 'fas fa-leaf' },
+        { id: 4, title: 'Port Security', description: 'Keeping our ports safe and secure.', icon: 'fas fa-anchor' }
+      ],
+      loading: false,
+      districts: []
     };
   },
   mounted() {
-  // Fetch districts from API
-  axios.get("/api/ShowDistricts")
-    .then(response => {
-      this.districts = response.data;
-      this.loading = false;
-    })
-    .catch(error => {
-      console.error("Error fetching districts:", error);
-      this.loading = false;
-    });
-},
-
+    this.fetchDistricts();
+  },
   methods: {
     loginOrLogout() {
       if (this.isLoggedIn) {
@@ -164,33 +71,22 @@ export default {
       this.isLoggedIn = false;
     },
     redirectTo(path) {
-      if (path === '/PcgaapplicationForm' && !this.areFormsFilled()) {
-        this.showMessage = true; // Assuming you have this method
-      } else {
-        // Redirect to the desired path
-      }
+      this.$router.push(path);
+      this.drawer = false;
     },
-    startInterviewProcess() {
-      this.showInterviewForm = true;
-    },
-    submitInterviewForm() {
-      const apiUrl = '/api/submit_interview_form';
-      axios.post(apiUrl, this.interviewForm)
-        .then(response => {
-          console.log("Interview Form submitted:", response.data.message);
-        })
-        .catch(error => {
-          console.error("Error submitting interview form:", error);
-        });
-    },
-    areFormsFilled() {
-      return (
-        this.interviewForm.intervieweeName.trim() !== "" &&
-        this.interviewForm.interviewDate.trim() !== "" &&
-        this.interviewForm.comments.trim() !== ""
-      );
-    },
-  },
+    fetchDistricts() {
+  this.loading = true;
+  axios.get("http://localhost:8080/api/ShowDistricts")
+    .then(response => {
+      this.districts = response.data;
+      this.loading = false;
+    })
+    .catch(error => {
+      console.error("Error fetching districts:", error);
+      this.loading = false;
+    });
+},
+  }
 };
 </script>
 
@@ -199,73 +95,239 @@ export default {
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  overflow-x: hidden;
+  padding: 0;
 }
 
-/* Header styles */
-.v-app-bar {
-  box-shadow: 0px 1px 5px rgba(149, 6, 6, 0.2);
-  margin-top: 0;
-  background-color: rgb(78, 32, 134);
-  color: white;
+/* Navigation bar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #fff;
 }
 
-.v-toolbar-title {
-  font-size: 24px;
-  font-weight: bold;
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
 }
 
 .coast-guard-logo {
-  max-height: 40px;
-  max-width: 100%;
-  margin-right: 8px;
+  height: 40px;
+  margin-right: 10px;
 }
 
-/* Navigation drawer styles */
-.v-navigation-drawer {
-  background-color: #303030;
-  margin-top: 0;
-}
-
-.v-list-item-title {
-  color: white;
+.app-title {
+  font-size: 1.5em;
   font-weight: bold;
 }
 
-.v-divider {
-  background-color: #757575;
-}
-
-/* Main content styles */
-main {
-  margin-top: 60px;
-}
-
-/* Footer styles */
-.v-footer {
-  background-color: rgb(78, 32, 134);
-  color: white;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-/* Responsive styles */
-@media only screen and (max-width: 960px) {
-  .v-app-bar {
-    font-size: 18px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .v-app-bar {
-    font-size: 16px;
-  }
-}
-
 .header-button {
-  color: white;
-  margin-left: 10px; /* Adjust spacing between buttons */
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.logout-btn {
+  color: #0e0d0d;
+  margin-left: 20px;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+.header-button:hover {
+  text-decoration: underline;
+}
+
+/* Landing Page Styles */
+.landing-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Hero Section Styles */
+.hero {
+  display: flex;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.hero-text {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.hero-btn {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* Services Section Styles */
+.services {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.service-card i {
+  font-size: 2em;
+  margin-bottom: 15px;
+  color: #3498db;
+}
+
+.service-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.service-card p {
+  font-size: 1em;
+  text-align: center;
+}
+
+.no-results {
+  color: #ff0000;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Footer Styles */
+.feedback {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-links {
+  display: flex;
+}
+
+.social-icon {
+  color: #fff;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.footer-links {
+  display: flex;
+}
+
+.footer-link {
+  color: #fff;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.feedback-btn {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}.main-content {
+  padding: 20px;
+}
+
+/* Districts container styles */
+.districts-container {
+  margin-top: 20px;
+}
+
+.district-item {
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.district-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.district-name {
+  font-weight: bold;
+}
+
+.district-location {
+  color: #666;
+}
+
+/* Loading and no districts message styles */
+.loading-message,
+.no-districts-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.loading-message {
+  font-style: italic;
+}
+
+.no-districts-message {
+  color: #ff0000;
 }
 </style>
