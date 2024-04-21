@@ -1,4 +1,22 @@
 <template>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <router-link to="/Home" class="logo-link">
+          <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+          <span class="app-title">PCGA</span>
+        </router-link>
+      </div>
+      <div class="nav-right">
+          <router-link to="/Navbar" class = "header-button">Home</router-link>
+        <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
+        <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
+        <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
+        <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
+        <router-link to="/Userstatus" class="header-button">User Status</router-link>
+        <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
+      </div>
+    </nav>
   <form class="pcga-form" @submit.prevent="submitForm">
     <div class="form-group">
       <label for="idNo">ID No.</label>
@@ -219,5 +237,60 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+/* Navigation bar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.coast-guard-logo {
+  height: 40px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.app-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.header-button {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.logout-btn {
+  color: #0e0d0d;
+  margin-left: 20px;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+.header-button:hover {
+  text-decoration: underline;
 }
 </style>
