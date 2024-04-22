@@ -7,7 +7,7 @@
 
       <nav class="nav-links">
         <router-link to="/" class="nav-link" exact>Home</router-link>
-        <router-link to="/about" class="nav-link">About</router-link>
+        <router-link to="/Home" class="nav-link">About</router-link>
         <router-link to="/logincomponent" class="nav-link">Login</router-link>
       </nav>
     </header>

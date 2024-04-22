@@ -1,0 +1,8 @@
+CRITICAL - 2024-04-21 06:36:10 --> Undefined property: App\Controllers\AppointmentController::$notificationService
+in APPPATH\Controllers\AppointmentController.php on line 40.
+ 1 APPPATH\Controllers\AppointmentController.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\AppointmentController::$notificationService', 'C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\app\\Controllers\\AppointmentController.php', 40)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\AppointmentController->accept()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AppointmentController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')

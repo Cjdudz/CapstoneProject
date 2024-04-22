@@ -9,7 +9,7 @@
       <div class="nav-links">
         <!-- Navigation Links using Vue Router -->
         <router-link to="/" class="nav-link" exact>Home</router-link> 
-        <router-link to="/about" class="nav-link">About</router-link>
+        <router-link to="/Home" class="nav-link">About</router-link>
         <router-link to="/login" class="nav-link">Login</router-link>
       </div>
     </nav>
@@ -17,7 +17,7 @@
     <!-- Main Content -->
     <div class="about">
       <!-- Main Heading -->
-      <h1>About Philippine Coast Guard Auxiliary (PCGA)</h1>
+      <h1>About Philippine Coast Guard Auxiliary (PCGA)505th District</h1>
       
       <!-- Introduction -->
       <p>

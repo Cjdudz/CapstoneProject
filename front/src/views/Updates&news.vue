@@ -137,7 +137,7 @@ export default {
         });
     },
     fetchNews() {
-      axios.get('/api/Shownews')
+      axios.get('/api/ShowNews')
         .then(response => {
           this.newsList = response.data;
         })

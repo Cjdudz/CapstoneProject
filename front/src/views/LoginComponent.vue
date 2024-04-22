@@ -1,30 +1,32 @@
 <template>
   <v-app>
-    <v-container class="login-container" fluid fill-height>
-      <v-row justify="center" align="center">
-        <v-col cols="12" sm="8" md="6" lg="4">
-          <v-card class="login-card">
-            <v-card-title class="title">Login</v-card-title>
-            <v-card-text class="form">
-              <v-form @submit.prevent="login">
-                <v-text-field v-model="username" label="Username" outlined dense color="white"></v-text-field>
-                <v-text-field v-model="password" label="Password" type="password" outlined dense color="white"></v-text-field>
-                <v-btn type="submit" block class="login-button">Login</v-btn>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <router-link to="/forgot-password" class="forgot-password">Forgot Password?</router-link>
-            </v-card-actions>
-            <v-card-actions>
-              <router-link to="/registercomponent" class="register-link">Don't have an account? Register here</router-link>
-            </v-card-actions>
-            <v-alert v-if="message" type="error" dismissible class="error-message">
-              {{ message }}
-            </v-alert>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div class="background">
+      <v-container class="login-container" fluid fill-height>
+        <v-row justify="center" align="center">
+          <v-col cols="12" sm="8" md="6" lg="4">
+            <v-card class="login-card">
+              <v-card-title class="title">Login</v-card-title>
+              <v-card-text class="form">
+                <v-form @submit.prevent="login">
+                  <v-text-field v-model="username" label="Username" outlined dense color="white"></v-text-field>
+                  <v-text-field v-model="password" label="Password" type="password" outlined dense color="white"></v-text-field>
+                  <v-btn type="submit" block class="login-button">Login</v-btn>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <router-link to="/forgot-password" class="forgot-password">Forgot Password?</router-link>
+              </v-card-actions>
+              <v-card-actions>
+                <router-link to="/registercomponent" class="register-link">Don't have an account? Register here</router-link>
+              </v-card-actions>
+              <v-alert v-if="message" type="error" dismissible class="error-message">
+                {{ message }}
+              </v-alert>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </v-app>
 </template>
 
@@ -75,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-.v-app {
+.background {
   background: linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
 }
 
@@ -83,7 +85,7 @@ export default {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end; /* Align to the right */
 }
 
 .login-card {

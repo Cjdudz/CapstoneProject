@@ -1,22 +1,23 @@
 <template>
-    <!-- Navigation bar -->
-    <nav class="navbar">
-      <div class="nav-left">
-        <router-link to="/Home" class="logo-link">
-          <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
-          <span class="app-title">PCGA</span>
-        </router-link>
-      </div>
-      <div class="nav-right">
-          <router-link to="/Navbar" class = "header-button">Home</router-link>
-        <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
-        <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
-        <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
-        <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
-        <router-link to="/Userstatus" class="header-button">User Status</router-link>
-        <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
-      </div>
-    </nav>
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <router-link to="/Home" class="logo-link">
+        <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+        <span class="app-title">PCGA</span>
+      </router-link>
+    </div>
+    <div class="nav-right">
+      <router-link to="/Navbar" class="header-button">Home</router-link>
+      <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
+      <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
+      <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
+      <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
+      <router-link to="/Userstatus" class="header-button">User Status</router-link>
+      <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
+    </div>
+  </nav>
+  <!-- Form -->
   <form class="pcga-form" @submit.prevent="submitForm">
     <div class="form-group">
       <label for="idNo">ID No.</label>
@@ -53,73 +54,11 @@
     <div class="form-group">
       <label for="homeAddress">Home Address</label>
       <input type="text" id="homeAddress" v-model="formData.homeAddress" required>
-    </div>
-    <div class="form-group">
-      <label for="maritalStatus">Marital Status</label>
-      <select id="maritalStatus" v-model="formData.maritalStatus" required>
-        <option value="">Select</option>
-        <option value="Single">Single</option>
-        <option value="Widowed">Widowed</option>
-        <option value="Divorced">Divorced</option>
-        <option value="Married">Married</option>
-        <option value="Separated">Separated</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="weight">Weight (kgs)</label>
-      <input type="number" id="weight" v-model="formData.weight" required>
-    </div>
-    <div class="form-group">
-      <label for="eyes">Eyes</label>
-      <input type="text" id="eyes" v-model="formData.eyes" required>
-    </div>
-    <div class="form-group">
-      <label for="height">Height (cm)</label>
-      <input type="number" id="height" v-model="formData.height" required>
-    </div>
-    <div class="form-group">
-      <label for="hair">Hair</label>
-      <input type="text" id="hair" v-model="formData.hair" required>
-    </div>
-    <div class="form-group">
-      <label for="bloodType">Blood Type</label>
-      <input type="text" id="bloodType" v-model="formData.bloodType" required>
-    </div>
-    <div class="form-group">
-      <label for="sex">Sex</label>
-      <select id="sex" v-model="formData.sex" required>
-        <option value="">Select</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="religion">Religion</label>
-      <input type="text" id="religion" v-model="formData.religion" required>
-    </div>
-    <div class="form-group">
-      <label for="dateOfBirth">Date of Birth</label>
-      <input type="date" id="dateOfBirth" v-model="formData.dateOfBirth" required>
-    </div>
-    <div class="form-group">
-      <label for="identifyingData">Identifying Data/Mark</label>
-      <input type="text" id="identifyingData" v-model="formData.identifyingData" required>
-    </div>
-    <div class="form-group">
-      <label for="emergencyContact">Person to be Notified in Case of Emergency</label>
-      <input type="text" id="emergencyContact" v-model="formData.emergencyContact" required>
-    </div>
-    <div class="form-group">
-      <label for="emergencyContactAddress">Address of Person to be Notified</label>
-      <input type="text" id="emergencyContactAddress" v-model="formData.emergencyContactAddress" required>
-    </div>
-    <div class="form-group">
-      <label for="emergencyContactNumber">Contact Number</label>
-      <input type="text" id="emergencyContactNumber" v-model="formData.emergencyContactNumber" required>
-    </div>
-    <button type="submit">Submit</button>
+    </div><button type="submit">Submit</button>
+
   </form>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -226,13 +165,26 @@ input[type="date"] {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #fff;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+button[type="submit"] {
+  background-color: #0056b3; /* Change to the desired background color */
+  color: #fff; /* Change to the desired text color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #004080; /* Darker shade on hover */
 }
 
 button:hover {

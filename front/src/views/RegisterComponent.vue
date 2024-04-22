@@ -1,5 +1,5 @@
-<template>
-  <div class="container">
+<template>   
+  <div class="container"><div class="background"></div> 
     <div class="login-container">
       <v-sheet width="300" class="mx-auto custom-border">
         <v-form @submit.prevent="register">
@@ -67,12 +67,15 @@ export default {
 };
 </script>
 <style scoped>
+.background {
+  background: linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
+}
 .container {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
 }
 
 .login-container {
