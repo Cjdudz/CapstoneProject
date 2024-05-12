@@ -46,8 +46,8 @@
           <div class="add-news">
             <h3>Add or Upload News</h3>
             <form @submit.prevent="addNews">
-              <label for="headline">Headline:</label>
-              <input type="text" id="headline" v-model="headline" required>
+              <label for="title">Title:</label>
+              <input type="text" id="title" v-model="title" required>
               <label for="content">Content:</label>
               <textarea id="content" v-model="content" rows="4" cols="50" required></textarea>
             
@@ -83,12 +83,12 @@ export default {
       drawer: true,
       hoverDelay: null,
       items: [
-      { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
-  { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
-  { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
-  { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
-  { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
-  { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
+        { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
+        { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
+        { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
+        { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
+        { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
+        { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
       ],
       title: '',
       content: '',
@@ -118,18 +118,15 @@ export default {
     },
     addNews() {
       const data = {
-        headline: this.headline,
+        title: this.title,
         content: this.content
       };
       
-      // Send the data to the backend endpoint '/api/AddNews'
       axios.post('/api/AddNews', data)
         .then(response => {
           console.log('Added News:', response.data);
-          // Reset the input fields after successful submission
-          this.headline = '';
+          this.title = '';
           this.content = '';
-          // Assuming this.fetchNews() is defined elsewhere to fetch updated news data
           this.fetchNews();
         })
         .catch(error => {

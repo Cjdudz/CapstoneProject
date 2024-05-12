@@ -4,20 +4,20 @@
       <v-container class="login-container" fluid fill-height>
         <v-row justify="center" align="center">
           <v-col cols="12" sm="8" md="6" lg="4">
-            <v-card class="login-card">
+            <v-card class="login-card rounded">
               <v-card-title class="title">Login</v-card-title>
               <v-card-text class="form">
                 <v-form @submit.prevent="login">
                   <v-text-field v-model="username" label="Username" outlined dense color="white"></v-text-field>
                   <v-text-field v-model="password" label="Password" type="password" outlined dense color="white"></v-text-field>
-                  <v-btn type="submit" block class="login-button">Login</v-btn>
+                  <v-btn type="submit" block class="login-button color--success" :disabled="!username || !password">Login</v-btn>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <router-link to="/forgot-password" class="forgot-password">Forgot Password?</router-link>
               </v-card-actions>
               <v-card-actions>
-                <router-link to="/registercomponent" class="register-link">Don't have an account? Register here</router-link>
+                <router-link v-if="!isAuthenticated" to="/registercomponent" class="register-link">Don't have an account? Register here</router-link>
               </v-card-actions>
               <v-alert v-if="message" type="error" dismissible class="error-message">
                 {{ message }}
@@ -47,25 +47,28 @@ export default {
           password: this.password,
         });
 
-        if ('msg' in response.data) {
-          if (response.data.msg === 'okay') {
-            // Check the user role and redirect accordingly
-            switch (response.data.role) {
-              case 'admin':
-                this.$router.push('/Admin');
-                break;
-              case 'user':
-                this.$router.push('/NavBar');
-                break;
-              default:
-                this.message = 'Invalid role. Please contact support.';
-            }
-          } else {
-            this.message = 'Login failed. Please try again.';
+        if ('token' in response.data) {
+          // Store the token in a secure HttpOnly cookie
+          document.cookie = `token=${response.data.token}; secure; HttpOnly;`;
+
+          // Set token expiration (e.g., 1 hour)
+          const expirationTime = new Date();
+          expirationTime.setTime(expirationTime.getTime() + 3600 * 1000); // 1 hour
+          document.cookie = `expires=${expirationTime.toUTCString()}; secure;`;
+
+          // Redirect based on user role
+          switch (response.data.role) {
+            case 'admin':
+              this.$router.push('/Admin');
+              break;
+            case 'user':
+              this.$router.push('/NavBar');
+              break;
+            default:
+              this.message = 'Invalid role. Please contact support.';
           }
         } else {
-          this.message = 'Unexpected response structure. Please try again.';
-          console.error('Unexpected response structure:', response);
+          this.message = 'Login failed. Please try again.';
         }
       } catch (error) {
         this.message = 'Error during login. Please try again later.';
@@ -75,6 +78,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .background {
@@ -104,6 +108,7 @@ export default {
 .form {
   padding: 20px;
 }
+
 
 .login-button {
   margin-top: 16px;

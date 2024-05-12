@@ -2,26 +2,39 @@
 
 namespace App\Controllers;
 
+use App\Models\PersonalInformationModel;
+use App\Models\EducationalBackgroundModel;
+use App\Models\EmploymentOccupationalBackgroundModel;
+use App\Models\AdditionalDataModel;
+use App\Models\EmergencyContactInformationModel;
+use CodeIgniter\RESTful\ResourceController;
 use App\Controllers\BaseController;
-use CodeIgniter\Restful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\RcgaApplication;
 
 class RcgaApplicationController extends ResourceController
 {
-    protected $modelName = 'App\Models\RcgaApplication';
-    protected $format    = 'json';
-
-    public function passForm()
+    public function submitForm()
     {
-        $data = $this->request->getJSON(true);
+        // Process personal information form data
+        $personalInfoModel = new PersonalInformationModel();
+        $personalInfoModel->insert($this->request->getPost('personalInfo'));
 
-        // Validate and process the data as needed
-        // For example, save the interview data to the database
-        $interviewModel = new RcgaApplication();
-        $interviewModel->insert($data);
+        // Process educational background form data
+        $educationModel = new EducationalBackgroundModel();
+        $educationModel->insert($this->request->getPost('educationInfo'));
 
-        return $this->respond(['message' => 'Interview form submitted successfully']);
+        // Process employment occupational background form data
+        $employmentModel = new EmploymentOccupationalBackgroundModel();
+        $employmentModel->insert($this->request->getPost('employmentInfo'));
+
+        // Process additional data form data
+        $additionalModel = new AdditionalDataModel();
+        $additionalModel->insert($this->request->getPost('additionalData'));
+
+        // Process emergency contact information form data
+        $emergencyContactModel = new EmergencyContactInformationModel();
+        $emergencyContactModel->insert($this->request->getPost('emergencyContact'));
+
+        // Redirect or send response as needed
     }
-
 }

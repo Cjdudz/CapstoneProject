@@ -8,7 +8,7 @@
       <nav class="nav-links">
         <router-link to="/" class="nav-link" exact>Home</router-link>
         <router-link to="/Home" class="nav-link">About</router-link>
-        <router-link to="/logincomponent" class="nav-link">Login</router-link>
+        <router-link to="/Logincomponent" class="nav-link">Login</router-link>
       </nav>
     </header>
 
@@ -19,10 +19,12 @@
         </div>
 
         <div class="hero-text">
-          <h1>Welcome to the Philippine Coast Guard Auxiliary</h1>
-          <p>We are dedicated to supporting the Philippine Coast Guard in safeguarding our seas and maritime interests.</p>
-          <p>Join us in our mission to ensure the safety and security of our waters.</p><br>
-          <router-link to="/about" class="hero-btn">Learn More</router-link>
+          <div class="welcome-card">
+            <h2>Welcome to PCGAWebApp!</h2>
+            <p>We're thrilled to have you here! The Philippine Coast Guard Auxiliary (PCGA) is a service-oriented, uniformed volunteer organization established in 1972 by the Philippine Coast Guard. As an applicant, you're about to embark on a journey towards becoming a part of a community dedicated to maritime safety, marine environmental protection, and community service.</p>
+            <p>Through this web application, you'll be able to apply and track your application status, learn more about our projects and services, and stay updated with the latest news and events. Let's safeguard our seas together!</p>
+            <button class="apply-btn" @click="startApplication">Start Application</button>
+          </div>
         </div>
       </section>
 
@@ -30,7 +32,7 @@
         <h2>Projects/Activities for 2015 and Beyond</h2>
         <div class="additional-images">
           <div class="project" v-for="project in projects" :key="project.id">
-            <img :src="`/img/${project.image}`" alt="" class="project-image" />
+            <img :src="`/img/${project.image}`" :alt="project.title" class="project-image" />
             <p>{{ project.title }}</p>
           </div>
         </div>
@@ -74,7 +76,19 @@
 
       <div class="feedback-text">
         <p>Have feedback? Let us know!</p>
-        <button class="feedback-btn">Leave Feedback</button>
+        <button class="feedback-btn" @click="showFeedbackModal = true">Leave Feedback</button>
+      </div>
+
+      <!-- Feedback Modal -->
+      <div class="modal" v-if="showFeedbackModal">
+        <div class="modal-content">
+          <span class="close" @click="closeFeedbackModal">&times;</span>
+          <h2>Leave Feedback</h2>
+          <form @submit.prevent="submitFeedback">
+            <textarea v-model="feedback" rows="4" placeholder="Enter your feedback"></textarea>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </footer>
   </div>
@@ -84,36 +98,98 @@
 export default {
   data() {
     return {
+      showFeedbackModal: false,
+      feedback: '',
       services: [
-        { id: 1, title: 'MARSAF (Maritime Safety)', description: 'Encompasses safety protocols, regulations, and practices within the maritime industry.', icon: 'fas fa-shield-alt' },
-        { id: 2, title: 'MAREP (Maritime Environment Protection)', description: 'Involves efforts to protect marine ecosystems, prevent pollution, and promote sustainable practices.', icon: 'fas fa-leaf' },
-        { id: 3, title: 'MARSAR (Maritime Search and Rescue)', description: 'Deals with emergency response, coordination, and rescue operations at sea.', icon: 'fas fa-life-ring' },
-        { id: 4, title: 'MCOMREL (Maritime Community Relations)', description: 'Fosters positive relationships between maritime stakeholders, communities, and organizations.', icon: 'fas fa-users' },
+        {
+          id: 1,
+          title: 'MARSAF (Maritime Safety)',
+          description: 'Encompasses safety protocols, regulations, and practices within the maritime industry.',
+          icon: 'fas fa-shield-alt'
+        },
+        {
+          id: 2,
+          title: 'MAREP (Maritime Environment Protection)',
+          description: 'Involves efforts to protect marine ecosystems, prevent pollution, and promote sustainable practices.',
+          icon: 'fas fa-leaf'
+        },
+        {
+          id: 3,
+          title: 'MARSAR (Maritime Search and Rescue)',
+          description: 'Deals with emergency response, coordination, and rescue operations at sea.',
+          icon: 'fas fa-life-ring'
+        },
+        {
+          id: 4,
+          title: 'MCOMREL (Maritime Community Relations)',
+          description: 'Fosters positive relationships between maritime stakeholders, communities, and organizations.',
+          icon: 'fas fa-users'
+        }
       ],
       projects: [
-        { id: 1, title: 'Blood Donation', image: '434202946_10163443568453852_665190660552754798_n.jpg' },
-        { id: 2, title: 'Medical Assistance', image: 'DxU5FxxUwAAqnLf.jfif' },
-        { id: 3, title: 'Dental Assistance', image: '405965871_798994005599287_7807612907306473337_n (1).jpg'},
-        { id: 4, title: 'Tree planting', image: '439218177_1488834228705483_9021847312691142682_n.jpg'},
-      ],
-    };
+        {
+          id: 1,
+          title: 'Blood Donation',
+          image: '434202946_10163443568453852_665190660552754798_n.jpg'
+        },
+        {
+          id: 2,
+          title: 'Medical Assistance',
+          image: 'DxU5FxxUwAAqnLf.jfif'
+        },
+        {
+          id: 3,
+          title: 'Dental Assistance',
+          image: '405965871_798994005599287_7807612907306473337_n (1).jpg'
+        },
+        {
+          id: 4,
+          title: 'Tree planting',
+          image: '439218177_1488834228705483_9021847312691142682_n.jpg'
+        }
+      ]
+    }
   },
-};
+  methods: {
+    startApplication() {
+      console.log('Application started!');
+      // Redirect to the application page
+      this.$router.push('/application');
+    },
+    submitFeedback() {
+      console.log('Feedback submitted:', this.feedback);
+      // Here you can send the feedback to your backend or perform any other necessary action
+      // Reset feedback and close modal
+      this.feedback = '';
+      this.showFeedbackModal = false;
+    },
+    closeFeedbackModal() {
+      // Method to close the feedback modal
+      this.showFeedbackModal = false;
+      // Reset feedback if the modal is closed without submitting
+      this.feedback = '';
+    }
+  }
+}
 </script>
+
+
 
 <style scoped>
 /* General Styles */
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f5f5f5;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Header Styles */
@@ -129,7 +205,49 @@ body {
 .logo img {
   height: 50px;
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
 
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 5px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+}
+
+.modal-content textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
 .nav-links {
   display: flex;
   list-style: none;
@@ -182,6 +300,7 @@ main {
 .hero-text h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .hero-btn {
@@ -209,6 +328,7 @@ main {
 .projects-container h2 {
   text-align: center;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .additional-images {
@@ -253,6 +373,7 @@ main {
 .services h2 {
   text-align: center;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .service-grid {
@@ -268,10 +389,9 @@ main {
   padding: 1rem;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  cursor:  pointer;
   transition: all 0.3s ease;
 }
-
 
 .service-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -307,6 +427,7 @@ main {
 .social-links {
   display: flex;
 }
+
 .social-icon {
   color: #fff;
   margin-right: 1rem;
@@ -368,3 +489,5 @@ main {
   background-color: #2980b9;
 }
 </style>
+
+  

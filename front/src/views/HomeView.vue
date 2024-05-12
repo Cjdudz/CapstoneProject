@@ -14,7 +14,7 @@
         <ul class="news-list">
           <li v-for="news in news" :key="news.id" class="news-item">
             <h3>{{ news.title }}</h3>
-            <p>{{ news.content }}</p>
+            <p>{{ news.contents }}</p>
             <p><strong>Date:</strong> {{ news.date }}</p>
           </li>
         </ul>
@@ -64,18 +64,18 @@ export default {
     };
   },
   mounted() {
-    // Fetch news from API endpoint
-    fetch('/api/news')
-      .then(response => response.json())
-      .then(data => {
-        // Assuming the API response contains 'news' and 'updates' arrays
-        this.news = data.news;
-        this.updates = data.updates;
-      })
-      .catch(error => {
-        console.error('Error fetching news:', error);
-      });
-  },
+  // Fetch news from API endpoint
+  axios.get('/api/news')
+    .then(response => {
+      // Assuming the API response contains 'news' and 'updates' arrays
+      this.news = response.data.news;
+      this.updates = response.data.updates;
+    })
+    .catch(error => {
+      console.error('Error fetching news:', error);
+    });
+}
+
 };
 </script>
 

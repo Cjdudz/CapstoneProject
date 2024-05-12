@@ -4,36 +4,45 @@
     <nav class="navbar">
       <div class="nav-left">
         <router-link to="/Home" class="logo-link">
-          <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
+        <img src="img/PCGA-removebg-preview.png " alt="Coast Guard Logo" class="coast-guard-logo" />
           <span class="app-title">PCGA</span>
         </router-link>
       </div>
-        <div class="nav-right">
-          <router-link to="/Navbar" class = "header-button">Home</router-link>
+      <div class="nav-right">
+        <router-link to="/Navbar" class="header-button">Home</router-link>
         <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
         <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
-        <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
-        <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
+        <router-link to="/LandingApp" class="header-button">Apply Online</router-link>
         <router-link to="/Userstatus" class="header-button">User Status</router-link>
         <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
       </div>
     </nav>
-      <!-- Main Content -->
-      <v-main>
-        <div class="transparency-seal">
-          <h1>Transparency Seal - Philippine Coast Guard Auxiliary</h1>
-          <div v-if="loading">Loading...</div>
-          <div v-else>
+
+    <div class="spacer"></div>
+
+    <!-- Main Content -->
+    <v-main>
+      <div class="transparency-seal">
+        <h1 class="section-title">Transparency Seal - Philippine Coast Guard Auxiliary</h1>
+        <div v-if="loading" class="loader">Loading...</div>
+        <div v-else>
+          <div class="seal-container">
             <div v-for="(item, index) in seals" :key="index" class="seal-item">
-              <img :src="item.image" :alt="item.name">
-              <h3>{{ item.name }}</h3>
-              <p>{{ item.description }}</p>
+              <div class="seal-card">
+                <img :src="item.image" :alt="item.name" class="seal-image">
+                <div class="seal-details">
+                  <h3 class="seal-title">{{ item.name }}</h3>
+                  <p class="seal-description">{{ item.description }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </v-main>
+      </div>
+    </v-main>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -58,7 +67,7 @@ export default {
   },
   {
     name: "Safety Inspection Certificate",
-    image: "/img/certificate3.png",
+    image: "C:\laragon\www\CapstoneProject\front\public\img/DxU5FxxUwAAqnLf.jfif",
     description: "This certificate confirms that the organization's facilities and equipment have passed the safety inspection conducted by the Philippine Coast Guard Auxiliary.",
   },
   {
@@ -119,16 +128,20 @@ export default {
 };
 </script>
 
-
 <style scoped>
-/* Navigation bar styles */
+/* Navbar styles */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   background-color: #2c3e50;
   color: #fff;
+  z-index: 1000; /* Ensure it's above other elements */
 }
 
 .nav-left {
@@ -139,6 +152,7 @@ export default {
 .nav-right {
   display: flex;
   align-items: center;
+  gap: 20px; /* Add some space between buttons */
 }
 
 .logo-link {
@@ -147,75 +161,74 @@ export default {
 }
 
 .coast-guard-logo {
-  height: 40px;
+  height: 50px;
   margin-right: 10px;
 }
 
 .app-title {
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: bold;
 }
 
 .header-button {
   color: #fff;
-  margin-left: 20px;
   text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.logout-btn {
-  color: #0e0d0d;
-  margin-left: 20px;
-}
-
-.logout-btn:hover {
-  text-decoration: underline;
+  font-weight: bold;  
+  transition: color 0.3s ease;
 }
 
 .header-button:hover {
-  text-decoration: underline;
+  color: #f39c12; /* Change color on hover */
 }
 
-/* General form styles */
-.form-card {
-  max-width: 800px;
-  margin: 20px auto;
+.logout-btn {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: #f39c12; /* Change color on hover */
+}
+
+.spacer {
+  height: 100px; /* Adjust the height for desired spacing */
+}
+
+/* New styles for the seal card */
+.seal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background-color: #f2f5f8;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* Add a white background to make the card stand out */
 }
 
-.header-design {
-  /* Add your header design styles here */
+.seal-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase the shadow on hover for a "lifting" effect */
 }
 
-
-/* Responsive styles */
-@media only screen and (max-width: 960px) {
-  .v-app-bar {
-    font-size: 18px;
-  }
+.seal-image {
+  width: 80%;
+  margin-bottom: 20px;
+  border-radius: 10px; /* Round the corners of the images */
 }
 
-@media only screen and (max-width: 600px) {
-  .v-app-bar {
-    font-size: 16px;
-  }
+.seal-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2c3e50; /* Dark blue color for the title */
 }
 
-.header-button {
-  color: white;
-  margin-left: 10px; /* Adjust spacing between buttons */
-}
-
-.transparency-seal {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.seal-item {
-    margin-bottom: 20px;
+.seal-description {
+  text-align: center;
+  color: #555; /* Dark gray color for the description */
 }
 </style>

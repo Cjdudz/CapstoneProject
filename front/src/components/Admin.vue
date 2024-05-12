@@ -218,11 +218,17 @@ export default {
     },
     onMouseLeave() {
       clearTimeout(this.hoverDelay);
-    },
-    logout() {
-      console.log('Logout button clicked');
-      this.$router.push('/LoginComponent');
-    },
+    },logout() {
+  // Clear the authentication token from session storage
+  sessionStorage.removeItem('token');
+
+  // Clear the authentication token from HttpOnly cookie
+  document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; HttpOnly';
+
+  // Redirect the user to the login page
+  this.$router.push('/LoginComponent');
+}
+
   },
 };
 </script>

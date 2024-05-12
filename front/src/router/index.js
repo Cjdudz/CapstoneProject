@@ -6,9 +6,29 @@ const routes = [
     component: () => import('@/views/HomeView.vue'),
   },
   {
+    path: '/Tryform',
+    name: 'tryform',
+    component: () => import('@/views/Tryform.vue'),
+  },
+
+  {
+    path: '/Terms',
+    name: 'home',
+    component: () => import('@/views/Terms.vue'),
+  },
+  {
+    path: '/PersonalInfo',
+    name: 'home',
+    component: () => import('@/views/Forms/PersonalInfo.vue'),
+  },
+  {
     path: '/Contacts',
     name: 'Contacts',
     component: () => import('@/views/Contacts.vue'),
+  },  {
+    path: '/LandingApp',
+    name: 'LandingApp',
+    component: () => import('@/views/LandingApp.vue'),
   },,
   {
     path: '/NavBar',
@@ -46,19 +66,48 @@ const routes = [
     component: () => import('@/views/Disctricts.vue'),
   },
   {
+    path: '/privacy',
+    name: 'privacy',
+    component: () => import('@/views/privacy.vue'),
+  },
+  {
     path: '/Availableupdates',
     name: 'Availableupdates',
     component: () => import('@/views/Availableupdates.vue'),
   },
   {
+    path: '/Additional',
+    name: 'Additional',
+    component: () => import('@/views/Forms/Additional.vue'),
+  },
+  {
     path: '/',
     component: () => import('@/views/Landingpage.vue'),
   },
- 
-
   {
-    path: '/IdentificationCard',
-    component: () => import('@/views/IdentificationCard.vue'),
+    path: '/EducationalBackground',
+    component: () => import('@/views/Forms/EducationalBackground.vue'),
+  },  
+  {
+    path: '/Formtemplate',
+    component: () => import('@/views/Forms/Formtemplate.vue'),
+  },
+   {
+    path: '/Employment',
+    component: () => import('@/views/Forms/Employment.vue'),
+  }, 
+  {
+    path: '/Readiness',
+    component: () => import('@/views/Forms/Readiness.vue'),
+  }, 
+
+   {
+    path: '/Emergency',
+    component: () => import('@/views/Forms/Emergency.vue'),
+  },
+
+  {path: '/IdentificationCard',
+    component: () => import('@/views/Forms/IdentificationCard.vue'),
   },
   {
     path: '/PersonalHistory',

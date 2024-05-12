@@ -1,22 +1,23 @@
 <template>
   <div>
     <!-- Navigation bar -->
-    <nav class="navbar">
-      <div class="nav-left">
-        <router-link to="/Home" class="logo-link">
-          <img src="/img/PCGA.png" alt="Coast Guard Logo" class="coast-guard-logo" />
-          <span class="app-title">PCGA</span>
-        </router-link>
-      </div>
-      <div class="nav-right">
-        <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
-        <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
-        <router-link to="/PcgaapplicationForm" class="header-button">Apply Online</router-link>
-        <router-link to="/IdentificationCard" class="header-button">Identification</router-link>
-        <router-link to="/Userstatus" class="header-button">User Status</router-link>
-        <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
-      </div>
-    </nav>
+    <!-- Update the Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <router-link to="/Home" class="logo-link">
+        <img src="img/PCGA-removebg-preview.png " alt="Coast Guard Logo" class="coast-guard-logo" />
+      <span class="app-title">PCGA</span>
+    </router-link>
+  </div>
+  <div class="nav-right">
+    <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
+    <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
+    <router-link to="/LandingApp" class="header-button">Apply Online</router-link>
+    <router-link to="/Userstatus" class="header-button">User Status</router-link>
+    <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>
+  </div>
+</nav>
+
 
     <!-- Main content -->
     <HelloWorld />
@@ -127,12 +128,10 @@ HelloWorld
     redirectTo(path) {
       this.$router.push(path);
       this.drawer = false;
-    }
+    },
   },
 };
-
 </script>
-
 <style scoped>
 /* General Styles */
 body {
@@ -148,14 +147,18 @@ body {
   background-color: #f5f5f5;
 }
 
-/* Header Styles */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   background-color: #2c3e50;
   color: #fff;
+  z-index: 1000; /* Ensure it's above other elements */
 }
 
 .nav-left {
@@ -166,10 +169,10 @@ body {
 .nav-center {
   flex-grow: 1;
 }
-
 .nav-right {
   display: flex;
   align-items: center;
+  gap: 20px; /* Add some space between buttons */
 }
 
 .logo img {
@@ -424,64 +427,144 @@ body {
 }
 
 
+/* Navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #fff;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+/* Nav Left styles */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Nav Right styles */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Add some space between buttons */
+}
+
+/* Logo link styles */
 .logo-link {
   text-decoration: none;
   color: #fff;
 }
 
+/* Coast Guard Logo styles */
 .coast-guard-logo {
-  height: 40px; /* Adjust as needed */
+  height: 50px;
   margin-right: 10px;
 }
 
+/* App Title styles */
 .app-title {
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: bold;
 }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.search-btn {
-  background-color: #3498db;
+/* Header button styles */
+.header-button {
   color: #fff;
+  text-decoration: none;
+  font-weight: bold;  
+  transition: color 0.3s ease;
+}
+
+.header-button:hover {
+  color: #f39c12; /* Change color on hover */
+}
+
+/* Logout button styles */
+.logout-btn {
+  color: #fff;
+  background-color: transparent;
   border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: #f39c12; /* Change color on hover */
+}
+
+.spacer {
+  height: 100px; /* Adjust the height for desired spacing */
+}
+
+/* Additional CSS for responsiveness */
+@media only screen and (max-width: 768px) {
+  .nav-right {
+    display: none; /* Hide right-side navigation links on small screens */
+  }
+
+  .nav-left {
+    margin-right: auto; /* Push logo to the left on small screens */
+  }
+
+  .navbar {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .nav-left .app-title {
+    font-size: 1.4em; /* Decrease font size for smaller screens */
+  }
+
+  .nav-left .coast-guard-logo {
+    height: 40px; /* Decrease logo size for smaller screens */
+  }
+
+  .spacer {
+    height: 60px; /* Adjust spacing for smaller screens */
+  }
+
+  .form-container {
+    width: 90%; /* Make form container width 90% on small screens */
+    margin: 20px auto; /* Adjust margin for smaller screens */
+  }
+
+  .step-container {
+    margin-bottom: 20px; /* Adjust margin for smaller screens */
+  }
+
+  .step-title {
+    font-size: 16px; /* Decrease font size for smaller screens */
+  }
+
+  .form-input {
+    padding: 8px; /* Adjust padding for smaller screens */
+  }
+
+  .button-container {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+  }
+
+  button {
+    width: 100%; /* Make buttons full width on smaller screens */
+  }
 }
 
 .header-button {
   color: #fff;
-  margin-left: 20px;
   text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
+  font-weight: bold;  
+  transition: color 0.3s ease;
 }
 
-
-.logout-btn {
-  color: #0e0d0d;
-  margin-left: 20px;
-  
-}
-
-.logout-btn:hover {
-  text-decoration: underline;
-}
 .header-button:hover {
-  text-decoration: underline;
+  color: #f39c12; /* Change color on hover */
 }
-
 /* Landing Page Styles */
 .landing-page {
   padding: 20px;

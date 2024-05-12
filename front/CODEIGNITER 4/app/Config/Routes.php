@@ -45,3 +45,13 @@ $routes->put('/api/UpdateDistrict/(:num)', 'Districts::update/$1');
 $routes->delete('/api/DeleteDistrict/(:num)', 'Districts::delete/$1');
 $routes->post('/api/SubmitPersonalHistory', 'PersonalHistory::submitForm');  
 $routes->post('/api/SubmitForm', 'IdForm::passForm');
+
+$routes->post('/api/submitAll', 'FormController::passForm');
+$routes->post('/api/sub', 'FormController::EducpassForm');
+$routes->post('/api/submit', 'EducationController::submitForm');
+
+$routes->post('/api/pass', 'Additional::index');
+
+$routes->post('/api/passF', 'Emergency::eme');
+$routes->post('/api/passFormE', 'Employment::Employment');
+$routes->post('/api/passFormR', 'ReadinessInput::index');

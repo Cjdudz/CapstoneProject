@@ -1,0 +1,209 @@
+CRITICAL - 2024-05-11 03:56:03 --> Cannot use App\Controllers\BaseController as BaseController because the name is already in use
+in APPPATH\Controllers\EducationController.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-11 03:56:33 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:01:48 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:01:58 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:01:59 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:01:59 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:01:59 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:01:59 --> Class "App\Controllers\EducationModel" not found
+in APPPATH\Controllers\EducationController.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\EducationController->submitForm()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EducationController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:14:27 --> Cannot use App\Controllers\ResourceController as ResourceController because the name is already in use
+in APPPATH\Controllers\Additional.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-11 04:16:01 --> Cannot use App\Controllers\ResourceController as ResourceController because the name is already in use
+in APPPATH\Controllers\Additional.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-11 04:21:12 --> Cannot use App\Controllers\ResourceController as ResourceController because the name is already in use
+in APPPATH\Controllers\Additional.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-11 04:39:11 --> Cannot use App\Controllers\ResourceController as ResourceController because the name is already in use
+in APPPATH\Controllers\Additional.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-11 04:39:11 --> Cannot use App\Controllers\ResourceController as ResourceController because the name is already in use
+in APPPATH\Controllers\Additional.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-11 04:40:01 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 768.
+ 1 SYSTEMPATH\BaseModel.php(768): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Additional.php(15): CodeIgniter\Model->insert(Object(stdClass))
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Additional->index()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Additional))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 04:41:18 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 768.
+ 1 SYSTEMPATH\BaseModel.php(768): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Additional.php(15): CodeIgniter\Model->insert(Object(stdClass))
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Additional->index()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Additional))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 05:28:15 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 768.
+ 1 SYSTEMPATH\BaseModel.php(768): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Emergency.php(19): CodeIgniter\Model->insert(Object(stdClass))
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Emergency->Eme()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Emergency))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 05:29:02 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 768.
+ 1 SYSTEMPATH\BaseModel.php(768): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Emergency.php(19): CodeIgniter\Model->insert(Object(stdClass))
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Emergency->Eme()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Emergency))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 05:40:39 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1726.
+ 1 SYSTEMPATH\BaseModel.php(1726): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(748): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\RcgaApplicationController.php(20): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\RcgaApplicationController->submitForm()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RcgaApplicationController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 05:40:40 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1726.
+ 1 SYSTEMPATH\BaseModel.php(1726): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(748): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\RcgaApplicationController.php(20): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\RcgaApplicationController->submitForm()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RcgaApplicationController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 05:40:42 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1726.
+ 1 SYSTEMPATH\BaseModel.php(1726): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(748): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\RcgaApplicationController.php(20): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\RcgaApplicationController->submitForm()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RcgaApplicationController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 05:40:42 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1726.
+ 1 SYSTEMPATH\BaseModel.php(1726): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(748): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\RcgaApplicationController.php(20): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\RcgaApplicationController->submitForm()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RcgaApplicationController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 07:27:12 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 768.
+ 1 SYSTEMPATH\BaseModel.php(768): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Employment.php(16): CodeIgniter\Model->insert(Object(stdClass))
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Employment->Employment()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employment))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 07:29:23 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 768.
+ 1 SYSTEMPATH\BaseModel.php(768): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Employment.php(16): CodeIgniter\Model->insert(Object(stdClass))
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Employment->Employment()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employment))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 07:48:51 --> Trait "App\Controllers\RsponseTrait" not found
+in APPPATH\Controllers\ReadinessInput.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-05-11 07:49:19 --> mysqli_sql_exception: Table 'pcga.readiness_inputs' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `re...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `re...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `re...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `re...', Array, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\ReadinessInput.php(16): CodeIgniter\Model->insert(Object(stdClass))
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\ReadinessInput->index()
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReadinessInput))
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#13 {main}
+CRITICAL - 2024-05-11 07:49:20 --> Table 'pcga.readiness_inputs' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `readiness_inputs` (`purpose`) VALUES (:purpose:)', [...], false)
+ 2 SYSTEMPATH\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(788): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\ReadinessInput.php(16): CodeIgniter\Model->insert(Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReadinessInput->index()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReadinessInput))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+CRITICAL - 2024-05-11 08:01:18 --> Cannot use object of type stdClass as array
+in APPPATH\Controllers\ReadinessInput.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReadinessInput->index()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReadinessInput))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
