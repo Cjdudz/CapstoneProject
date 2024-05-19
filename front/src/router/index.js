@@ -10,7 +10,16 @@ const routes = [
     name: 'tryform',
     component: () => import('@/views/Tryform.vue'),
   },
-
+  {
+    path: '/Fileupload',
+    name: 'Fileupload',
+    component: () => import('@/views/Forms/Fileupload.vue'),
+  },
+  {
+    path: '/Upload',
+    name: 'Upload',
+    component: () => import('@/views/Forms/Upload.vue'),
+  },
   {
     path: '/Terms',
     name: 'home',

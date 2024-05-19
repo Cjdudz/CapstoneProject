@@ -226,7 +226,7 @@ export default {
   document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; HttpOnly';
 
   // Redirect the user to the login page
-  this.$router.push('/LoginComponent');
+  this.$router.push('/');
 }
 
   },

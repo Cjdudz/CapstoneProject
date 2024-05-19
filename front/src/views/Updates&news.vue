@@ -2,7 +2,6 @@
   <div>
     <v-navigation-drawer app v-model="drawer">
       <v-list>
-        <!-- Navigation items -->
         <v-list-item v-for="(item, index) in items" :key="index" link>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -14,7 +13,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <!-- Logout Button -->
         <v-list-item>
           <v-row>
             <v-col>
@@ -38,11 +36,9 @@
 
     <v-main>
       <v-container>
-        <!-- Admin Panel Content -->
         <div class="admin-panel">
           <h2>Admin Panel</h2>
 
-          <!-- Add or Upload News -->
           <div class="add-news">
             <h3>Add or Upload News</h3>
             <form @submit.prevent="addNews">

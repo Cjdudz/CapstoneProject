@@ -45,12 +45,15 @@
     data() {
       return {
         requirements: [
-          { id: 1, text: 'Minimum age of 18 years old.' },
-          { id: 2, text: 'Proficiency in at least one competitive PC game.' },
-          { id: 3, text: 'Good sportsmanship and behavior.' },
-          { id: 4, text: 'Willingness to adhere to PCGA rules and regulations.' }
-          // Add more requirements here
+          
+        { id: 1, text: 'Valid ID(if Not Valid Passport).' },
+          { id: 2, text: 'Valid NBI Clearance(Original and Copy).' },
+          { id: 3, text: 'Police Clearance and Barangay Clearance(Original Copy)' },
+          { id: 4, text: 'Duly Accomplished Member Aplication Form(4 Copies)' },
+          { id: 5, text: 'Four(4) Copies of 2x2 ID Picture with Red Background Officers - Green Background(Auxiliarists).' },
+          { id: 6, text: 'Additional Requirements: Letters of Recommendation/ Endorsement From Operation/ Support/ Technical Service/ Special Service Commands.' }
         ],
+
         steps: [
           { id: 1, title: 'Step 1: Fill Up Identification Card', description: 'Fill up your identification card with the necessary details.', image: 'img/step1.png' },
           { id: 2, title: 'Step 2: Complete Membership Form', description: 'Complete the membership form to proceed with the application.', image: 'img/step2.png' },

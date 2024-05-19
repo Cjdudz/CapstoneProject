@@ -18,7 +18,6 @@
 </template>
 
 <script>
-// Import Axios
 import axios from 'axios';
 
 export default {

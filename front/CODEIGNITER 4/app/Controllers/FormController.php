@@ -39,6 +39,49 @@ class FormController extends ResourceController
 
         return $this->respond(['message' => 'Interview form submitted successfully']);
     }
+    public function upload()
+    {
+        $file = $this->request->getFile('userfile');
+        if ($file->isValid() && ! $file->hasMoved()) {
+            $file->move(WRITEPATH . 'uploads');
+            return $this->response->setStatusCode(200)->setJSON(['message' => 'File uploaded successfully']);
+        }
+        return $this->response->setStatusCode(400)->setJSON(['errors' => 'Failed to upload file.']);
+    }
+        
+    public function files()
+    {
+        $path = WRITEPATH . 'uploads';
+        $files = array_diff(scandir($path), array('.', '..'));
+    
+        $fileData = [];
+        foreach ($files as $file) {
+            if (!is_dir($path . '/' . $file)) { // Exclude directories from the list
+                $fileData[] = [
+                    'name' => $file,
+                    'url' => base_url('uploads/' . $file)
+                ];
+            }
+        }
+    
+        return $this->response->setStatusCode(200)->setJSON($fileData);
+    } public function download($filename)
+    {
+        $file = WRITEPATH . 'uploads/' . $filename;
+    
+        // Check if the file exists
+        if (file_exists($file)) {
+            // Set appropriate headers for file download and send the file to the client
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
+        } else {
+            // If the file doesn't exist, return an error response
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'File not found']);
+        }
+    }
     
 }
 

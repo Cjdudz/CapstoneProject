@@ -55,3 +55,9 @@ $routes->post('/api/pass', 'Additional::index');
 $routes->post('/api/passF', 'Emergency::eme');
 $routes->post('/api/passFormE', 'Employment::Employment');
 $routes->post('/api/passFormR', 'ReadinessInput::index');
+
+$routes->post('/api/upload', 'FormController::upload'); // Add this line.
+$routes->get('/api/files', 'FormController::files');
+
+$routes->get('/api/files1', 'FormController::upload1');
+$routes->get('/api/download/(:any)', 'FormController::download/$1');
