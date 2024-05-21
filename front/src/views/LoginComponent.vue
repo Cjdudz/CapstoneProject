@@ -48,13 +48,8 @@ export default {
         });
 
         if ('token' in response.data) {
-          // Store the token in a secure HttpOnly cookie
-          document.cookie = `token=${response.data.token}; secure; HttpOnly;`;
-
-          // Set token expiration (e.g., 1 hour)
-          const expirationTime = new Date();
-          expirationTime.setTime(expirationTime.getTime() + 3600 * 1000); // 1 hour
-          document.cookie = `expires=${expirationTime.toUTCString()}; secure;`;
+          // Store the token in session storage
+          sessionStorage.setItem('token', response.data.token);
 
           // Redirect based on user role
           switch (response.data.role) {

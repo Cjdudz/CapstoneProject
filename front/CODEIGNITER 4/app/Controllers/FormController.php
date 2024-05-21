@@ -10,7 +10,8 @@ use App\Models\EmergencyContactInformationModel;
 use CodeIgniter\RESTful\ResourceController;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
-
+use App\Models\UploadModel;
+use CodeIgniter\HTTP\Files\UploadedFile;
 class FormController extends ResourceController
 {
     use ResponseTrait;
@@ -41,47 +42,69 @@ class FormController extends ResourceController
     }
     public function upload()
     {
+        $uploadModel = new UploadModel();
+
         $file = $this->request->getFile('userfile');
         if ($file->isValid() && ! $file->hasMoved()) {
-            $file->move(WRITEPATH . 'uploads');
+            $newName = $file->getRandomName();
+            $file->move(WRITEPATH . 'uploads', $newName);
+
+            $data = [
+                'filename' => $newName,
+                'filepath' => WRITEPATH . 'uploads/' . $newName,
+                'filesize' => $file->getSize(),
+                'filetype' => $file->getClientMimeType(),
+            ];
+
+            $uploadModel->insert($data);
+
             return $this->response->setStatusCode(200)->setJSON(['message' => 'File uploaded successfully']);
         }
+
         return $this->response->setStatusCode(400)->setJSON(['errors' => 'Failed to upload file.']);
     }
-        
     public function files()
     {
-        $path = WRITEPATH . 'uploads';
-        $files = array_diff(scandir($path), array('.', '..'));
+        $uploadModel = new UploadModel();
+        $files = $uploadModel->findAll();
     
         $fileData = [];
         foreach ($files as $file) {
-            if (!is_dir($path . '/' . $file)) { // Exclude directories from the list
-                $fileData[] = [
-                    'name' => $file,
-                    'url' => base_url('uploads/' . $file)
-                ];
-            }
+            $fileData[] = [
+                'name' => $file['filename'],
+                'url' => base_url('uploads/' . $file['filename']),
+                'size' => $file['filesize'],
+                'type' => $file['filetype']
+            ];
         }
     
         return $this->response->setStatusCode(200)->setJSON($fileData);
-    } public function download($filename)
-    {
-        $file = WRITEPATH . 'uploads/' . $filename;
-    
+    }
+    public function download($filename)
+{
+    $uploadModel = new UploadModel();
+    $file = $uploadModel->where('filename', $filename)->first();
+
+    if ($file) {
+        $filepath = $file['filepath'];
+
         // Check if the file exists
-        if (file_exists($file)) {
+        if (file_exists($filepath)) {
             // Set appropriate headers for file download and send the file to the client
             header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($file) . '"');
-            header('Content-Length: ' . filesize($file));
-            readfile($file);
+            header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
+            header('Content-Length: ' . filesize($filepath));
+            readfile($filepath);
             exit;
         } else {
             // If the file doesn't exist, return an error response
             return $this->response->setStatusCode(404)->setJSON(['error' => 'File not found']);
         }
+    } else {
+        // If the file information is not found in the database, return an error response
+        return $this->response->setStatusCode(404)->setJSON(['error' => 'File information not found']);
     }
+}
     
 }
 

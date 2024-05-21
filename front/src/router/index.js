@@ -1,4 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
+const requireAuth = (to, from, next) => {
+  if (localStorage.getItem('token')) {
+    next('/');
+  } else {
+    next();
+  }
+};
+
 const routes = [
   {
     path: '/Helloworld',
@@ -24,27 +33,30 @@ const routes = [
     path: '/Terms',
     name: 'home',
     component: () => import('@/views/Terms.vue'),
+    beforeEnter: requireAuth,
   },
   {
     path: '/PersonalInfo',
     name: 'home',
     component: () => import('@/views/Forms/PersonalInfo.vue'),
+    beforeEnter: requireAuth,
   },
   {
     path: '/Contacts',
     name: 'Contacts',
     component: () => import('@/views/Contacts.vue'),
-  },  {
+  },
+  {
     path: '/LandingApp',
     name: 'LandingApp',
     component: () => import('@/views/LandingApp.vue'),
-  },,
+  },
   {
     path: '/NavBar',
     name: 'NavBar',
     component: () => import('@/views/NavBar.vue'),
   },
- {
+  {
     path: '/ProcurementManagement',
     name: 'ProcurementManagement',
     component: () => import('@/views/ProcurementManagement.vue'),
@@ -88,6 +100,7 @@ const routes = [
     path: '/Additional',
     name: 'Additional',
     component: () => import('@/views/Forms/Additional.vue'),
+    beforeEnter: requireAuth,
   },
   {
     path: '/',
@@ -96,38 +109,40 @@ const routes = [
   {
     path: '/EducationalBackground',
     component: () => import('@/views/Forms/EducationalBackground.vue'),
-  },  
+    beforeEnter: requireAuth,
+  },
   {
     path: '/Formtemplate',
     component: () => import('@/views/Forms/Formtemplate.vue'),
   },
-   {
+  {
     path: '/Employment',
     component: () => import('@/views/Forms/Employment.vue'),
-  }, 
-  {
+    beforeEnter: requireAuth,
+  },
+{
     path: '/Readiness',
     component: () => import('@/views/Forms/Readiness.vue'),
-  }, 
-
-   {
+    beforeEnter: requireAuth,
+  },
+  {
     path: '/Emergency',
     component: () => import('@/views/Forms/Emergency.vue'),
+    beforeEnter: requireAuth,
   },
-
-  {path: '/IdentificationCard',
+  {
+    path: '/IdentificationCard',
     component: () => import('@/views/Forms/IdentificationCard.vue'),
+    beforeEnter: requireAuth,
   },
   {
     path: '/PersonalHistory',
     component: () => import('@/views/PersonalHistory.vue'),
   },
-
   {
     path: '/PcgaapplicationForm',
     component: () => import('@/views/PcgaapplicationForm.vue'),
   },
-
   {
     path: '/ApplicantsData',
     name: 'ApplicantsData',
@@ -141,18 +156,17 @@ const routes = [
     path: '/admin',
     component: () => import('@/views/Admin.vue'),
   },
- 
   {
     path: '/Userstatus',
     name: 'Userstatus',
     component: () => import('@/views/Userstatus.vue'),
+    beforeEnter: requireAuth,
   },
   {
     path: '/Home',
     name: 'homeKo',
     component: () => import('@/views/Home.vue'),
   },
-
   {
     path: '/LoginComponent',
     name: 'login',
@@ -169,7 +183,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
 ];
-
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

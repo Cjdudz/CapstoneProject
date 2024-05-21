@@ -1,5 +1,4 @@
 <template>
-  <!-- Navigation bar -->
 
   <!-- Form -->
   <form class="pcga-form" @submit.prevent="submitForm">
@@ -42,7 +41,6 @@
 
   </form>
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -123,6 +121,7 @@ export default {
 </script>
 
 <style scoped>
+/* Form styles */
 .pcga-form {
   max-width: 600px;
   margin: auto;
@@ -174,6 +173,7 @@ button[type="submit"]:hover {
 button:hover {
   background-color: #0056b3;
 }
+
 /* Navigation bar styles */
 .navbar {
   display: flex;

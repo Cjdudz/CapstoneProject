@@ -44,9 +44,77 @@
       <label>Weight:</label>
       <input type="text" v-model="personalInfo.Weight">
       <label>Color of Eyes:</label>
-      <input type="text" v-model="personalInfo.ColorOfEyes">
-      <label>Color of Hair:</label>
-      <input type="text" v-model="personalInfo.ColorOfHair">
+      <select v-model="personalInfo.ColorOfEyes">
+        <option value="Brown">Brown</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+        <option value="Hazel">Hazel</option>
+        <option value="Amber">Amber</option>
+        <option value="Heterochromia">Heterochromia</option>
+      </select>
+     <label>Color of Hair:</label>
+      <select v-model="personalInfo.ColorOfHair">
+        <option value="">Select</option>
+        <optgroup label="Natural Hair Colors">
+          <option value="Black">Black</option>
+          <option value="Jet Black">Jet Black</option>
+          <option value="Soft Black">Soft Black</option>
+          <option value="Ebony">Ebony</option>
+          <option value="Brown">Brown</option>
+          <option value="Light Brown">Light Brown</option>
+          <option value="Medium Brown">Medium Brown</option>
+          <option value="Dark Brown">Dark Brown</option>
+          <option value="Chestnut Brown">Chestnut Brown</option>
+          <option value="Chocolate Brown">Chocolate Brown</option>
+          <option value="Blonde">Blonde</option>
+          <option value="Platinum Blonde">Platinum Blonde</option>
+          <option value="Ash Blonde">Ash Blonde</option>
+          <option value="Golden Blonde">Golden Blonde</option>
+          <option value="Strawberry Blonde">Strawberry Blonde</option>
+          <option value="Dirty Blonde">Dirty Blonde</option>
+          <option value="Red">Red</option>
+          <option value="Ginger">Ginger</option>
+          <option value="Auburn">Auburn</option>
+          <option value="Copper">Copper</option>
+          <option value="Deep Red">Deep Red</option>
+          <option value="Gray">Gray</option>
+          <option value="Silver">Silver</option>
+          <option value="White">White</option>
+          <option value="Salt and Pepper">Salt and Pepper</option>
+        </optgroup>
+        <optgroup label="Dyed/Artificial Hair Colors">
+          <option value="Bright and Unnatural Colors">Bright and Unnatural Colors</option>
+          <option value="Blue">Blue</option>
+          <option value="Green">Green</option>
+          <option value="Pink">Pink</option>
+          <option value="Purple">Purple</option>
+          <option value="Teal">Teal</option>
+          <option value="Turquoise">Turquoise</option>
+          <option value="Lavender">Lavender</option>
+          <option value="Neon Colors (e.g., Neon Pink, Neon Green)">Neon Colors (e.g., Neon Pink, Neon Green)</option>
+          <option value="Pastel Colors">Pastel Colors</option>
+          <option value="Pastel Pink">Pastel Pink</option>
+          <option value="Pastel Blue">Pastel Blue</option>
+          <option value="Pastel Purple">Pastel Purple</option>
+          <option value="Mint Green">Mint Green</option>
+          <option value="Peach">Peach</option>
+          <option value="Ombre/Balayage">Ombre/Balayage</option>
+          <option value="Dark to Light Fade (e.g., Black to Blonde)">Dark to Light Fade (e.g., Black to Blonde)</option>
+          <option value="Bright to Dark Fade (e.g., Purple to Blue)">Bright to Dark Fade (e.g., Purple to Blue)</option>
+          <option value="Highlights and Lowlights">Highlights and Lowlights</option>
+          <option value="Blonde Highlights">Blonde Highlights</option>
+          <option value="Red Highlights">Red Highlights</option>
+          <option value="Caramel Lowlights">Caramel Lowlights</option>
+          <option value="Ashy Highlights">Ashy Highlights</option>
+          <option value="Mixed Colors">Mixed Colors</option>
+          <option value="Two-Tone">Two-Tone</option>
+          <option value="Half and Half (e.g., Half Black, Half White)">Half and Half (e.g., Half Black, Half White)</option>
+          <option value="Split Dye (e.g., Half Blue, Half Pink)">Split Dye (e.g., Half Blue, Half Pink)</option>
+          <option value="Rainbow">Rainbow</option>
+          <option value="Multi-colored Streaks">Multi-colored Streaks</option>
+          <option value="Full Spectrum Hair">Full Spectrum Hair</option>
+        </optgroup>
+      </select>
       <label>Scars or Marks:</label>
       <input type="text" v-model="personalInfo.ScarsOrMarks">
       <label>SSS or GSIS No.:</label>
@@ -144,7 +212,7 @@ export default {
         .then(response => {
           console.log('Form submitted successfully:', response.data);
           // Optionally, you can perform actions based on the response
-        })
+       })
         .catch(error => {
           console.error('Error submitting form:', error);
           // Optionally, you can handle errors here
