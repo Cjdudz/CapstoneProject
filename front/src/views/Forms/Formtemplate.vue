@@ -17,7 +17,7 @@ Copy code
     <div class="nav-right">
       <router-link to="/" class="header-button">Home</router-link>
       <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
-      <router-link to="/Districts" class="header-button">Coast Guard Districts</router-link>
+      <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
       <router-link to="/LandingApp" class="header-button">Apply Online</router-link>
       <router-link to="/Userstatus" class="header-button">User Status</router-link>
       <button @click="logout" class="header-button logout-btn">Logout</button>

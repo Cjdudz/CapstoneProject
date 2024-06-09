@@ -48,8 +48,13 @@ export default {
         });
 
         if ('token' in response.data) {
-          // Store the token in session storage
-          sessionStorage.setItem('token', response.data.token);
+          // Store the token in a secure HttpOnly cookie
+          document.cookie = `token=${response.data.token}; secure; HttpOnly;`;
+
+          // Set token expiration (e.g., 1 hour)
+          const expirationTime = new Date();
+          expirationTime.setTime(expirationTime.getTime() + 3600 * 1000); // 1 hour
+          document.cookie = `expires=${expirationTime.toUTCString()}; secure;`;
 
           // Redirect based on user role
           switch (response.data.role) {
@@ -74,10 +79,12 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .background {
-  background: linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
+  background: url('C:\laragon\www\CapstoneProject\front\dist\img\bpgng.png'), linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .login-container {
@@ -103,7 +110,6 @@ export default {
 .form {
   padding: 20px;
 }
-
 
 .login-button {
   margin-top: 16px;

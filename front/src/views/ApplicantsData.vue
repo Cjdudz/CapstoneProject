@@ -1,19 +1,19 @@
 <template>
-<v-app>
-  <!-- Navigation Drawer -->
-  <v-navigation-drawer app v-model="drawer">
-    <v-list>
-      <!-- Navigation items -->
-      <v-list-item v-for="(item, index) in items" :key="index" link>
-        <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title @click="navigateTo(item.route)">
-            {{ item.text }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+  <v-app>
+    <!-- Navigation Drawer -->
+    <v-navigation-drawer app v-model="drawer">
+      <v-list>
+        <!-- Navigation items -->
+        <v-list-item v-for="(item, index) in items" :key="index" link>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title @click="navigateTo(item.route)">
+              {{ item.text }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
         <!-- Logout Button -->
         <v-list-item>
@@ -46,53 +46,60 @@
         <table class="user-table">
           <thead>
             <tr>
-              <th class="table-header">ID</th>
-              <th class="table-header">Name</th>
-              <th class="table-header">Age</th>
-              <th class="table-header">Nationality</th>
+              <!-- New Fields -->
+              <th class="table-header">ID No</th>
+              <th class="table-header">Auxiliary District</th>
+              <th class="table-header">Squadron No</th>
+              <th class="table-header">First Name</th>
+              <th class="table-header">Middle Name</th>
+              <th class="table-header">Last Name</th>
+              <th class="table-header">Rank Designation</th>
+              <th class="table-header">Home Address</th>
+              <th class="table-header">Marital Status</th>
+              <th class="table-header">Weight</th>
+              <th class="table-header">Eyes</th>
+              <th class="table-header">Height</th>
+              <th class="table-header">Hair</th>
+              <th class="table-header">Blood Type</th>
+              <th class="table-header">Sex</th>
+              <th class="table-header">Religion</th>
               <th class="table-header">Date of Birth</th>
-              <th class="table-header">Passport</th>
-              <th class="table-header">Address</th>
-              <th class="table-header">Telephone</th>
-              <th class="table-header">Email</th>
-              <th class="table-header">Occupation</th>
-              <th class="table-header">Club</th>
-              <th class="table-header">Application Date</th>
-              <th class="table-header">Status</th>
-              <th class="table-header">Actions</th>
+              <th class="table-header">Identifying Data</th>
+              <th class="table-header">Emergency Contact</th>
+              <th class="table-header">Emergency Contact Address</th>
+              <th class="table-header">Emergency Contact Number</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="appointment in appointments" :key="appointment.id">
-              <td>{{ appointment.id }}</td>
-              <td>{{ appointment.name }}</td>
-              <td>{{ appointment.age }}</td>
-              <td>{{ appointment.nationality }}</td>
-              <td>{{ formatDateTime(appointment.dob) }}</td>
-              <td>{{ appointment.passport }}</td>
-              <td>{{ appointment.address }}</td>
-              <td>{{ appointment.telephone }}</td>
-              <td>{{ appointment.email }}</td>
-              <td>{{ appointment.occupation }}</td>
-              <td>{{ appointment.club }}</td>
-              <td>{{ formatDateTime(appointment.applicationDate) }}</td>
-              <td>{{ appointment.status }}</td>
-              <td>
-                <button @click="acceptAppointment(appointment.id)">Accept</button>
-                <button @click="rejectAppointment(appointment.id)">Reject</button>
-              </td>
+              <!-- Display appointment data -->
+              <td>{{ appointment.idNo }}</td>
+              <td>{{ appointment.auxiliaryDistrict }}</td>
+              <td>{{ appointment.squadronNo }}</td>
+              <td>{{ appointment.firstName }}</td>
+              <td>{{ appointment.middleName }}</td>
+              <td>{{ appointment.lastName }}</td>
+              <td>{{ appointment.rankDesignationAuthority }}</td>
+              <td>{{ appointment.homeAddress }}</td>
+              <td>{{ appointment.maritalStatus }}</td>
+              <td>{{ appointment.weight }}</td>
+              <td>{{ appointment.eyes }}</td>
+              <td>{{ appointment.height }}</td>
+              <td>{{ appointment.hair }}</td>
+              <td>{{ appointment.bloodType }}</td>
+              <td>{{ appointment.sex }}</td>
+              <td>{{ appointment.religion }}</td>
+              <td>{{ appointment.dateOfBirth }}</td>
+              <td>{{ appointment.identifyingData }}</td>
+              <td>{{ appointment.emergencyContact }}</td>
+              <td>{{ appointment.emergencyContactAddress }}</td>
+              <td>{{ appointment.emergencyContactNumber }}</td>
             </tr>
           </tbody>
         </table>
-        <div v-if="error" class="error-message">
-          <i class="fas fa-exclamation-circle"></i> {{ error }}
-        </div>
-        <div v-if="loading" class="loading-message">
-          Loading...
-        </div>
       </div>
     </v-main>
-  </v-app>
+  </v-app>,
 </template>
 
 <script>
@@ -103,13 +110,12 @@ export default {
     return {
       drawer: true,
       items: [
-      { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
-  { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
-  { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
-  { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
-  { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
-  { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
-
+        { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/Admin' },
+        { text: 'Users', icon: 'mdi-account', route: '/users' },
+        { text: 'Applicants data', icon: 'mdi-account-multiple', route: '/ApplicantsData' },
+        { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
+        { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
+        { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
       ],
       appointments: [],
       error: null,
@@ -123,34 +129,10 @@ export default {
     async fetchAppointments() {
       this.loading = true;
       try {
-        const response = await axios.get('/api/appointment');
-        this.appointments = response.data;
+        const response = await axios.get('/api/data');
+        this.appointments = response.data.personalInformation;
       } catch (error) {
         this.handleError(error, 'Error fetching appointments');
-      } finally {
-        this.loading = false;
-      }
-    },
-    async acceptAppointment(appointmentId) {
-      this.loading = true;
-      try {
-        const response = await axios.post('/api/accept', { id: appointmentId });
-        // Handle success if needed
-        this.fetchAppointments(); // Refresh appointments after accepting
-      } catch (error) {
-        this.handleError(error, 'Error accepting appointment');
-      } finally {
-        this.loading = false;
-      }
-    },
-    async rejectAppointment(appointmentId) {
-      this.loading = true;
-      try {
-        const response = await axios.post('/api/reject', { id: appointmentId });
-        // Handle success if needed
-        this.fetchAppointments(); // Refresh appointments after rejecting
-      } catch (error) {
-        this.handleError(error, 'Error rejecting appointment');
       } finally {
         this.loading = false;
       }
@@ -162,10 +144,6 @@ export default {
       } else {
         this.error = defaultMessage;
       }
-    },
-    formatDateTime(dateTime) {
-      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-      return new Date(dateTime).toLocaleDateString('en-US', options);
     },
     onMouseEnter() {
       this.drawer = true;
@@ -186,6 +164,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .user-table {

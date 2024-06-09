@@ -8,7 +8,7 @@
       </div>
       <div class="nav-right">
         <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
-        <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
+      <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
         <router-link to="/LandingApp" class="header-button">Apply Online</router-link>
         <router-link to="/Userstatus" class="header-button">User Status</router-link>
         <v-btn text @click="loginOrLogout" class="logout-btn">{{ isLoggedIn ? 'Logout' : 'Logout' }}</v-btn>

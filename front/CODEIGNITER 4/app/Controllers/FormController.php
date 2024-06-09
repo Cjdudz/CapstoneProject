@@ -1,21 +1,32 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\IdModel;
 use App\Models\PersonalInformationModel;
 use App\Models\EducationalBackgroundModel;
 use App\Models\EmploymentOccupationalBackgroundModel;
 use App\Models\AdditionalDataModel;
 use App\Models\EmergencyContactInformationModel;
+use App\Models\UploadModel;
+
 use CodeIgniter\RESTful\ResourceController;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\UploadModel;
+
 use CodeIgniter\HTTP\Files\UploadedFile;
 class FormController extends ResourceController
 {
     use ResponseTrait;
-
+    public function __construct()
+    {
+        $this->idModel = new \App\Models\IdModel();
+        $this->personalInformationModel = new \App\Models\PersonalInformationModel();
+        $this->educationalBackgroundModel = new \App\Models\EducationalBackgroundModel();
+        $this->employmentOccupationalBackgroundModel = new \App\Models\EmploymentOccupationalBackgroundModel();
+        $this->additionalDataModel = new \App\Models\AdditionalDataModel();
+        $this->emergencyContactInformationModel = new \App\Models\EmergencyContactInformationModel();
+        $this->uploadModel = new \App\Models\UploadModel();
+    }
     public function passForm()
     {
         $data = $this->request->getJSON(true);
@@ -27,8 +38,35 @@ class FormController extends ResourceController
 
         return $this->respond(['message' => 'Interview form submitted successfully']);
     }
+    public function fetchData()
+    {
+        $data = [];
 
-   
+        // Fetch data from IdModel
+        $data['id'] = $this->idModel->findAll();
+
+        // Fetch data from PersonalInformationModel
+        $data['personalInformation'] = $this->personalInformationModel->findAll();
+
+        // Fetch data from EducationalBackgroundModel
+        $data['educationalBackground'] = $this->educationalBackgroundModel->findAll();
+
+        // Fetch data from EmploymentOccupationalBackgroundModel
+        $data['employmentOccupationalBackground'] = $this->employmentOccupationalBackgroundModel->findAll();
+
+        // Fetch data from AdditionalDataModel
+        $data['additionalData'] = $this->additionalDataModel->findAll();
+
+        // Fetch data from EmergencyContactInformationModel
+        $data['emergencyContactInformation'] = $this->emergencyContactInformationModel->findAll();
+
+        // Fetch data from UploadModel
+        $data['upload'] = $this->uploadModel->findAll();
+
+        // Return the data as a response
+        return $this->respond($data);
+    }
+
     public function EducpassForm()
     {
         $data = $this->request->getJSON(true);
