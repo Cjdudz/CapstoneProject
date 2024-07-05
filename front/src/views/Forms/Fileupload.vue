@@ -1,30 +1,30 @@
-<template>
-  <div class="file-upload-container">
-    <div class="upload-introduction">
-      <h2>Upload Requirements</h2>
-      <p>Please upload the necessary files for your application. Supported file types include images (JPEG, PNG, GIF) and documents (PDF, DOCX).</p>
+  <template>
+    <div class="file-upload-container">
+      <div class="upload-introduction">
+        <h2>Upload Requirements</h2>
+        <p>Please upload the necessary files for your application. Supported file types include images (JPEG, PNG, GIF) and documents (PDF, DOCX).</p>
+      </div>
+      <div class="upload-section">
+        <label for="file-input" class="file-input-label">
+          <span>Choose File</span>
+          <input id="file-input" type="file" @change="handleFileUpload" class="file-input">
+        </label>
+        <span v-if="file" class="file-name">{{ file.name }}</span>
+        <button @click="uploadFile" class="upload-button">Upload</button>
+      </div>
+      <p v-if="error" class="error-message">{{ error }}</p>
+      <p v-if="success" class="success-message">File uploaded successfully!</p>
+      <div class="uploaded-files-container">
+        <h3>Uploaded Files</h3>
+        <ul class="uploaded-files-list">
+          <li v-for="(file, index) in files" :key="index" class="uploaded-file-item">
+            <a :href="file.url" class="file-link" :download="file.name">{{ file.name }}</a>
+            <button @click="downloadFile(file.name)" class="download-button">Download</button>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="upload-section">
-      <label for="file-input" class="file-input-label">
-        <span>Choose File</span>
-        <input id="file-input" type="file" @change="handleFileUpload" class="file-input">
-      </label>
-      <span v-if="file" class="file-name">{{ file.name }}</span>
-      <button @click="uploadFile" class="upload-button">Upload</button>
-    </div>
-    <p v-if="error" class="error-message">{{ error }}</p>
-    <p v-if="success" class="success-message">File uploaded successfully!</p>
-    <div class="uploaded-files-container">
-      <h3>Uploaded Files</h3>
-      <ul class="uploaded-files-list">
-        <li v-for="(file, index) in files" :key="index" class="uploaded-file-item">
-          <a :href="file.url" class="file-link" :download="file.name">{{ file.name }}</a>
-          <button @click="downloadFile(file.name)" class="download-button">Download</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</template>
+  </template>
 
 <script>
 import axios from 'axios';

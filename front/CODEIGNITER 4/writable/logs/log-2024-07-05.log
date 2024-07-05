@@ -1,0 +1,52 @@
+ERROR - 2024-07-05 08:21:27 --> mysqli_sql_exception: Table 'pcga.alerts' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(871): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(40): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(22): App\Controllers\OverviewController->getActiveAlertsCount()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#12 {main}
+CRITICAL - 2024-07-05 08:21:27 --> Table 'pcga.alerts' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `alerts`', null, false)
+ 2 SYSTEMPATH\Model.php(871): CodeIgniter\Database\BaseBuilder->countAll()
+ 3 APPPATH\Controllers\OverviewController.php(40): CodeIgniter\Model->__call('countAll', [])
+ 4 APPPATH\Controllers\OverviewController.php(22): App\Controllers\OverviewController->getActiveAlertsCount()
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
+ERROR - 2024-07-05 08:22:02 --> mysqli_sql_exception: Table 'pcga.alerts' doesn't exist in C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Model.php(871): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(40): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\app\Controllers\OverviewController.php(22): App\Controllers\OverviewController->getActiveAlertsCount()
+#7 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+#8 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+#9 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\public\index.php(85): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\CapstoneProject\front\CODEIGNITER 4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#12 {main}
+CRITICAL - 2024-07-05 08:22:02 --> Table 'pcga.alerts' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `alerts`', null, false)
+ 2 SYSTEMPATH\Model.php(871): CodeIgniter\Database\BaseBuilder->countAll()
+ 3 APPPATH\Controllers\OverviewController.php(40): CodeIgniter\Model->__call('countAll', [])
+ 4 APPPATH\Controllers\OverviewController.php(22): App\Controllers\OverviewController->getActiveAlertsCount()
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\OverviewController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OverviewController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(85): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\CapstoneProject\\front\\CODEIGNITER 4\\public\\index.php')
