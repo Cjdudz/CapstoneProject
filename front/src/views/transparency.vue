@@ -129,7 +129,6 @@ export default {
 </script>
 
 <style scoped>
-/* Navbar styles */
 .navbar {
   position: fixed;
   top: 0;
@@ -138,72 +137,71 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  background-color: #2c3e50; /* Retained original color */
+  padding: 10px 20px;
+  background-color: #2c3e50;
   color: #fff;
   z-index: 1000; /* Ensure it's above other elements */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* Nav Left styles */
 .nav-left {
   display: flex;
   align-items: center;
 }
 
+/* Nav Right styles */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 25px; /* Add some space between buttons */
+  gap: 20px; /* Add some space between buttons */
 }
 
+/* Logo link styles */
 .logo-link {
   text-decoration: none;
   color: #fff;
-  display: flex;
-  align-items: center;
 }
 
+/* Coast Guard Logo styles */
 .coast-guard-logo {
-  height: 60px;
-  margin-right: 15px;
+  height: 50px;
+  margin-right: 10px;
 }
 
+/* App Title styles */
 .app-title {
-  font-size: 2em;
+  font-size: 1.8em;
   font-weight: bold;
 }
 
+/* Header button styles */
 .header-button {
   color: #fff;
   text-decoration: none;
   font-weight: bold;  
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .header-button:hover {
-  background-color: #f39c12; /* Change background color on hover */
-  color: #fff; /* Ensure text remains white */
+  color: #f39c12; /* Change color on hover */
 }
 
+/* Logout button styles */
 .logout-btn {
   color: #fff;
-  background-color: #e74c3c; /* Red background for logout button */
+  background-color: transparent;
   border: none;
-  padding: 10px 15px;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .logout-btn:hover {
-  background-color: #c0392b; /* Darker red on hover */
+  color: #f39c12; /* Change color on hover */
 }
 
 .spacer {
-  height: 80px; /* Adjust the height for desired spacing */
+  height: 100px; /* Adjust the height for desired spacing */
 }
 
 /* Main content styles */
