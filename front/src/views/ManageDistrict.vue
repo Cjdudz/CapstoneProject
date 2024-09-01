@@ -91,6 +91,7 @@ export default {
   { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
   { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
   { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
+  { text: 'Add Content', icon: 'mdi-plus', route: '/add-content' },
       ],
       coastGuardDistricts: [],
       newDistrict: { name: '', description: '' },

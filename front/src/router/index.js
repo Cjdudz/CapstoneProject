@@ -15,6 +15,10 @@ const routes = [
     component: () => import('@/views/HomeView.vue'),
   },
   {
+    path: '/Addcontent',
+    component: () => import('@/views/Changecontent.vue'),
+  },
+  {
     path: '/Tryform',
     name: 'tryform',
     component: () => import('@/views/Tryform.vue'),
