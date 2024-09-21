@@ -81,7 +81,7 @@ export default {
 
 <style scoped>
 .background {
-  background: url('C:\laragon\www\CapstoneProject\front\dist\img\bpgng.png'), linear-gradient(135deg, #536dfe 0%, #1e88e5 100%);
+  
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

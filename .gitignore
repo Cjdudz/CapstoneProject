@@ -21,3 +21,38 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# CodeIgniter 4 specific directories and files
+/vendor/*
+/writable/*
+/public/uploads/*
+/env
+
+# Ignore Composer dependencies
+composer.lock
+
+# Ignore environment specific files
+.env
+.env.*
+
+# IDE or editor specific directories/files
+/.vscode/
+/.idea/
+/*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log and cache files
+*.log
+*.cache
+
+# Ignore node_modules if you're using frontend tooling
+/node_modules/
+/npm-debug.log
+
+# Ignore build files (if applicable)
+/dist/
+
+/front/backend/writable/uploads/*.png
