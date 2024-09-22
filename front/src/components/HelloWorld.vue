@@ -13,7 +13,7 @@
         <li v-for="newsItem in news" :key="newsItem.id" class="news-item">
           <h3>{{ newsItem.title }}</h3>
           <p>{{ newsItem.content }}</p>
-          <p><strong>Date:</strong> {{ newsItem.date }}</p>
+          <p><strong>Date:</strong> {{ formatDate(newsItem.created_at) }}</p>
         </li>
       </ul>
     </section>
@@ -24,7 +24,7 @@
         <li v-for="updateItem in updates" :key="updateItem.id" class="update-item">
           <h3>{{ updateItem.title }}</h3>
           <p>{{ updateItem.content }}</p>
-          <p><strong>Date:</strong> {{ updateItem.date }}</p>
+          <p><strong>Date:</strong> {{ formatDate(updateItem.created_at) }}</p>
         </li>
       </ul>
     </section>
@@ -44,7 +44,22 @@ export default {
     this.fetchNews();
     this.fetchUpdates(); // Call fetchUpdates() when the component is mounted
   },
-  methods: {
+  methods: { formatDate(dateString) {
+    const date = new Date(dateString);
+
+    // Format the date options
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true, // Ensures 12-hour format
+    };
+
+    // Use Intl.DateTimeFormat for localized formatting
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  },
     fetchNews() {
       axios.get('/api/ShowNews')
         .then(response => {

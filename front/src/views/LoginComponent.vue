@@ -1,66 +1,3 @@
-<template>
-  <v-app>
-    <div class="background">
-      <v-container class="login-container" fluid fill-height>
-        <v-row justify="center" align="center">
-          <v-col cols="12" sm="8" md="6" lg="4">
-            <v-card class="login-card rounded">
-              <v-card-title class="title">Login</v-card-title>
-              <v-card-text class="form">
-                <v-form @submit.prevent="login">
-                  <v-text-field
-                    v-model="username"
-                    label="Username"
-                    outlined
-                    dense
-                    color="white"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="password"
-                    label="Password"
-                    type="password"
-                    outlined
-                    dense
-                    color="white"
-                  ></v-text-field>
-                  <v-btn
-                    type="submit"
-                    block
-                    class="login-button color--success"
-                    :disabled="!username || !password"
-                    >Login</v-btn
-                  >
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <router-link to="/forgot-password" class="forgot-password"
-                  >Forgot Password?</router-link
-                >
-              </v-card-actions>
-              <v-card-actions>
-                <router-link
-                  v-if="!isAuthenticated"
-                  to="/registercomponent"
-                  class="register-link"
-                  >Don't have an account? Register here</router-link
-                >
-              </v-card-actions>
-              <v-alert
-                v-if="message"
-                type="error"
-                dismissible
-                class="error-message"
-              >
-                {{ message }}
-              </v-alert>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
-  </v-app>
-</template>
-
 <script>
 import axios from 'axios';
 
@@ -109,65 +46,155 @@ export default {
 };
 </script>
 
+<template>
+  <v-app>
+    <div class="background">
+      <v-container class="login-container" fluid fill-height>
+        <v-row>
+          <!-- Larger login form with rounded corners -->
+          <v-col cols="12" sm="8" md="6" lg="5" class="login-col">
+            <v-card class="login-card rounded-xl">
+              <v-card-title class="title">Login</v-card-title>
+              <v-card-text class="form">
+                <v-form @submit.prevent="login">
+                  <v-text-field
+                    class="bold-label"
+                    v-model="username"
+                    label="Username"
+                    outlined
+                    dense
+                    color="black"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    label="Password"
+                    type="password"
+                    outlined
+                    dense
+                    color="black"
+                  ></v-text-field>
+                  <v-btn
+                    type="submit"
+                    block
+                    class="login-button color--success"
+                    :disabled="!username || !password"
+                    >Login</v-btn>
+                </v-form>
+              </v-card-text>
+              <v-card-actions class="center-links">
+                <router-link to="/forgot-password" class="forgot-password"
+                  >Forgot Password?</router-link
+                >
+              </v-card-actions>
+              <v-card-actions class="center-links">
+                <router-link
+                  v-if="!isAuthenticated"
+                  to="/registercomponent"
+                  class="register-link"
+                  >Don't have an account? Register here</router-link
+                >
+              </v-card-actions>
+              <v-alert
+                v-if="message"
+                type="error"
+                dismissible
+                class="error-message"
+              >
+                {{ message }}
+              </v-alert>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+  </v-app>
+</template>
+
 <style scoped>
 .background {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('C:/laragon/www/CapstoneProject/front/public/img/pcga-loginpage.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100vh; /* Full-page background */
 }
 
 .login-container {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Align to the right */
+  padding-left: 150px; /* Shift form slightly to the right */
+}
+
+.login-col {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px; /* Increased padding */
 }
 
 .login-card {
-  border-radius: 10px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 20px; /* Rounded corners for the login form */
+  width: 100%; /* Take the full width of the column */
+  background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque for better contrast */
+  border: 2px solid #005cb2; /* Adjusted blue for stronger contrast */
+  box-shadow: none; /* Removed shadow */
+  padding: 20px; /* Padding inside the card */
 }
 
 .title {
   text-align: center;
-  color: #1976d2;
+  color: #005cb2; /* Adjusted blue for text */
   margin-bottom: 16px;
   font-size: 25px;
   font-weight: 700;
+  padding-bottom: 10px; /* Added padding to the title */
 }
 
 .form {
-  padding: 20px;
+  padding: 50px;
 }
 
 .login-button {
   margin-top: 16px;
-  background-color: #3f51b5;
+  background-color: #005cb2; /* Stronger blue color */
   color: #fff;
   border: none;
   border-radius: 5px;
 }
 
 .login-button:hover {
-  background-color: #303f9f;
+  background-color: #004080; /* Darker hover effect */
 }
 
 .forgot-password,
 .register-link {
   text-align: center;
   margin-top: 16px;
-  color: #1976d2;
+  color: #005cb2;
   text-decoration: none;
-  display: inline-block;
+  display: block; /* Display as block elements to center them */
 }
 
 .forgot-password:hover,
 .register-link:hover {
-  color: #296540;
+  color: #004080;
+}
+
+.center-links {
+  justify-content: center; /* Center the links */
+  display: flex;
+  width: 100%;
 }
 
 .error-message {
   margin-top: 16px;
   color: #f44336;
+}
+
+.bold-label .v-label {
+  font-weight: bold;
 }
 </style>

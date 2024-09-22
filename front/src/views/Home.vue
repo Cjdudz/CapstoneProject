@@ -125,12 +125,13 @@ box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
 .hero {
-margin-bottom: 40px;
-background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('C:\laragon\www\CapstoneProject\front\public/img/bpgng.png');
-background-size: cover;
-color: #fff;
-padding: 60px 0;
-text-align: center;
+    margin-bottom: 40px;
+    background: #294054;
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    
 }
 
 .hero h1 {

@@ -15,7 +15,7 @@
     <main>
       <section class="hero">
         <div class="hero-image">
-          <img src="/img/download.jpg" alt="Philippine Coast Guard Auxiliary Hero Image" />
+          <img src="/img/pcg-ranks.webp" alt="Philippine Coast Guard Auxiliary Hero Image" />
         </div>
 
         <div class="hero-text">

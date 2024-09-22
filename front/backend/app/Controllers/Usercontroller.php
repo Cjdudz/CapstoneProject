@@ -19,6 +19,7 @@ class UserController extends ResourceController
     
         $data = [
             'email' => $this->request->getVar('email'),
+            'mobile_number' => $this->request->getVar('number'),
             'username' => $this->request->getVar('username'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'token' => $token,

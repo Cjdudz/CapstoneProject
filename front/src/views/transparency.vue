@@ -212,10 +212,12 @@ export default {
 }
 
 .section-title {
+  background: #294054;
   font-size: 2.5em;
   font-weight: bold;
-  color: #2c3e50;
+  color: #fff;
   text-align: center;
+  padding: 60px 0;
   margin-bottom: 30px;
   text-transform: uppercase; /* Make text uppercase */
   letter-spacing: 2px; /* Add spacing between letters */

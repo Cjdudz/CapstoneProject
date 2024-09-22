@@ -44,59 +44,28 @@
         <!-- User Appointments Table -->
         <h2 class="table-title">User Appointments</h2>
         <table class="user-table">
-          <thead>
-            <tr>
-              <!-- New Fields -->
-              <th class="table-header">ID No</th>
-              <th class="table-header">Auxiliary District</th>
-              <th class="table-header">Squadron No</th>
-              <th class="table-header">First Name</th>
-              <th class="table-header">Middle Name</th>
-              <th class="table-header">Last Name</th>
-              <th class="table-header">Rank Designation</th>
-              <th class="table-header">Home Address</th>
-              <th class="table-header">Marital Status</th>
-              <th class="table-header">Weight</th>
-              <th class="table-header">Eyes</th>
-              <th class="table-header">Height</th>
-              <th class="table-header">Hair</th>
-              <th class="table-header">Blood Type</th>
-              <th class="table-header">Sex</th>
-              <th class="table-header">Religion</th>
-              <th class="table-header">Date of Birth</th>
-              <th class="table-header">Identifying Data</th>
-              <th class="table-header">Emergency Contact</th>
-              <th class="table-header">Emergency Contact Address</th>
-              <th class="table-header">Emergency Contact Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="appointment in appointments" :key="appointment.id">
-              <!-- Display appointment data -->
-              <td>{{ appointment.idNo }}</td>
-              <td>{{ appointment.auxiliaryDistrict }}</td>
-              <td>{{ appointment.squadronNo }}</td>
-              <td>{{ appointment.firstName }}</td>
-              <td>{{ appointment.middleName }}</td>
-              <td>{{ appointment.lastName }}</td>
-              <td>{{ appointment.rankDesignationAuthority }}</td>
-              <td>{{ appointment.homeAddress }}</td>
-              <td>{{ appointment.maritalStatus }}</td>
-              <td>{{ appointment.weight }}</td>
-              <td>{{ appointment.eyes }}</td>
-              <td>{{ appointment.height }}</td>
-              <td>{{ appointment.hair }}</td>
-              <td>{{ appointment.bloodType }}</td>
-              <td>{{ appointment.sex }}</td>
-              <td>{{ appointment.religion }}</td>
-              <td>{{ appointment.dateOfBirth }}</td>
-              <td>{{ appointment.identifyingData }}</td>
-              <td>{{ appointment.emergencyContact }}</td>
-              <td>{{ appointment.emergencyContactAddress }}</td>
-              <td>{{ appointment.emergencyContactNumber }}</td>
-            </tr>
-          </tbody>
-        </table>
+  <thead>
+    <tr>
+      <th class="table-header">ID</th>
+      <th class="table-header">Type of Application</th>
+      <th class="table-header">Last Name</th>
+      <th class="table-header">First Name</th>
+      <th class="table-header">Middle Name</th>
+      <!-- Add more headers here if necessary -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="appointment in appointments" :key="appointment.ID">
+      <!-- Display correct appointment data -->
+      <td>{{ appointment.ID }}</td>
+      <td>{{ appointment.TypeOfApplication }}</td>
+      <td>{{ appointment.LastName }}</td>
+      <td>{{ appointment.FirstName }}</td>
+      <td>{{ appointment.MiddleName }}</td>
+      <!-- Add more table data cells if necessary -->
+    </tr>
+  </tbody>
+</table>
       </div>
     </v-main>
   </v-app>,
@@ -125,44 +94,47 @@ export default {
   },
   mounted() {
     this.fetchAppointments();
+    console.log(this.appointments);
   },
   methods: {
-    async fetchAppointments() {
-      this.loading = true;
-      try {
-        const response = await axios.get('/api/data');
-        this.appointments = response.data.personalInformation;
-      } catch (error) {
-        this.handleError(error, 'Error fetching appointments');
-      } finally {
-        this.loading = false;
-      }
-    },
-    handleError(error, defaultMessage) {
-      console.error(defaultMessage, error);
-      if (error.response && error.response.data && error.response.data.message) {
-        this.error = error.response.data.message;
-      } else {
-        this.error = defaultMessage;
-      }
-    },
-    onMouseEnter() {
-      this.drawer = true;
-    },
-    onMouseLeave() {
-      this.drawer = false;
-    },
-    logout() {
-      // Handle logout functionality
-      console.log('Logout button clicked');
-      // Example: Redirect to login page
-      this.$router.push('/LoginComponent');
-    },
-    navigateTo(route) {
-      this.$router.push(route);
-      this.drawer = false;
-    },
+  async fetchAppointments() {
+    this.loading = true;
+    try {
+      const response = await axios.get('/api/data');
+      this.appointments = response.data.personalInformation;
+      // Log the appointments after data is fetched
+      console.log(this.appointments);
+    } catch (error) {
+      this.handleError(error, 'Error fetching appointments');
+    } finally {
+      this.loading = false;
+    }
   },
+  handleError(error, defaultMessage) {
+    console.error(defaultMessage, error);
+    if (error.response && error.response.data && error.response.data.message) {
+      this.error = error.response.data.message;
+    } else {
+      this.error = defaultMessage;
+    }
+  },
+  onMouseEnter() {
+    this.drawer = true;
+  },
+  onMouseLeave() {
+    this.drawer = false;
+  },
+  logout() {
+    // Handle logout functionality
+    console.log('Logout button clicked');
+    // Example: Redirect to login page
+    this.$router.push('/LoginComponent');
+  },
+  navigateTo(route) {
+    this.$router.push(route);
+    this.drawer = false;
+  },
+},
 };
 </script>
 
