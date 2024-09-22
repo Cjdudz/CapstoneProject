@@ -1,58 +1,64 @@
 <?php
-use CodeIgniter\Email\Email;
 
-/**
- * Sends an email using the global configuration.
- *
- * @param string $to       Recipient email address
- * @param string $subject  Email subject
- * @param string $message  Email message body (HTML or plain text)
- * @param string $from     Sender email address (optional, will use global config if not provided)
- * @param string $fromName Sender name (optional, will use global config if not provided)
- * @param array  $cc       CC recipients (optional)
- * @param array  $bcc      BCC recipients (optional)
- *
- * @return bool Returns TRUE on success, FALSE on failure
- */
-function send_email($to, $subject, $message, $from = null, $fromName = null, $cc = [], $bcc = [])
-{
-    // Load email config from app/Config/Email.php
-    $config = config('Email');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-    // Get an instance of the email service
-    $email = \Config\Services::email();
+if (!function_exists('send_email_batch')) {
+    function send_email($recipients, $subject, $body)
+    {
+        $config = config('Email');
+        // Load the email configuration from environment variables
+        $fromEmail = $config->SMTPUser;
+        $fromName  = "PCGA 505th";
+        $smtpHost  = $config->SMTPHost;
+        $smtpUser  = $config->SMTPUser;
+        $smtpPass  = $config->SMTPPass;
+        $smtpPort  = $config->SMTPPort;
+        $smtpCrypto = $config->SMTPCrypto;
 
-    // Initialize email with global configuration
-    $email->initialize([
-        'protocol' => $config->protocol,
-        'SMTPHost' => $config->SMTPHost,
-        'SMTPUser' => $config->SMTPUser,
-        'SMTPPass' => $config->SMTPPass,
-        'SMTPPort' => $config->SMTPPort,
-        'mailType' => $config->mailType,
-        'charset'  => $config->charset,
-        'newline'  => $config->newline,
-        'wordWrap' => $config->wordWrap,
-    ]);
+        // Create an instance of PHPMailer
+        $mail = new PHPMailer(true);
 
-    // Set email parameters
-    $email->setFrom($from ?? $config->fromEmail, $fromName ?? $config->fromName);
-    $email->setTo($to);
-    if (!empty($cc)) {
-        $email->setCC($cc);
-    }
-    if (!empty($bcc)) {
-        $email->setBCC($bcc);
-    }
-    $email->setSubject($subject);
-    $email->setMessage($message);
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host       = $smtpHost;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $smtpUser;
+            $mail->Password   = $smtpPass;
+            $mail->SMTPSecure = $smtpCrypto;
+            $mail->Port       = $smtpPort;
 
-    // Send the email and return the status
-    if ($email->send()) {
-        return true;
-    } else {
-        // Log the error if needed
-        log_message('error', $email->printDebugger(['headers']));
-        return false;
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            
+            // Set the sender
+            $mail->setFrom($fromEmail, $fromName);
+
+            // Iterate through recipients and send emails
+            foreach ($recipients as $to) {
+                $mail->clearAddresses();  // Clear previous recipient to avoid re-sending
+                $mail->addAddress($to);   // Add new recipient
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+                $mail->Body    = $body;
+
+                // Send the email
+                $mail->send();
+            }
+
+            return true;
+        } catch (Exception $e) {
+            // Handle error, e.g., log or display an error message
+            log_message('error', "Batch email error for recipient: {$to}. Mailer Error: {$mail->ErrorInfo}");
+            return false;
+        }
     }
 }

@@ -6,6 +6,7 @@
             <v-alert v-if="message === 'error'" type="error" dense dismissible>
               Invalid response
             </v-alert>
+            <v-text-field v-model="email" label="Email" required dense></v-text-field>
             <v-text-field v-model="username" label="Username" required dense></v-text-field>
             <v-text-field v-model="password" label="Password" type="password" required dense></v-text-field>
             <v-text-field v-model="passwordConfirm" label="Confirm Password" type="password" required dense></v-text-field>
@@ -33,6 +34,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      email: '',
       username: '',
       password: '',
       passwordConfirm: '',
@@ -44,6 +46,7 @@ export default {
       if (this.password === this.passwordConfirm) {
         try {
           const response = await axios.post('api/register', {
+            email: this.email,
             username: this.username,
             password: this.password,
             role: 'user', // Hardcoded role as 'user'

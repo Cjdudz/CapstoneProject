@@ -27,7 +27,7 @@
 import axios from 'axios';
 
 export default {
-  data() {
+  data: () => {
     return {
       files: {
         birthCertificate: { label: 'Birth Certificate', file: null },
@@ -55,8 +55,9 @@ export default {
 
       axios.post('/api/upload', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data',
+          'Authorization': this.getAuthToken(),
+        },
       })
       .then(response => {
         this.success = true;
@@ -67,7 +68,7 @@ export default {
       })
       .catch(error => {
         this.success = false;
-        this.error = error.response.data.errors || 'An error occurred.';
+        this.error = error.response?.data?.errors || 'An error occurred.';
       });
     },
     resetForm() {
@@ -76,6 +77,17 @@ export default {
         this.files[key].file = null;
       }
       this.success = false;
+    },
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+      return null;
+    },
+    getAuthToken() {
+      return this.getCookie('auth_token');
     },
   },
 }

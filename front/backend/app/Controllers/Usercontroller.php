@@ -18,6 +18,7 @@ class UserController extends ResourceController
         $userRole = $this->request->getVar('role'); // Get the selected user role
     
         $data = [
+            'email' => $this->request->getVar('email'),
             'username' => $this->request->getVar('username'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'token' => $token,

@@ -64,3 +64,4 @@ $routes->get('/api/download/(:any)', 'FormController::download/$1');
 $routes->get('/api/data', 'FormController::fetchData');
 
 $routes->get('/api/send-email', 'Email::sendEmail');
+$routes->get('/api/send-sms', 'Email::sendSMS');

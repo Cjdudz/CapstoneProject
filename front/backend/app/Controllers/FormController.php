@@ -9,6 +9,7 @@ use App\Models\EmploymentOccupationalBackgroundModel;
 use App\Models\AdditionalDataModel;
 use App\Models\EmergencyContactInformationModel;
 use App\Models\UploadModel;
+use App\Models\UserModel;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
@@ -76,6 +77,9 @@ class FormController extends ResourceController
     {
         $files = $this->request->getFiles();
         $fileData = [];
+        $token = $this->request->getHeaderLine('Authorization');
+        $userModel = new UserModel();
+        $user = $userModel->where('token',$token)->first();
 
         foreach ($files as $key => $file) {
             if ($file->isValid() && !$file->hasMoved()) {
@@ -92,10 +96,14 @@ class FormController extends ResourceController
 
                 $this->uploadModel->insert($data);
                 $fileData[] = $data;
+
             } else {
                 return $this->response->setStatusCode(400)->setJSON(['errors' => 'Failed to upload file: ' . $file->getErrorString()]);
             }
         }
+        
+        $body =  view('emails/application', ['userName' => $user['username']]);
+        send_email([$user['email']], "Application Form - Completed", $body);
 
         return $this->response->setStatusCode(200)->setJSON(['message' => 'Files uploaded successfully', 'files' => $fileData]);
     }
