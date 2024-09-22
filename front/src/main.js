@@ -16,7 +16,7 @@ createApp(App)
   .mount('#app')
 
 // Set base URL for axios
-axios.defaults.baseURL = "http://backend.test/backend/public";
+axios.defaults.baseURL = "http://backend.test";
 
 // Load fonts
 loadFonts();

@@ -62,3 +62,5 @@ $routes->get('/api/files', 'FormController::files');
 $routes->get('/api/files1', 'FormController::upload1');
 $routes->get('/api/download/(:any)', 'FormController::download/$1');
 $routes->get('/api/data', 'FormController::fetchData');
+
+$routes->get('/api/send-email', 'Email::sendEmail');
