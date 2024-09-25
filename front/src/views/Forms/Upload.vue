@@ -62,7 +62,7 @@ export default {
       .then(response => {
         this.success = true;
         this.error = '';
-
+        this.$router.push({ name: 'NavBar' });
         // Reset form after successful upload
         this.resetForm();
       })

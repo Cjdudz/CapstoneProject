@@ -1,8 +1,3 @@
-
-Edit
-Run
-Full Screen
-Copy code
 <template>
   <!-- Navigation bar -->
   <nav class="navbar">
@@ -19,7 +14,6 @@ Copy code
       <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
       <router-link to="/Disctricts" class="header-button">Coast Guard Districts</router-link>
       <router-link to="/LandingApp" class="header-button">Apply Online</router-link>
-      <router-link to="/Userstatus" class="header-button">User Status</router-link>
       <button @click="logout" class="header-button logout-btn">Logout</button>
     </div>
   </nav>
@@ -32,10 +26,6 @@ Copy code
     </div>
 
     <!-- Navigation buttons -->
-    <div class="pagination-buttons">
-      <button @click.prevent="prevStep" :disabled="step === 1" class="pagination-button prev">Previous</button>
-      <button @click.prevent="nextStep" :disabled="isNextButtonDisabled" class="pagination-button next">Next</button>
-    </div>
   </div>
 </template>
 
@@ -63,7 +53,7 @@ export default {
   },
   data() {
     return {
-      step: 1,
+      step: 8,
       isEmergencyValid: false
     };
   },

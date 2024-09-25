@@ -203,21 +203,20 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      // Assuming you have a backend URL for form submission
-      const submitURL = 'http://localhost:8080/api/submitAll';
+    async submitForm() {
+      try {
+        // Send form data to CodeIgniter backend
+        const response = await axios.post('/api/submitAll', this.personalInfo);
 
-      // Post the form data using Axios
-      axios.post(submitURL, this.personalInfo)
-        .then(response => {
-          console.log('Form submitted successfully:', response.data);
-          // Optionally, you can perform actions based on the response
-       })
-        .catch(error => {
-          console.error('Error submitting form:', error);
-          // Optionally, you can handle errors here
-        });
-    }
+        // Assuming the backend responds with a success message
+        console.log('Form submitted successfully:', response.data);   
+        this.$emit('next');
+        // Reset the form after successful submission
+        this.resetForm();
+      } catch (error) {
+        console.error('Error submitting form:', error.message);
+      }
+    },
   }
 }
 </script>

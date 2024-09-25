@@ -10,32 +10,67 @@ export default {
       password: '',
       passwordConfirm: '',
       message: '',
+      passwordError: '',
     };
   },
   methods: {
     async register() {
+      // Check if passwords match
       if (this.password === this.passwordConfirm) {
-        try {
-          const response = await axios.post('api/register', {
-            email: this.email,
-            number: this.mobileNumber,
-            username: this.username,
-            password: this.password,
-            role: 'user', // Hardcoded role as 'user'
-          });
+        // Check if password is valid
+        if (this.validatePassword(this.password)) {
+          try {
+            const response = await axios.post('api/register', {
+              email: this.email,
+              number: this.mobileNumber,
+              username: this.username,
+              password: this.password,
+              role: 'user', // Hardcoded role as 'user'
+            });
 
-          if (response.data.msg === 'okay') {
-            alert('Registered successfully');
-            this.$router.push('/LoginComponent');
-          } else {
-            this.message = 'registrationFailed';
+            if (response.data.msg === 'okay') {
+              alert('Registered successfully');
+              this.$router.push('/LoginComponent');
+            } else {
+              this.message = 'registrationFailed';
+            }
+          } catch (error) {
+            console.error('Error during registration:', error);
+            this.message = 'error';
           }
-        } catch (error) {
-          console.error('Error during registration:', error);
-          this.message = 'error';
+        } else {
+          this.message = 'invalidPassword';
         }
       } else {
         this.message = 'passwordMismatch';
+      }
+    },
+    // Password validation function
+    validatePassword(password) {
+      const minLength = 8;
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumbers = /\d/.test(password);
+      const hasSpecialChar = /[!@#\$%\^\&*\)\(+=._-]/.test(password);
+
+      if (password.length < minLength) {
+        this.passwordError = `Password must be at least ${minLength} characters long.`;
+        return false;
+      } else if (!hasUpperCase) {
+        this.passwordError = 'Password must contain at least one uppercase letter.';
+        return false;
+      } else if (!hasLowerCase) {
+        this.passwordError = 'Password must contain at least one lowercase letter.';
+        return false;
+      } else if (!hasNumbers) {
+        this.passwordError = 'Password must contain at least one number.';
+        return false;
+      } else if (!hasSpecialChar) {
+        this.passwordError = 'Password must contain at least one special character.';
+        return false;
+      } else {
+        this.passwordError = ''; // Clear error message if valid
+        return true;
       }
     },
   },
@@ -47,7 +82,6 @@ export default {
     <div class="background">
       <v-container class="login-container" fluid fill-height>
         <v-row>
-          <!-- Larger registration form with rounded corners -->
           <v-col cols="12" sm="8" md="6" lg="5" class="login-col">
             <v-card class="login-card rounded-xl">
               <v-card-title class="title">Register</v-card-title>
@@ -100,6 +134,7 @@ export default {
                     dense
                     outlined
                     color="black"
+                    :error-messages="passwordError"
                   ></v-text-field>
                   <!-- Confirm Password field -->
                   <v-text-field
@@ -121,6 +156,16 @@ export default {
                   >
                     Passwords do not match
                   </v-alert>
+                  <!-- Invalid Password Alert -->
+                  <v-alert
+                    v-if="message === 'invalidPassword'"
+                    type="error"
+                    dense
+                    dismissible
+                    class="error-message"
+                  >
+                    {{ passwordError }}
+                  </v-alert>
                   <!-- Registration Failed Alert -->
                   <v-alert
                     v-if="message === 'registrationFailed'"
@@ -141,7 +186,6 @@ export default {
                   >
                 </v-form>
               </v-card-text>
-              <!-- Centering the already have an account and login link -->
               <v-card-actions class="center-links">
                 <div class="center-links-text">
                   <span class="caption">Already have an account?</span>

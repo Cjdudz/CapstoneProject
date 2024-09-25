@@ -58,6 +58,7 @@ export default {
           }
         });
         console.log('Form submitted successfully');
+        this.$emit('next');
         // Reset form fields
         this.resetForm();
       } catch (error) {

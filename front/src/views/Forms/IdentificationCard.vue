@@ -46,8 +46,10 @@
 import axios from 'axios';
 
 export default {
+  props: ['step'], 
   data() {
     return {
+      step: 1,
       formData: {
         idNo: '',
         auxiliaryDistrict: '',
@@ -81,8 +83,8 @@ export default {
         const response = await axios.post('/api/SubmitForm', this.formData);
 
         // Assuming the backend responds with a success message
-        console.log('Form submitted successfully:', response.data);
-
+        console.log('Form submitted successfully:', response.data);   
+        this.$emit('next');
         // Reset the form after successful submission
         this.resetForm();
       } catch (error) {

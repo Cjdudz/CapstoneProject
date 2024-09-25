@@ -50,7 +50,7 @@ export default {
 
         // Assuming the backend responds with a success message
         console.log('Form submitted successfully:', response.data);
-
+        this.$emit('next');
         // Reset the form after successful submission
         this.resetForm();
       } catch (error) {

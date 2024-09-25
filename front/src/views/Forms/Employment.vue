@@ -46,6 +46,7 @@ export default {
         const response = await axios.post('/api/passFormE', this.form);
         console.log('Form submitted successfully');
         // Reset form fields
+        this.$emit('next');
         this.resetForm();
       } catch (error) {
         console.error('Error submitting form:', error);

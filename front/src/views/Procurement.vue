@@ -32,15 +32,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link @click="redirectTo('/Userstatus')">
-          <v-list-item-icon>
-            <v-icon>mdi-account-check</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>User Status</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
         <v-list-item v-if="isLoggedIn" @click="logout">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
