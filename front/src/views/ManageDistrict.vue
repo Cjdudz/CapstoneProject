@@ -1,82 +1,3 @@
-<template>
-  <div>
-    <v-navigation-drawer app v-model="drawer">
-      <v-list>
-        <!-- Navigation items -->
-        <v-list-item v-for="(item, index) in items" :key="index" link>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title @click="navigateTo(item.route)">
-              {{ item.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <!-- Logout Button -->
-        <v-list-item>
-          <v-row>
-            <v-col>
-              <v-list-item-action>
-                <v-btn icon @click="logout">
-                  <v-icon>mdi-logout</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-col>
-          </v-row>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app>
-      <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
-        <v-app-bar-nav-icon v-if="!drawer"></v-app-bar-nav-icon>
-      </div>
-      <v-toolbar-title class="custom-title">PCGA</v-toolbar-title>
-    </v-app-bar>
-
-    <v-main>
-      <v-container>
-        <!-- Admin Panel Content -->
-        <div class="admin-panel">
-          <h2>Coast Guard Districts</h2>
-          <ul class="district-list">
-            <li v-for="(district, index) in coastGuardDistricts" :key="index" class="district-item">
-              <span class="district-name">{{ district.name }}</span>
-              <span class="district-name">{{ district.description }}</span>
-              <button @click="editDistrict(index)" class="edit-btn">Edit</button>
-              <button @click="deleteDistrict(index)" class="delete-btn">Delete</button>
-            </li>
-          </ul>
-
-          <h3>Add New District</h3>
-          <form @submit.prevent="addDistrict" class="add-district-form">
-            <label for="newDistrictName">District Name:</label>
-            <input type="text" id="newDistrictName" v-model.trim="newDistrict.name" required class="input-field">
-            <label for="newDistrictDescription">District Description:</label>
-            <input type="text" id="newDistrictDescription" v-model.trim="newDistrict.description" class="input-field">
-            <button type="submit" class="submit-btn">Add District</button>
-          </form>
-
-          <!-- Edit District Modal -->
-          <div v-if="isEditModalOpen" class="modal">
-            <div class="modal-content">
-              <span class="close" @click="closeEditModal">&times;</span>
-              <h3>Edit District</h3>
-              <label for="editDistrictName">District Name:</label>
-              <input type="text" id="editDistrictName" v-model.trim="editedDistrict.name" required class="input-field">
-              <label for="editDistrictDescription">District Description:</label>
-              <input type="text" id="editDistrictDescription" v-model.trim="editedDistrict.description" class="input-field">
-              <button @click="saveEditedDistrict" class="submit-btn">Save</button>
-            </div>
-          </div>
-        </div>
-      </v-container>
-    </v-main>
-  </div>
-</template>
-
 <script>
 import axios from 'axios';
 
@@ -175,6 +96,107 @@ export default {
 };
 </script>
 
+<template>
+  <div>
+    <v-navigation-drawer app v-model="drawer">
+      <v-list>
+        <!-- Navigation items -->
+        <v-list-item v-for="(item, index) in items" :key="index" link>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title @click="navigateTo(item.route)">
+              {{ item.text }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Logout Button -->
+        <v-list-item>
+          <v-list-item-action>
+            <v-btn icon @click="logout">
+              <v-icon>mdi-logout</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+        <v-app-bar-nav-icon v-if="!drawer"></v-app-bar-nav-icon>
+      </div>
+      <v-toolbar-title class="custom-title">PCGA</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <!-- Admin Panel Content -->
+        <div class="admin-panel">
+          <h2>Coast Guard Districts</h2>
+          <v-row>
+            <v-col v-for="(district, index) in coastGuardDistricts" :key="index" cols="12" md="6">
+              <v-card>
+                <v-card-title>{{ district.name }}</v-card-title>
+                <v-card-subtitle>{{ district.description }}</v-card-subtitle>
+                <v-card-actions>
+                  <v-btn small @click="editDistrict(index)" color="primary">Edit</v-btn>
+                  <v-btn small @click="deleteDistrict(index)" color="red">Delete</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <v-divider class="my-5"></v-divider>
+
+          <h3>Add New District</h3>
+          <v-form @submit.prevent="addDistrict">
+            <v-text-field
+              label="District Name"
+              v-model.trim="newDistrict.name"
+              required
+              class="mb-3"
+            ></v-text-field>
+            <v-text-field
+              label="District Description"
+              v-model.trim="newDistrict.description"
+              required
+              class="mb-3"
+            ></v-text-field>
+            <v-btn type="submit" color="success">Add District</v-btn>
+          </v-form>
+
+          <!-- Edit District Modal -->
+          <v-dialog v-model="isEditModalOpen" persistent max-width="600px">
+            <v-card>
+              <v-card-title>Edit District</v-card-title>
+              <v-card-text>
+                <v-form>
+                  <v-text-field
+                    label="District Name"
+                    v-model.trim="editedDistrict.name"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    label="District Description"
+                    v-model.trim="editedDistrict.description"
+                  ></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn text @click="closeEditModal">Cancel</v-btn>
+                <v-btn text color="primary" @click="saveEditedDistrict">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+      </v-container>
+    </v-main>
+  </div>
+</template>
+
 <style scoped>
 /* Navigation Drawer Styles */
 .v-navigation-drawer {
@@ -209,83 +231,17 @@ export default {
   padding: 20px;
 }
 
-.district-list {
-  list-style: none;
-  padding: 0;
+.v-card {
+  margin-bottom: 16px;
 }
 
-.district-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+.v-btn {
+  margin-right: 8px;
 }
 
-.district-name {
-  flex: 1;
+.v-divider {
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
-.edit-btn,
-.delete-btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.add-district-form {
-  margin-top: 20px;
-}
-
-.input-field {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-}
-
-.submit-btn {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.modal {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 60%;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-}
 </style>

@@ -11,6 +11,8 @@ export default {
       passwordConfirm: '',
       message: '',
       passwordError: '',
+      showPassword: false,
+      showPasswordConfirm: false
     };
   },
   methods: {
@@ -125,26 +127,30 @@ export default {
                     outlined
                     color="black"
                   ></v-text-field>
-                  <!-- Password field -->
+                  <!-- Password field with eye icon toggle -->
                   <v-text-field
                     v-model="password"
+                    :type="showPassword ? 'text' : 'password'"
                     label="Password"
-                    type="password"
                     required
                     dense
                     outlined
                     color="black"
                     :error-messages="passwordError"
+                    :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                    @click:append="showPassword = !showPassword"
                   ></v-text-field>
-                  <!-- Confirm Password field -->
+                  <!-- Confirm Password field with eye icon toggle -->
                   <v-text-field
                     v-model="passwordConfirm"
+                    :type="showPasswordConfirm ? 'text' : 'password'"
                     label="Confirm Password"
-                    type="password"
                     required
                     dense
                     outlined
                     color="black"
+                    :append-icon="showPasswordConfirm ? 'mdi-eye-off' : 'mdi-eye'"
+                    @click:append="showPasswordConfirm = !showPasswordConfirm"
                   ></v-text-field>
                   <!-- Password Mismatch Alert -->
                   <v-alert
@@ -201,6 +207,9 @@ export default {
     </div>
   </v-app>
 </template>
+
+showPassword: false,
+      showPasswordConfirm: false
 
 <style scoped>
 .background {

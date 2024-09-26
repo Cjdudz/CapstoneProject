@@ -102,8 +102,8 @@ class FormController extends ResourceController
             }
         }
         
-        // $body =  view('emails/application', ['userName' => $user['username']]);
-        // send_email([$user['email']], "Application Form - Completed", $body);
+        $body =  view('emails/application', ['userName' => $user['username']]);
+        send_email([$user['email']], "Application Form - Completed", $body);
         // send_sms($user['mobile_number'], "Hi");
         return $this->response->setStatusCode(200)->setJSON(['message' => 'Files uploaded successfully', 'files' => $fileData]);
     }

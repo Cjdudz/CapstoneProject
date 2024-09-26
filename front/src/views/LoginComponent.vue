@@ -6,6 +6,7 @@ export default {
     username: '',
     password: '',
     message: '',
+    showPassword: false,
   }),
   methods: {
       async login() {
@@ -65,14 +66,19 @@ export default {
                     dense
                     color="black"
                   ></v-text-field>
+
+                  <!-- Password field with toggle visibility -->
                   <v-text-field
                     v-model="password"
+                    :type="showPassword ? 'text' : 'password'"
                     label="Password"
-                    type="password"
                     outlined
                     dense
                     color="black"
+                    :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                    @click:append="showPassword = !showPassword"
                   ></v-text-field>
+
                   <v-btn
                     type="submit"
                     block
@@ -81,6 +87,7 @@ export default {
                     >Login</v-btn>
                 </v-form>
               </v-card-text>
+
               <v-card-actions class="center-links">
                 <router-link to="/forgot-password" class="forgot-password"
                   >Forgot Password?</router-link

@@ -62,6 +62,7 @@ export default {
       .then(response => {
         this.success = true;
         this.error = '';
+        alert('Files uploaded successfully!');
         this.$router.push({ name: 'NavBar' });
         // Reset form after successful upload
         this.resetForm();

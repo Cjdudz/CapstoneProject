@@ -97,18 +97,25 @@ export default {
     closeModal() {
       this.selectedDistrict = null;
     },
-    fetchDistricts() {
-      this.loading = true;
-      axios.get("http://localhost:8080/api/ShowDistricts")
-        .then(response => {
-          this.districts = response.data;
-          this.loading = false;
-        })
-        .catch(error => {
-          console.error("Error fetching districts:", error);
-          this.loading = false;
-        });
-    },
+    async fetchDistricts() {
+  this.loading = true; // Start loading
+
+  try {
+    const response = await axios.get("api/ShowDistricts");
+
+    if (response.status === 200) {
+      this.districts = response.data; // Assign the data to districts
+    } else {
+      this.message = `Failed to fetch districts: ${response.status}`;
+      console.error('Failed to fetch districts:', response.status);
+    }
+  } catch (error) {
+    console.error("Error fetching districts:", error); // Error handling
+    this.message = 'Error fetching districts'; // Set an error message for the user
+  } finally {
+    this.loading = false; // Stop loading after fetching or error
+  }
+},
   }
 };
 </script>
