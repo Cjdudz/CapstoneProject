@@ -6,7 +6,7 @@ export default {
     username: '',
     password: '',
     message: '',
-    showPassword: false,
+    showPassword: false,  
   }),
   methods: {
       async login() {
@@ -89,7 +89,7 @@ export default {
               </v-card-text>
 
               <v-card-actions class="center-links">
-                <router-link to="/forgot-password" class="forgot-password"
+                <router-link to="/ForgotPass" class="forgot-password"
                   >Forgot Password?</router-link
                 >
               </v-card-actions>

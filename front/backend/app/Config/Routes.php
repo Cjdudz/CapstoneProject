@@ -65,3 +65,11 @@ $routes->get('/api/data', 'FormController::fetchData');
 
 $routes->get('/api/send-email', 'Email::sendEmail');
 $routes->get('/api/send-sms', 'Email::sendSMS');
+
+$routes->group('api', function ($routes) {
+$routes->get('test', 'PasswordResetController::requestReset');
+$routes->post('password-reset/request', 'PasswordResetController::requestReset');
+$routes->get('password-reset/verify/(:segment)', 'PasswordResetController::verifyToken/$1');
+$routes->post('password-reset/reset', 'PasswordResetController::resetPassword');
+});
+$routes->get('password-reset/reset/(:segment)', 'PasswordResetController::showResetPage/$1');
