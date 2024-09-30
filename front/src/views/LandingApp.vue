@@ -45,12 +45,21 @@
       return {
         requirements: [
           
-        { id: 1, text: 'Valid ID(if Not Valid Passport).' },
-          { id: 2, text: 'Valid NBI Clearance(Original and Copy).' },
-          { id: 3, text: 'Police Clearance and Barangay Clearance(Original Copy)' },
-          { id: 4, text: 'Duly Accomplished Member Aplication Form(4 Copies)' },
-          { id: 5, text: 'Four(4) Copies of 2x2 ID Picture with Red Background Officers - Green Background(Auxiliarists).' },
-          { id: 6, text: 'Additional Requirements: Letters of Recommendation/ Endorsement From Operation/ Support/ Technical Service/ Special Service Commands.' }
+        { id: 1, text: 'a. DAS Endoresment Letter' },
+          { id: 2, text: 'b. Certificate of Squadron Orientation' },
+          { id: 3, text: 'c. Duly Accomplished PCGA Application Form' },
+          { id: 4, text: 'd. Notarized Personal History Statement (PHS)' },
+          { id: 5, text: 'e. NBI Clearance (Original and one photocopy)' },
+          { id: 6, text: 'f. National Police Clearance (original); ' },
+          { id: 7, text: 'g. Barangay Clearance at place of residence (original);'},
+          { id: 8, text: 'h. Community Tax Certificate (original);'},
+          { id: 9, text: 'i. Drug Test Certificate'},
+          { id: 10, text: 'j. Physical Exam Result with X-Ray'},
+          { id: 11, text: 'k. Professional License, when appropriate (original for verification and one (1) photocopy)'},
+          { id: 12, text: 'l. Four (4) copies of 2x2 colored IP Picture with white background'},
+          { id: 13, text: 'm. Foreign applicants shall submit the following additional requirements:'},
+          
+
         ],
 
         steps: [

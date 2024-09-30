@@ -31,6 +31,8 @@
           <h1>Welcome to the Philippine Coast Guard Auxiliary</h1>
           <p>We are dedicated to supporting the Philippine Coast Guard in safeguarding our seas and maritime interests.</p>
           <p>Join us in our mission to ensure the safety and security of our waters.</p><br>
+          <p>We are honored to have you explore our online portal, where you can learn more about the dedicated volunteer arm of the Philippine Coast Guard. As part of our mission to support maritime safety, environmental protection, and disaster response, the PCGA stands ready to serve the nation and its communities.
+            Whether you are here to learn about our ongoing initiatives, seek volunteer opportunities, or stay updated on the latest news, we hope this website serves as a helpful and informative resource. We invite you to join us in making a positive impact on our seas and coastal communities. Together, we can ensure safer waters and a resilient maritime environment for all Filipinos.</p>
         </div>
       </section>
 
