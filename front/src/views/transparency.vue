@@ -51,32 +51,32 @@ export default {
       seals: [
         {
           name: "Certificate of Accreditation",
-          image: "/img/certificate1.jpg",
+          image: "/img/certificate1.1.jpg",
           description: "This certificate verifies the accreditation of the organization by the Philippine Coast Guard Auxiliary.",
         },
         {
           name: "License to Operate",
-          image: "/img/certificate3.jpg",
+          image: "/img/certificate3.3.jpg",
           description: "This license grants permission for the organization to operate in accordance with the regulations set forth by the Philippine Coast Guard Auxiliary.",
         },
         {
           name: "Training Certification",
-          image: "/img/certificate2.jpg",
+          image: "/img/certificate2.2.jpg",
           description: "This certificate certifies that the organization has completed the required training program as mandated by the Philippine Coast Guard Auxiliary.",
         },
         {
           name: "Safety Inspection Certificate",
-          image: "/img/certificate4.jpg",
+          image: "/img/certificate4.4.jpg",
           description: "This certificate confirms that the organization's facilities and equipment have passed the safety inspection conducted by the Philippine Coast Guard Auxiliary.",
         },
         {
           name: "Community Service Award",
-          image: "/img/certificate5.jpg",
+          image: "/img/certificate5.5.jpg",
           description: "This award recognizes the organization's outstanding contribution to community service as acknowledged by the Philippine Coast Guard Auxiliary.",
         },
         {
           name: "Leadership Excellence Award",
-          image: "/img/certificate6.jpg",
+          image: "/img/certificate6.6.jpg",
           description: "This award is presented to the organization for demonstrating exceptional leadership qualities and initiatives in support of the Philippine Coast Guard Auxiliary's mission.",
         },
         // Add more certificates and licenses as needed

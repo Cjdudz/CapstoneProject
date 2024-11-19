@@ -56,3 +56,4 @@ Thumbs.db
 /dist/
 
 /front/backend/writable/uploads/*.png
+.vercel

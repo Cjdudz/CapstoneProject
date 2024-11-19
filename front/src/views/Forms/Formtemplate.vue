@@ -1,5 +1,5 @@
 <template>
-  <!-- Navigation bar -->
+  <!-- Navigation bar (unchanged) -->
   <nav class="navbar">
     <!-- Nav Left -->
     <div class="nav-left">
@@ -17,15 +17,42 @@
       <button @click="logout" class="header-button logout-btn">Logout</button>
     </div>
   </nav>
-  <div class="spacer"></div>
-  <div class="form-container">
-    <h2 class="form-heading">Welcome to Your Application Form</h2>
-    <div class="form-steps">
-      <!-- Display the appropriate form component based on the current step -->
-      <component :is="currentStepComponent" @next="nextStep" @prev="prevStep" />
-    </div>
 
-    <!-- Navigation buttons -->
+  <div class="spacer"></div>
+
+  <div class="page-container">
+    <div class="form-container">
+      <h2 class="form-heading">Welcome to Your Application Form</h2>
+      
+      <!-- Progress bar -->
+      <div class="progress-bar">
+        <div class="progress" :style="{ width: `${(step / 8) * 100}%` }"></div>
+      </div>
+      
+      <div class="form-steps">
+        <!-- Display the appropriate form component based on the current step -->
+        <component :is="currentStepComponent" @next="nextStep" @prev="prevStep" />
+      </div>
+
+      <!-- Navigation buttons -->
+      <div class="pagination-buttons">
+        <button
+          class="pagination-button prev"
+          @click="prevStep"
+          :disabled="step === 1"
+        >
+          <span class="button-icon">&#8592;</span> Previous
+        </button>
+
+        <button
+          class="pagination-button next"
+          @click="nextStep"
+          :disabled="isNextButtonDisabled"
+        >
+          {{ step === 8 ? 'Submit' : 'Next' }} <span class="button-icon">&#8594;</span>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,7 +80,7 @@ export default {
   },
   data() {
     return {
-      step: 8,
+      step: 1,
       isEmergencyValid: false
     };
   },
@@ -72,158 +99,213 @@ export default {
       return stepComponents[this.step];
     },
     isNextButtonDisabled() {
-      return this.step === 8 || (this.step === 8 && !this.isEmergencyValid);
+      return this.step === 8 || (this.step === 6 && !this.isEmergencyValid);
     }
   },
   methods: {
     nextStep() {
-      if (this.step === 8) {
-        this.isEmergencyValid = true;
+      if (this.step === 6) {
+        this.isEmergencyValid = true; // Implement actual validation logic here
         if (!this.isEmergencyValid) {
           return;
         }
       }
-      this.step++;
+      if (this.step < 8) {
+        this.step++;
+      }
     },
     prevStep() {
-      this.step--;
+      if (this.step > 1) {
+        this.step--;
+      }
     },
     logout() {
-      // Remove authentication token or user data from local storage or cookies
       localStorage.removeItem('token');
-      // Redirect to login page or a designated logout page
       this.$router.push('/');
     }
-  }};
+  }
+};
 </script>
 
-    <style scoped>
-    /* General Styles */
-    .form-container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 40px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
+<style scoped>
+/* General Styles */
+.page-container {
+  min-height: calc(100vh - 70px);
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
-    .form-heading {
-      font-size: 24px;
-      margin-bottom: 30px;
-      text-align: center;
-      color: #333333;
-    }
+.form-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 30px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
 
-    /* Pagination Buttons */
-    .pagination-buttons {
-      margin-top: 30px;
-      text-align: center;
-    }
+.form-container:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
 
-    /* Button Styles */
-    .pagination-button {
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      margin: 0 12px; /* Increased spacing */
-    }
+.form-heading {
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #2c3e50;
+  font-weight: bold;
+}
 
-    .prev {
-      background-color: #4a90e2;
-    }
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
 
-    .next {
-      background-color: #50c878;
-    }
+.progress {
+  height: 100%;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
 
-    .pagination-button:disabled {
-      background-color: #bdc3c7;
-      cursor: not-allowed;
-    }
+/* Pagination Buttons */
+.pagination-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
 
-    .pagination-button:hover:not(:disabled) {
-      transform: translateY(-2px);
-    }
+/* Button Styles */
+.pagination-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #2c3e50;
-      color: #fff;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+.prev {
+  background-color: #3498db;
+}
 
-    /* Nav Left styles */
-    .nav-left {
-      display: flex;
-      align-items: center;
-    }
+.next {
+  background-color: #2ecc71;
+}
 
-    /* Nav Right styles */
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+.pagination-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
 
-    /* Logo link styles */
-    .logo-link {
-      text-decoration: none;
-      color: #fff;
-    }
+.pagination-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
 
-    /* Coast Guard Logo styles */
-    .coast-guard-logo {
-      height: 50px;
-      margin-right: 10px;
-    }
+.button-icon {
+  font-size: 20px;
+  margin: 0 8px;
+}
 
-    /* App Title styles */
-    .app-title {
-      font-size: 1.8em;
-      font-weight: bold;
-    }
+/* Navbar Styles (unchanged) */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #fff;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    /* Header button styles */
-    .header-button {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;  
-      transition: color 0.3s ease;
-    }
+.nav-left {
+  display: flex;
+  align-items: center;
+}
 
-    .header-button:hover {
-      color: #f39c12;
-    }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-    /* Logout button styles */
-    .logout-btn {
-      color: #fff;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+}
 
-    .logout-btn:hover {
-      color: #f39c12;
-    }
+.coast-guard-logo {
+  height: 50px;
+  margin-right: 10px;
+}
 
-    .spacer {
-      height: 50px;
-    }
-    </style>
+.app-title {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.header-button {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;  
+  transition: color 0.3s ease;
+}
+
+.header-button:hover {
+  color: #f39c12;
+}
+
+.logout-btn {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: #f39c12;
+}
+
+.spacer {
+  height: 70px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 20px;
+  }
+
+  .form-heading {
+    font-size: 24px;
+  }
+
+  .pagination-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+</style>

@@ -82,9 +82,9 @@ export default {
         { id: 13, text: 'm. Foreign applicants shall submit the following additional requirements: Copy of Passport, Visa, Alien Certificate of Registration (ACR) issued by the BI, Authenticated birth certificate, National Security Clearance from NSC, Marriage contract to a Filipino citizen'},
       ],
       steps: [
-        { id: 1, title: 'Step 1: Fill Up Identification Card', description: 'Fill up your identification card with the necessary details.', image: 'img/step1.png' },
-        { id: 2, title: 'Step 2: Complete Membership Form', description: 'Complete the membership form to proceed with the application.', image: 'img/step2.png' },
-        { id: 3, title: 'Step 3: Upload Requirements', description: 'Upload the necessary documents and requirements for the application.', image: 'img/step3.png' }
+        { id: 1, title: 'Step 1: Fill Up Identification Card', description: 'Fill up your identification card with the necessary details.' },
+        { id: 2, title: 'Step 2: Complete Membership Form', description: 'Complete the membership form to proceed with the application.' },
+        { id: 3, title: 'Step 3: Upload Requirements', description: 'Upload the necessary documents and requirements for the application.' }
       ]
     };
   },

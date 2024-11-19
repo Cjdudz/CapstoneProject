@@ -14,6 +14,7 @@ const routes = [
     name: 'home',
     component: () => import('@/views/HomeView.vue'),
   },
+  
   {
     path: '/Addcontent',
     component: () => import('@/views/Changecontent.vue'),
@@ -22,6 +23,10 @@ const routes = [
     path: '/Tryform',
     name: 'tryform',
     component: () => import('@/views/Tryform.vue'),
+  },  {
+    path: '/Announcement',
+    name: 'Announcement',
+    component: () => import('@/views/Announcement.vue'),
   },
   {
     path: '/Fileupload',
@@ -29,9 +34,19 @@ const routes = [
     component: () => import('@/views/Forms/Fileupload.vue'),
   },
   {
+    path: '/Feedbacklist',
+    name: 'Feedbacklist',
+    component: () => import('@/views/Feedbacklist.vue'),
+  },
+  {
     path: '/Upload',
     name: 'Upload',
     component: () => import('@/views/Forms/Upload.vue'),
+  },
+  {
+    path: '/FetchFile',
+    name: 'FetchFile',
+    component: () => import('@/views/Forms/FetchFile.vue'),
   },
   {
     path: '/Terms',

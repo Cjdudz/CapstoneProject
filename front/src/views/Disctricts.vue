@@ -1,14 +1,12 @@
 <template>
-  <!-- Navigation bar -->
+  <!-- Navigation bar (unchanged) -->
   <nav class="navbar">
-    <!-- Nav Left -->
     <div class="nav-left">
       <router-link to="/Home" class="logo-link">
-        <img src="img/PCGA-removebg-preview.png " alt="Coast Guard Logo" class="coast-guard-logo" />
+        <img src="img/PCGA-removebg-preview.png" alt="Coast Guard Logo" class="coast-guard-logo" />
         <span class="app-title">PCGA</span>
       </router-link>
     </div>
-    <!-- Nav Right -->
     <div class="nav-right">
       <router-link to="/Navbar" class="header-button">Home</router-link>
       <router-link to="/Transparency" class="header-button">Transparency Seal</router-link>
@@ -18,42 +16,61 @@
     </div>
   </nav>
   <div class="spacer"></div>
+  
   <div class="main-content">
-    <!-- Modal for district details -->
-    <div v-if="selectedDistrict" class="modal">
-      <div class="modal-content">
-        <span class="close" @click="closeModal">&times;</span>
-        <h2>{{ selectedDistrict.name }}</h2>
-        <p>{{ selectedDistrict.description }}</p>
-        <!-- Add more details here as needed -->
-      </div>
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1 class="hero-title">Coast Guard Districts</h1>
+      <p class="hero-subtitle">Explore our nationwide network of Coast Guard districts</p>
     </div>
 
+  
+
     <!-- Display districts -->
-<div v-if="loading" class="loading-message">
-  <div class="spinner"></div>
-</div>
-<div v-else-if="districts.length === 0" class="no-districts-message">
-  <img src="img/DISTRICTS FOUND.png" alt="No districts found" class="no-districts-img" />
-  <p>We couldn't find any districts at the moment.</p>
-  <p>Perhaps try again later or <router-link to="/navbar" class="home-link">return to the homepage</router-link>.</p>
-</div>
-<div v-else class="districts-container">
-  <h2>Districts</h2>
-  <div class="card-grid">
-    <!-- Mapping to display districts -->
-    <div v-for="district in districts" :key="district.id" class="district-card" @click="showDistrictDetails(district)">
-      <div class="district-info">
-        <span class="district-name">{{ district.name }}</span><br>
-        <span class="district-description">{{ district.description }}</span>
-        <!-- Simple mapping to display the districts they hold -->
-        <div v-if="district.hold">
-          <span class="district-hold">Hold: {{ district.hold }}</span>
+    <div class="districts-container">
+      <div v-if="loading" class="loading-message">
+        <div class="spinner"></div>
+        <p>Loading districts...</p>
+      </div>
+      <div v-else-if="filteredDistricts.length === 0" class="no-districts-message">
+        <img src="img/DISTRICTS FOUND.png" alt="No districts found" class="no-districts-img" />
+        <h2>No Districts Found</h2>
+        <p>We couldn't find any districts matching your criteria. Please try a different search or filter.</p>
+        <button @click="resetFilters" class="btn btn-primary">Reset Filters</button>
+      </div>
+      <transition-group name="fade" tag="div" class="card-grid">
+        <div v-for="district in filteredDistricts" :key="district.id" class="district-card" @click="showDistrictDetails(district)">
+          <div class="district-icon" :style="{ backgroundColor: getRandomColor() }">
+            <i class="fas fa-anchor"></i>
+          </div>
+          <div class="district-info">
+            <h3 class="district-name">{{ district.name }}</h3>
+            <p class="district-description">{{ district.description }}</p>
+            <div v-if="district.hold" class="district-hold">
+              <span class="hold-badge">Hold: {{ district.hold }}</span>
+            </div>
+          </div>
+        </div>
+      </transition-group>
+    </div>
+
+    <!-- Modal for district details -->
+    <transition name="modal">
+      <div v-if="selectedDistrict" class="modal" @click.self="closeModal">
+        <div class="modal-content">
+          <span class="close" @click="closeModal">&times;</span>
+          <h2>{{ selectedDistrict.name }}</h2>
+          <p>{{ selectedDistrict.description }}</p>
+          <div v-if="selectedDistrict.hold" class="district-hold">
+            <strong>Hold:</strong> {{ selectedDistrict.hold }}
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-primary">Contact District</button>
+            <button class="btn btn-secondary">View More Details</button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </transition>
   </div>
 </template>
 
@@ -67,8 +84,21 @@ export default {
       isLoggedIn: false,
       loading: false,
       districts: [],
-      selectedDistrict: null // New property to store selected district
+      selectedDistrict: null,
+      error: null,
+      searchQuery: '',
+      filterOption: '',
     };
+  },
+  computed: {
+    filteredDistricts() {
+      return this.districts.filter(district => {
+        const matchesSearch = district.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                              district.description.toLowerCase().includes(this.searchQuery.toLowerCase());
+        const matchesFilter = this.filterOption === '' || district.region === this.filterOption;
+        return matchesSearch && matchesFilter;
+      });
+    }
   },
   mounted() {
     this.fetchDistricts();
@@ -89,48 +119,49 @@ export default {
       this.$router.push(path);
       this.drawer = false;
     },
-    // Method to handle click on district card
     showDistrictDetails(district) {
       this.selectedDistrict = district;
     },
-    // Method to close the modal
     closeModal() {
       this.selectedDistrict = null;
     },
     async fetchDistricts() {
-  this.loading = true; // Start loading
+      this.loading = true;
+      this.error = null;
 
-  try {
-    const response = await axios.get("api/ShowDistricts");
-
-    if (response.status === 200) {
-      this.districts = response.data; // Assign the data to districts
-    } else {
-      this.message = `Failed to fetch districts: ${response.status}`;
-      console.error('Failed to fetch districts:', response.status);
+      try {
+        const response = await axios.get("api/ShowDistricts");
+        this.districts = response.data;
+      } catch (error) {
+        console.error("Error fetching districts:", error);
+        this.error = 'Failed to fetch districts. Please try again later.';
+      } finally {
+        this.loading = false;
+      }
+    },
+    resetFilters() {
+      this.searchQuery = '';
+      this.filterOption = '';
+    },
+    getRandomColor() {
+      const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6'];
+      return colors[Math.floor(Math.random() * colors.length)];
     }
-  } catch (error) {
-    console.error("Error fetching districts:", error); // Error handling
-    this.message = 'Error fetching districts'; // Set an error message for the user
-  } finally {
-    this.loading = false; // Stop loading after fetching or error
-  }
-},
   }
 };
 </script>
 
-
-
 <style scoped>
 /* Global styles */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #f8fafc;
+  color: #1e293b;
 }
-/* Navbar styles */
+
+/* Navbar styles (unchanged) */
 .navbar {
   position: fixed;
   top: 0;
@@ -142,182 +173,218 @@ body {
   padding: 10px 20px;
   background-color: #2c3e50;
   color: #fff;
-  z-index: 1000; /* Ensure it's above other elements */
+  z-index: 1000;
 }
 
-/* Nav Left styles */
-.nav-left {
+.nav-left, .nav-right {
   display: flex;
   align-items: center;
 }
 
-/* Nav Right styles */
 .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px; /* Add some space between buttons */
+  gap: 20px;
 }
 
-/* Logo link styles */
 .logo-link {
   text-decoration: none;
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 
-/* Coast Guard Logo styles */
 .coast-guard-logo {
   height: 50px;
   margin-right: 10px;
 }
 
-/* App Title styles */
 .app-title {
   font-size: 1.8em;
   font-weight: bold;
 }
 
-/* Header button styles */
-.header-button {
+.header-button, .logout-btn {
   color: #fff;
   text-decoration: none;
-  font-weight: bold;  
-  transition: color 0.3s ease;
-}
-
-.header-button:hover {
-  color: #f39c12; /* Change color on hover */
-}
-
-/* Logout button styles */
-.logout-btn {
-  color: #fff;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
-.logout-btn:hover {
-  color: #f39c12; /* Change color on hover */
+.header-button:hover, .logout-btn:hover {
+  color: #f39c12;
 }
 
 .spacer {
-  height: 100px; /* Adjust the height for desired spacing */
-}
-
-/* Additional CSS for responsiveness */
-@media only screen and (max-width: 768px) {
-  .nav-right {
-    display: none; /* Hide right-side navigation links on small screens */
-  }
-
-  .nav-left {
-    margin-right: auto; /* Push logo to the left on small screens */
-  }
-
-  .navbar {
-    padding: 10px; /* Adjust padding for smaller screens */
-  }
-
-  .nav-left .app-title {
-    font-size: 1.4em; /* Decrease font size for smaller screens */
-  }
-
-  .nav-left .coast-guard-logo {
-    height: 40px; /* Decrease logo size for smaller screens */
-  }
-
-  .spacer {
-    height: 60px; /* Adjust spacing for smaller screens */
-  }
-
-  .form-container {
-    width: 90%; /* Make form container width 90% on small screens */
-    margin: 20px auto; /* Adjust margin for smaller screens */
-  }
-
-  .step-container {
-    margin-bottom: 20px; /* Adjust margin for smaller screens */
-  }
-
-  .step-title {
-    font-size: 16px; /* Decrease font size for smaller screens */
-  }
-
-  .form-input {
-    padding: 8px; /* Adjust padding for smaller screens */
-  }
-
-  .button-container {
-    flex-direction: column; /* Stack buttons vertically on smaller screens */
-  }
-
-  button {
-    width: 100%; /* Make buttons full width on smaller screens */
-  }
+  height: 70px;
 }
 
 /* Main content styles */
 .main-content {
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-/* Districts container styles */
-.districts-container {
-  margin-top: 20px;
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 30px 0;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: #fff;
+  border-radius: 8px;
 }
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
-}
-.district-card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-.district-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.district-info {
-  display: flex;
-  flex-direction: column;
-}
-.district-name {
-  font-weight: bold;
+
+.hero-title {
+  font-size: 2.5em;
   margin-bottom: 5px;
 }
-.district-description {
-  color: #666;
+
+.hero-subtitle {
+  font-size: 1.1em;
+  opacity: 0.8;
 }
+
+/* Search and Filter */
+.search-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input, .filter-select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus, .filter-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Districts container styles */
+.districts-container {
+  margin-top: 10px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.district-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.district-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.district-icon {
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.district-info {
+  padding: 15px;
+}
+
+.district-name {
+  font-size: 1.2em;
+  margin: 0 0 8px;
+  color: #2c3e50;
+}
+
+.district-description {
+  color: #64748b;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  font-size: 0.9em;
+}
+
+.district-hold {
+  margin-top: 8px;
+}
+
+.hold-badge {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
 /* Loading and no districts message styles */
 .loading-message,
 .no-districts-message {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
+
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #3498db;
+  border: 3px solid rgba(52, 152, 219, 0.3);
+  border-top: 3px solid #3498db;
   border-radius: 50%;
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
 }
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 .no-districts-img {
-  width: 200px;
-  margin-bottom: 20px;
+  width: 150px;
+  margin-bottom: 15px;
 }
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #2c3e50;
+}
+
+.btn-secondary:hover {
+  background-color: #cbd5e1;
+}
+
 /* Modal styles */
 .modal {
-  display: block;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -325,27 +392,110 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 5px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .close {
-  color: #aaa;
+  color: #94a3b8;
   float: right;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-}
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #2c3e50;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Transitions */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.modal-enter-active, .modal-leave-active {
+  transition: opacity 0.2s, transform 0.2s;
+}
+.modal-enter-from, .modal-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .nav-right {
+    display: none;
+  }
+
+  .nav-left {
+    margin-right: auto;
+  }
+
+  .navbar {
+    padding: 8px;
+  }
+
+  .nav-left .app-title {
+    font-size: 1.2em;
+  }
+
+  .nav-left .coast-guard-logo {
+    height: 35px;
+  }
+
+  .spacer {
+    height: 50px;
+  }
+
+  .hero-title {
+    font-size: 2em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9em;
+  }
+
+  .search-filter {
+    flex-direction: column;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    
+    width: 100%;
+  }
 }
 </style>

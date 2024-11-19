@@ -16,7 +16,7 @@ createApp(App)
   .mount('#app')
 
 // Set base URL for axios
-axios.defaults.baseURL = "http://backend.test";
+axios.defaults.baseURL = "https://pcga505th.online";
 
 // Load fonts
 loadFonts();

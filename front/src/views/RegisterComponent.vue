@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-
+import loginImage from '@/assets/pcga-loginpage.png';
 export default {
   data() {
     return {
@@ -213,8 +213,7 @@ showPassword: false,
 
 <style scoped>
 .background {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url('C:/laragon/www/CapstoneProject/front/public/img/pcga-loginpage.png');
+  background-image: url('~@/assets/pcga-loginpage.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

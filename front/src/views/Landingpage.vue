@@ -4,7 +4,6 @@
       <div class="logo">
         <img src="/img/PCGA.png" alt="Philippine Coast Guard Auxiliary Logo" class="coast-guard-logo" />
       </div>
-
       <nav class="nav-links">
         <router-link to="/" class="nav-link" exact>Home</router-link>
         <router-link to="/Home" class="nav-link">About</router-link>
@@ -17,12 +16,15 @@
         <div class="hero-image">
           <img src="/img/pcg-ranks.webp" alt="Philippine Coast Guard Auxiliary Hero Image" />
         </div>
-
         <div class="hero-text">
           <div class="welcome-card">
             <h2>Welcome to PCGAWebApp!</h2>
-            <p>We're thrilled to have you here! The Philippine Coast Guard Auxiliary (PCGA) is a service-oriented, uniformed volunteer organization established in 1972 by the Philippine Coast Guard. As an applicant, you're about to embark on a journey towards becoming a part of a community dedicated to maritime safety, marine environmental protection, and community service.</p>
-            <p>Through this web application, you'll be able to apply and track your application status, learn more about our projects and services, and stay updated with the latest news and events. Let's safeguard our seas together!</p>
+            <p>
+              We're thrilled to have you here! The Philippine Coast Guard Auxiliary (PCGA) is a service-oriented, uniformed volunteer organization established in 1972 by the Philippine Coast Guard. As an applicant, you're about to embark on a journey towards becoming a part of a community dedicated to maritime safety, marine environmental protection, and community service.
+            </p>
+            <p>
+              Through this web application, you'll be able to apply and track your application status, learn more about our projects and services, and stay updated with the latest news and events. Let's safeguard our seas together!
+            </p>
             <button class="apply-btn" @click="startApplication">Start Application</button>
           </div>
         </div>
@@ -52,128 +54,124 @@
 
     <footer class="footer">
       <div class="social-links">
-        <a href="#" class="social-icon">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" class="social-icon">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#" class="social-icon">
-          <i class="fab fa-instagram"></i>
-        </a>
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
       </div>
-
       <div class="footer-links">
         <router-link to="/terms" class="footer-link">Terms of Service</router-link>
         <router-link to="/privacy" class="footer-link">Privacy Policy</router-link>
       </div>
-
       <div class="contact-info">
         <p class="organization">Philippine Coast Guard Auxiliary</p>
         <p class="contact-person">Contact Person: Noemi Joy F. Alfante</p>
         <p class="phone">Phone: 0975 563 3517</p>
       </div>
-
       <div class="feedback-text">
         <p>Have feedback? Let us know!</p>
-        <button class="feedback-btn" @click="showFeedbackModal = true">Leave Feedback</button>
-      </div>
-
-      <!-- Feedback Modal -->
-      <div class="modal" v-if="showFeedbackModal">
-        <div class="modal-content">
-          <span class="close" @click="closeFeedbackModal">&times;</span>
-          <h2>Leave Feedback</h2>
-          <form @submit.prevent="submitFeedback">
-            <textarea v-model="feedback" rows="4" placeholder="Enter your feedback"></textarea>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+        <button class="feedback-btn" @click="openFeedbackModal">Leave Feedback</button>
       </div>
     </footer>
+
+    <!-- Feedback Modal -->
+    <div v-if="showFeedbackModal" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeFeedbackModal">&times;</span>
+        <h2>Leave Your Feedback</h2>
+        <form @submit.prevent="submitFeedback">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" v-model="feedbackForm.name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="feedbackForm.email" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Feedback:</label>
+            <textarea id="message" v-model="feedbackForm.message" required></textarea>
+          </div>
+          <button type="submit" :disabled="isSubmitting">
+            {{ isSubmitting ? 'Submitting...' : 'Submit Feedback' }}
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       showFeedbackModal: false,
-      feedback: '',
+      isSubmitting: false,
+      feedbackForm: {
+        name: '',
+        email: '',
+        message: ''
+      },
       services: [
-        {
-          id: 1,
-          title: 'MARSAF (Maritime Safety)',
-          description: 'Encompasses safety protocols, regulations, and practices within the maritime industry.',
-          icon: 'fas fa-shield-alt'
-        },
-        {
-          id: 2,
-          title: 'MAREP (Maritime Environment Protection)',
-          description: 'Involves efforts to protect marine ecosystems, prevent pollution, and promote sustainable practices.',
-          icon: 'fas fa-leaf'
-        },
-        {
-          id: 3,
-          title: 'MARSAR (Maritime Search and Rescue)',
-          description: 'Deals with emergency response, coordination, and rescue operations at sea.',
-          icon: 'fas fa-life-ring'
-        },
-        {
-          id: 4,
-          title: 'MCOMREL (Maritime Community Relations)',
-          description: 'Fosters positive relationships between maritime stakeholders, communities, and organizations.',
-          icon: 'fas fa-users'
-        }
+        { id: 1, title: 'MARSAF (Maritime Safety)', description: 'Safety protocols, regulations, and practices in the maritime industry.', icon: 'fas fa-shield-alt' },
+        { id: 2, title: 'MAREP (Maritime Environment Protection)', description: 'Efforts to protect marine ecosystems, prevent pollution, and promote sustainable practices.', icon: 'fas fa-leaf' },
+        { id: 3, title: 'MARSAR (Maritime Search and Rescue)', description: 'Emergency response, coordination, and rescue operations at sea.', icon: 'fas fa-life-ring' },
+        { id: 4, title: 'MCOMREL (Maritime Community Relations)', description: 'Fosters positive relationships between maritime stakeholders and communities.', icon: 'fas fa-users' }
       ],
       projects: [
-        {
-          id: 1,
-          title: 'Blood Donation',
-          image: '434202946_10163443568453852_665190660552754798_n.jpg'
-        },
-        {
-          id: 2,
-          title: 'Medical Assistance',
-          image: 'DxU5FxxUwAAqnLf.jfif'
-        },
-        {
-          id: 3,
-          title: 'Dental Assistance',
-          image: '405965871_798994005599287_7807612907306473337_n (1).jpg'
-        },
-        {
-          id: 4,
-          title: 'Tree planting',
-          image: '439218177_1488834228705483_9021847312691142682_n.jpg'
-        }
+        { id: 1, title: 'Blood Donation', image: '434202946_10163443568453852_665190660552754798_n.jpg' },
+        { id: 2, title: 'Medical Assistance', image: 'DxU5FxxUwAAqnLf.jfif' },
+        { id: 3, title: 'Dental Assistance', image: '405965871_798994005599287_7807612907306473337_n (1).jpg' },
+        { id: 4, title: 'Tree Planting', image: '439218177_1488834228705483_9021847312691142682_n.jpg' }
       ]
-    }
+    };
   },
   methods: {
-    startApplication() {
-      console.log('Application started!');
-      // Redirect to the application page
-      this.$router.push('/application');
-    },
-    submitFeedback() {
-      console.log('Feedback submitted:', this.feedback);
-      // Here you can send the feedback to your backend or perform any other necessary action
-      // Reset feedback and close modal
-      this.feedback = '';
-      this.showFeedbackModal = false;
-    },
-    closeFeedbackModal() {
-      // Method to close the feedback modal
-      this.showFeedbackModal = false;
-      // Reset feedback if the modal is closed without submitting
-      this.feedback = '';
+  startApplication() {
+    const confirmLogin = confirm('You need to log in before starting the application. Do you want to log in now?');
+    if (confirmLogin) {
+      this.$router.push('/Logincomponent');
+    }
+  },
+  openFeedbackModal() {
+    this.showFeedbackModal = true;
+  },
+  closeFeedbackModal() {
+    this.showFeedbackModal = false;
+    this.resetFeedbackForm();
+  },
+  resetFeedbackForm() {
+    this.feedbackForm = {
+      name: '',
+      email: '',
+      message: ''
+    };
+  },
+  async submitFeedback() {
+    if (this.feedbackForm.name.trim() === '' || this.feedbackForm.email.trim() === '' || this.feedbackForm.message.trim() === '') {
+      alert('Please fill out all fields.');
+      return;
+    }
+
+    this.isSubmitting = true; // Start the submission process
+    try {
+      // Replace '/api/submit' with your actual API endpoint
+      await axios.post('/api/submitFeedback', this.feedbackForm);
+      
+      // Notify the user of successful submission
+      alert('Feedback submitted successfully! Thank you!');
+      this.resetFeedbackForm(); // Clear input fields after submission
+    } catch (error) {
+      console.error('Error submitting Feedback:', error);
+      alert('There was an error submitting your feedback. Please try again later.');
+    } finally {
+      this.isSubmitting = false; // Reset submission state
     }
   }
 }
+};
 </script>
-
-
 
 <style scoped>
 /* General Styles */
@@ -205,49 +203,7 @@ body {
 .logo img {
   height: 50px;
 }
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
 
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  border-radius: 5px;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-content h2 {
-  margin-bottom: 10px;
-}
-
-.modal-content textarea {
-  width: 100%;
-  margin-bottom: 10px;
-}
 .nav-links {
   display: flex;
   list-style: none;
@@ -297,13 +253,24 @@ main {
   padding: 1rem;
 }
 
-.hero-text h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
+.welcome-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.hero-btn {
+.welcome-card h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.welcome-card p {
+  color: #34495e;
+  margin-bottom: 1rem;
+}
+
+.apply-btn {
   background-color: #3498db;
   color: #fff;
   border: none;
@@ -313,7 +280,7 @@ main {
   transition: all 0.3s ease;
 }
 
-.hero-btn:hover {
+.apply-btn:hover {
   background-color: #2980b9;
 }
 
@@ -323,6 +290,7 @@ main {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .projects-container h2 {
@@ -389,7 +357,7 @@ main {
   padding: 1rem;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  cursor:  pointer;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -477,7 +445,7 @@ main {
 
 .feedback-btn {
   background-color: #3498db;
-  color: #fff;
+  color:  #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -488,6 +456,114 @@ main {
 .feedback-btn:hover {
   background-color: #2980b9;
 }
-</style>
 
-  
+/* Modal Styles */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  height: 100px;
+}
+
+button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+button[type="submit"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero-image,
+  .hero-text {
+    width: 100%;
+  }
+
+  .project {
+    flex: 1 1 calc(50% - 1rem);
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-links,
+  .footer-links,
+  .contact-info,
+  .feedback-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+</style>

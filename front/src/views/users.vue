@@ -1,104 +1,90 @@
 <template>
-  <v-app>
-    <!-- Navigation Drawer -->
-    <v-navigation-drawer app v-model="drawer">
-      <v-list>
-        <!-- Navigation items -->
-        <v-list-item v-for="(item, index) in items" :key="index" link>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title @click="navigateTo(item.route)">
-              {{ item.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <!-- Logout Button -->
-        <v-list-item>
-          <v-row>
-            <v-col>
-              <v-list-item-action>
-                <v-btn icon @click="logout">
-                  <v-icon>mdi-logout</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-col>
-          </v-row>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <!-- App Bar -->
-    <v-app-bar app>
-      <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
-        <v-app-bar-nav-icon v-if="!drawer"></v-app-bar-nav-icon>
+  <div class="user-management">
+    <nav class="sidebar" :class="{ 'sidebar-open': drawer }">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Admin Panel</h2>
+        <button @click="drawer = !drawer" class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
-      <v-toolbar-title class="custom-title">User Management</v-toolbar-title>
-    </v-app-bar>
+      <ul class="sidebar-menu">
+        <li v-for="(item, index) in items" :key="index">
+          <a @click="navigateTo(item.route)" :class="{ 'active': $route.path === item.route }">
+            <i :class="['fas', item.icon]"></i>
+            <span>{{ item.text }}</span>
+          </a>
+        </li>
+      </ul>
+      <button @click="logout" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
+    </nav>
 
-    <!-- Main Content -->
-    <v-main>
-      <div class="admin-panel">
-        <h1 class="title">User Management</h1>
+    <main class="main-content">
+      <header class="main-header">
+        <button @click="drawer = !drawer" class="sidebar-toggle-mobile">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="main-title">User Management</h1>
+      </header>
 
-        <div class="user-list">
-          <table class="user-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.role }}</td>
-                <td>
-                  <button @click="editUser(user)" class="edit-btn">
-                    <i class="fas fa-edit"></i> Edit
-                  </button>
-                  <button @click="deleteUser(user)" class="delete-btn">
-                    <i class="fas fa-trash-alt"></i> Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="user-list">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" :key="user.id">
+              <td>{{ user.id }}</td>
+              <td>
+                <div class="user-info">
+                  <img :src="user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username)}&background=random`" :alt="user.username" class="user-avatar">
+                  <span>{{ user.username }}</span>
+                </div>
+              </td>
+              <td>{{ user.role }}</td>
+              <td>
+                <button @click="editUser(user)" class="edit-btn">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button @click="deleteUser(user)" class="delete-btn">
+                  <i class="fas fa-trash-alt"></i> Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
 
-        <div v-if="editMode" class="user-form-modal">
-          <div class="user-form">
-            <h2 class="form-title">Edit User</h2>
-            <form @submit.prevent="updateUser">
-              <div class="form-group">
-                <label for="id" class="form-label">ID:</label>
-                <input type="number" id="id" v-model="editedUserId" class="form-input">
-              </div>
-              <div class="form-group">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" id="name" v-model="editedUserName" class="form-input">
-              </div>
-              <div class="form-group">
-                <label for="role" class="form-label">Role:</label>
-                <input type="text" id="role" v-model="editedUserRole" class="form-input">
-              </div>
-              <button type="submit" class="update-btn">
-                <i class="fas fa-check"></i> Update User
-              </button>
-              <button type="button" @click="cancelEdit" class="cancel-btn">
-                <i class="fas fa-times"></i> Cancel
-              </button>
-            </form>
-          </div>
+    <transition name="fade">
+      <div v-if="editMode" class="modal-overlay">
+        <div class="modal">
+          <h2 class="modal-title">Edit User</h2>
+          <form @submit.prevent="updateUser">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" id="username" v-model="editedUserName" required>
+            </div>
+            <div class="form-group">
+              <label for="role">Role:</label>
+              <input type="text" id="role" v-model="editedUserRole" required>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="update-btn">Update User</button>
+              <button type="button" @click="cancelEdit" class="cancel-btn">Cancel</button>
+            </div>
+          </form>
         </div>
       </div>
-    </v-main>
-  </v-app>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -109,14 +95,13 @@ export default {
     return {
       drawer: true,
       items: [
-
-      { text: 'Dashboard', icon: 'mdi-view-dashboard', symbol: '$', route: '/Admin' },
-  { text: 'Users', icon: 'mdi-account', symbol: 'U', route: '/users' },
-  { text: 'Applicants data', icon: 'mdi-account-multiple', symbol: 'A', route: '/ApplicantsData' },
-  { text: 'Updates and News Management', icon: 'mdi-newspaper', route: '/Updates&news' },
-  { text: 'District Management', icon: 'mdi-cogs', route: '/ManageDistrict' },
-  { text: 'Available Updates', icon: 'mdi-update', route: '/Availableupdates' },
-  { text: 'Add Content', icon: 'mdi-plus', route: '/add-content' },
+        { text: 'Dashboard', icon: 'fa-tachometer-alt', route: '/Admin' },
+        { text: 'Users', icon: 'fa-users', route: '/users' },
+        { text: 'Applicants data', icon: 'fa-file-alt', route: '/fetchfile' },
+        { text: 'Updates and News Management', icon: 'fa-newspaper', route: '/Updates&news' },
+        { text: 'District Management', icon: 'fa-map-marker-alt', route: '/ManageDistrict' },
+        { text: 'Available Updates', icon: 'fa-bell', route: '/Availableupdates' },
+        { text: 'Add Content', icon: 'fa-plus-circle', route: '/add-content' },
       ],
       users: [],
       editMode: false,
@@ -131,7 +116,7 @@ export default {
   methods: {
     cancelEdit() {
       console.log('Editing canceled!');
-      this.editMode = false; // Make sure this line is present
+      this.editMode = false;
     },
     editUser(user) {
       this.editMode = true;
@@ -144,7 +129,6 @@ export default {
         username: this.editedUserName,
         role: this.editedUserRole,
       };
-
       axios.put(`/api/update_user/${this.editedUserId}`, data)
         .then((response) => {
           this.getUsers();
@@ -179,9 +163,7 @@ export default {
       this.drawer = false;
     },
     logout() {
-      // Handle logout functionality
       console.log('Logout button clicked');
-      // Example: Redirect to login page
       this.$router.push('/LoginComponent');
     },
     navigateTo(route) {
@@ -193,191 +175,313 @@ export default {
 </script>
 
 <style scoped>
-  /* Resetting default margin and padding */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+.user-management {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+}
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f2f5;
-  }
+.sidebar {
+  width: 280px;
+  background-color: #1a237e;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
 
-  .admin-panel {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
+.sidebar-header {
+  padding: 1.5rem;
+  background-color: #0d47a1;
+}
 
-  .title {
-    font-size: 32px;
-    color: #007bff;
-    margin-bottom: 20px;
-  }
+.sidebar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
+.sidebar-toggle {
+  display: none;
+}
 
-  .user-table th,
-  .user-table td {
-    border: 1px solid #dee2e6;
-    padding: 12px;
-    text-align: left;
-  }
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .user-table th {
-    background-color: #007bff;
-    color: #ffffff;
-  }
+.sidebar-menu li a {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
 
-  .user-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-  }
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+  background-color: #283593;
+}
 
-  .edit-btn,
-  .delete-btn,
-  .update-btn,
-  .cancel-btn {
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 4px;
-    font-weight: bold;
-  }
+.sidebar-menu li a i {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  width: 1.5rem;
+  text-align: center;
+}
 
-  .edit-btn,
-  .update-btn {
-    background-color: #28a745;
-    color: #ffffff;
-  }
+.logout-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: #c62828;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
 
-  .delete-btn,
-  .cancel-btn {
-    background-color: #dc3545;
-    color: #ffffff;
-  }
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
 
-  .edit-btn:hover,
-  .update-btn:hover,
-  .delete-btn:hover,
-  .cancel-btn:hover {
-    opacity: 0.8;
-  }
+.logout-btn i {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
 
-  .user-form-modal {
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-toggle-mobile {
+  display: none;
+}
+
+.main-title {
+  font-size: 2rem;
+  color: #1a237e;
+  margin: 0;
+}
+
+.user-list table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  background-color: transparent;
+}
+
+.user-list th,
+.user-list td {
+  padding: 1rem;
+  text-align: left;
+  background-color: #ffffff;
+}
+
+.user-list th {
+  background-color: #3f51b5;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.user-list tr:nth-child(even) td {
+  background-color: #e8eaf6;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  object-fit: cover;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a237e;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333333;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.update-btn,
+.cancel-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+}
+
+.update-btn {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.update-btn:hover {
+  background-color: #45a049;
+}
+
+.cancel-btn {
+  background-color: #9e9e9e;
+  color: #ffffff;
+}
+
+.cancel-btn:hover {
+  background-color: #757575;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    bottom: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
   }
 
-  .user-form {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  .sidebar-open {
+    transform: translateX(0);
   }
 
-  .form-title {
-    font-size: 24px;
-    color: #333333;
-    margin-bottom: 20px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .form-label {
-    font-size: 16px;
-    color: #333333;
-    margin-bottom: 8px;
+  .sidebar-toggle,
+  .sidebar-toggle-mobile {
     display: block;
-  }
-
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-
-   /* Navigation Drawer Styles */
-   .v-navigation-drawer {
-    background-color: #1a237e; /* Dark blue background color */
-    color: white;
-  }
-
-  .v-list-item {
-    border-bottom: 1px solid #3949ab; /* Dark blue border between items */
-  }
-
-  .v-list-item-title {
-    color: white;
-    font-weight: bold;
-  }
-
-  /* App Bar Styles */
-  .v-app-bar {
-    background-color: #283593; /* Darker blue app bar */
-    color: white;
-  }
-
-  .custom-title {
-    font-family: 'Pacifico', cursive; /* Custom font for the title */
-    font-size: 24px;
-  }
-
-  /* Main Content Styles */
-  .overview {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .info-card {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
     cursor: pointer;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease-in-out;
   }
 
-  .info-card:hover {
-    background-color: #7986cb; /* Lighter blue on hover */
+  .sidebar-toggle-mobile {
+    color: #1a237e;
+    margin-right: 1rem;
   }
 
-  .selected-card {
-    background-color: #303f9f; /* Darker blue for selected card */
+  .main-content {
+    padding: 1rem;
   }
 
-  .chart-container {
-    margin-top: 20px;
+  .main-title {
+    font-size: 1.5rem;
   }
 
-  /* Logout Button Styles */
-  .v-btn {
-    color: #ffffff; /* White button text color */
+  .user-list th,
+  .user-list td {
+    padding: 0.75rem;
   }
 
-  /* Global Styles */
-  body {
-    font-family: 'Roboto', sans-serif; /* Default font family */
-    background-color: #fafafa; /* Light gray background color */
+  .edit-btn,
+  .delete-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
+}
 </style>
